@@ -1,0 +1,55 @@
+function randomData() {
+       return d3.range(6).map( function() { return Math.random()*20; } )
+};
+
+function refresh( data ) {
+  shapes = scene.selectAll("transform").data( data );
+  shapesEnter = shapes
+       .enter()
+       .append( "transform" )
+       .append( "shape" )
+       .on("mouseover", function(d){
+           console.log("Hey "+d)
+       });
+       ;
+  // Enter and update
+
+  shapes.transition()
+        .attr("translation", function(d,i) { return i*1.5 + " 0.0 " + d/2.0; } )
+        .attr("scale", function(d) { return "1.0 1.0 " + d; } )
+        ;
+
+  shapesEnter
+      .append("appearance")
+        .append("material")
+        .attr("diffuseColor", "steelblue" );
+
+  shapesEnter.append( "box" )
+    .attr( "size", "1.0 1.0 1.0" );
+}
+
+function init(){
+    body = d3.select("body");
+
+    var x3d = body.append("x3d")
+                  .attr("height", height)
+                  .attr("width", width);
+
+    scene = x3d.append("scene");
+    scene.append("viewpoint")
+         .attr( "centerOfRotation", "3.75 0 10")
+         .attr( "position", "13.742265188709691 -27.453522975182366 16.816062840792625" )
+         .attr( "orientation", "0.962043810961999 0.1696342804961945 0.21376603254551874 1.379433089729343" )
+         ;
+
+    refresh( randomData() );
+    refresh( randomData() );
+
+    return x3d;
+}
+
+var body;
+var height = 600;
+var width = 800;
+var scene;
+var x3d = init();
