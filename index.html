@@ -4,9 +4,99 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Swicity - Visualizing Swift Systems as cities!</title>
 		<script src="https://d3js.org/d3.v4.min.js"></script>
+        <script type='text/javascript' src='http://www.x3dom.org/download/x3dom.js'> </script>
+        <script type='text/javascript' src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+        <!--<link rel='stylesheet' type='text/css' href='http://www.x3dom.org/download/x3dom.css'></link>-->
+        <style>
+        x3d
+          {
+              border:2px solid darkorange;
+              background: rgba(128, 128, 128, 0.4);
+          }
+
+
+        body
+        {
+        font-size:110%;
+        font-family:verdana, sans-serif;
+        margin: 3em;
+        color: lightgray;
+        }
+
+        h1
+        {
+        color: darkorange;
+        }
+        </style>
 	</head>
 	<body>
-        <script type="text/javascript" src="js/three.js"></script>
-        <script type="text/javascript" src="swicityRender.js"></script>
+        <!--<script type="text/javascript" src="js/three.js"></script>
+        <script type="text/javascript" src="swicityRender.js"></script>-->
+        <!--<script type="text/javascript" src="myX3dom.js"></script>-->
+        <h1>Usando X3DOM!</h1>
+        <p>
+            Testando se consigo clicar em algo.
+        </p>
+
+
+        <script>
+
+            function init(){
+                x3d = d3.select("body")
+                    .append("x3d")
+                    .attr("height", "400px")
+                    .attr("width", "600px");
+
+                var scene = x3d.append("scene");
+
+                var data = [1,2,3];
+
+                shapes = scene.selectAll("transform").data(data);
+
+                var x = d3.scaleLinear()
+                    .domain([d3.min(data), d3.max(data)])
+                    .range([0, 6]);
+
+                shapesEnter = shapes
+                    .enter()
+                    .append("transform")
+                    .attr("translation", function(d,i){
+                        console.log(i);
+                        console.log(x(d));
+                        return x(d)+" 0.0 0.0";
+                    })
+                    .append("shape");
+
+                shapesEnter
+                    .append("appearance")
+                    .append("material")
+                    .attr("diffuseColor", "steelblue" );
+
+                shapesEnter.append( "box" )
+                    //.attr("onclick", "alert('boramim')")
+                    .attr("size", function(d,i){
+                        return "1.0 "+d+" 1.0";
+                    });
+
+                d3.select("box").attr("onclick", "alert('boramim')");
+            }
+
+            init();
+
+            function showAlertWithEventCoordinate(event) {
+                console.log('hey');
+                console.log(event);
+                //var pagePt = invertMousePosition(event);
+                /*alert(d3.select(event.target).attr('id') + ' picked at:\n'
+                + 'world coordinate (' + event.hitPnt + '),\n'
+                + 'canvas coordinate (' + event.layerX + ', ' + event.layerY + '),\n'
+                + 'page coordinate (' + pagePt.x + ', ' + pagePt.y + ')' )*/
+            }
+
+            function doSomething(evt){
+                console.log(evt);
+            }
+        </script>
+
     </body>
 </html>

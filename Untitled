@@ -1,0 +1,112 @@
+function init(){
+
+    setUp();
+
+    renderData();
+
+    camera.position.z = 5;
+
+    render(renderer);
+}
+
+function setUp(){
+    scene = new THREE.Scene();
+    camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+    renderer = new THREE.WebGLRenderer();
+    renderer.setSize( width, height);
+    document.body.appendChild( renderer.domElement );
+}
+
+function render() {
+	requestAnimationFrame(render);
+    //cube.rotation.y += 0.01;
+	renderer.render(scene, camera);
+}
+var world;
+var data = [4, 8, 15, 16, 23, 42];
+
+
+function renderData(){
+    /*for(var el in dataset){
+        var element = dataset[el];
+        var value = element.coordinates;
+        var geometry = new THREE.BoxGeometry( value[0], value[1], value[2]);
+        var material = new THREE.MeshBasicMaterial( { color: pickColor(element.key) } );
+        var newCube = new THREE.Mesh( geometry, material );
+        geometry.applyMatrix(new THREE.Matrix4().makeTranslation(1.0*el, 0.0, 0.0) );
+        scene.add(newCube);
+    }*/
+
+    // create container for our 3D chart
+
+    var geometry = new THREE.CubeGeometry( 20, 20, 20 );
+   var material = new THREE.MeshLambertMaterial( {
+       color: 0x4682B4, shading: THREE.FlatShading, vertexColors: THREE.VertexColors } );
+
+    chart3d = new THREE.Object3D();
+	chart3d.rotation.x = 0.6;
+	scene.add( chart3d );
+
+    // use D3 to set up 3D bars
+    d3.select( chart3d )
+        .selectAll()
+        .data(data)
+    .enter().append( function() { return new THREE.Mesh( geometry, material ); } )
+        .attr("position.x", function(d, i) { return 30 * i; })
+        .attr("position.y", function(d, i) { return d; })
+        .attr("scale.y", function(d, i) { return d / 10; })
+
+    /*chart3d = new THREE.Object3D();
+
+    d3.select( chart3d )
+      .selectAll()
+      .data(data)
+        .enter().append(
+          function (d, i) {
+          var geometry = new THREE.BoxGeometry( value[0], value[1], value[2]);
+          var material = new THREE.MeshBasicMaterial( { color: pickColor("Class") } );
+            var bar = new THREE.Mesh( geometry, material );
+            bar.position.x = 30 * i;
+            bar.position.y = d;
+            bar.scale.y = d / 10;
+            return bar;
+          }
+      );*/
+}
+
+// these are, as before, to make D3's .append() and .selectAll() work
+THREE.Object3D.prototype.appendChild = function (c) { this.add(c); return c; };
+THREE.Object3D.prototype.querySelectorAll = function () { return []; };
+
+// this one is to use D3's .attr() on THREE's objects
+THREE.Object3D.prototype.setAttribute = function (name, value) {
+    var chain = name.split('.');
+    var object = this;
+    for (var i = 0; i < chain.length - 1; i++) {
+        object = object[chain[i]];
+    }
+    object[chain[chain.length - 1]] = value;
+}
+
+
+//Global parameters
+var height = 800;
+var width = 850;
+var scene;
+var camera;
+var renderer;
+var cube;
+
+var dataset = [
+    { key: "Class", coordinates:[1.0,1.0,1.0]},
+    { key: "Functions", coordinates:[1,1,1]}
+];
+
+function pickColor(key) {
+    if (key == "Class")
+        return "red";
+    else (key == "Functions")
+        return "blue";
+}
+init();
