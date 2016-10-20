@@ -49,36 +49,62 @@
 
                 var scene = x3d.append("scene");
 
-                var data = [1,2,3];
+                scene.append("viewpoint")
+                    .attr( "centerOfRotation", "0 0 5")
+                    .attr( "position", "13.742265188709691 -27.453522975182366 10.816062840792625" )
+                    .attr( "orientation", "0.962043810961999 0.1696342804961945 0.21376603254551874 1.379433089729343" )
+                    ;
 
-                shapes = scene.selectAll("transform").data(data);
+                var dataset = [
+                    { key: "Class", coordinates:[1.0,1.0,1.0]},
+                    { key: "Protocol", coordinates:[1.0,1.0,2.0]},
+                    { key: "Functions", coordinates:[1.0,1.0,3.0]}
+                ];
+
+                shapes = scene.selectAll("transform.blocks").data(dataset);
 
                 var x = d3.scaleLinear()
-                    .domain([d3.min(data), d3.max(data)])
+                    .domain([0, dataset.length])
                     .range([0, 6]);
 
                 shapesEnter = shapes
                     .enter()
                     .append("transform")
-                    .attr("translation", function(d,i){
-                        console.log(i);
-                        console.log(x(d));
-                        return x(d)+" 0.0 0.0";
-                    })
+                    .attr("class", "blocks")
+                    .attr("translation", function(d,i) { return x(i) + " 0.0 " + d.coordinates[2]/2.0; } )
+                    .attr("scale", function(d) { return "1.0 1.0 "+d.coordinates[2]; } )
                     .append("shape");
 
                 shapesEnter
                     .append("appearance")
                     .append("material")
-                    .attr("diffuseColor", "steelblue" );
+                    .attr("diffuseColor", function(d){
+                        console.log(d);
+                        return colorN(d.key);
+                    } );
 
                 shapesEnter.append( "box" )
                     //.attr("onclick", "alert('boramim')")
                     .attr("size", function(d,i){
-                        return "1.0 "+d+" 1.0";
+                        return "1.0 1.0 1.0";
                     });
 
                 d3.select("box").attr("onclick", "alert('boramim')");
+
+                block = scene.append("transform")
+                    .attr("class", "district")
+                    .attr("translation", function() { return "0.0 -1.0 0.0"; }
+                    .attr("scale", function() { "1.0 1.0 1.0"})
+                    .append("shape")
+                    .append("app")
+            }
+            function colorN(type) {
+                if (type == "Class")
+                    return "red";
+                else if (type == "Protocol")
+                    return "pink";
+                else if (type == "Functions")
+                    return "green";
             }
 
             init();
