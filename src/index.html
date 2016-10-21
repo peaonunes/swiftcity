@@ -5,6 +5,7 @@
 		<title>Swicity - Visualizing Swift Systems as cities!</title>
 		<script src="https://d3js.org/d3.v4.min.js"></script>
         <script src="js/three.js"></script>
+        <script src="js/OrbitControls.js"></script>
 	</head>
 	<body>
 
@@ -48,6 +49,8 @@
                 camera.position.x = 1;
 
                 scene.background = new THREE.Color(0xffffdd);
+
+                var orbit = new THREE.OrbitControls( camera, renderer.domElement );
                 render(renderer);
 
             }
