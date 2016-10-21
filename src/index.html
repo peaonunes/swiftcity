@@ -51,6 +51,14 @@
                 scene.background = new THREE.Color(0xffffdd);
 
                 var orbit = new THREE.OrbitControls( camera, renderer.domElement );
+
+                var geometry = new THREE.PlaneGeometry( 10, 10, 5 );
+                var material = new THREE.MeshBasicMaterial( {color: 0xd3d3d3, side: THREE.DoubleSide} );
+                var plane = new THREE.Mesh( geometry, material );
+                plane.rotation.x = Math.PI/2;
+
+                scene.add( plane );
+
                 render(renderer);
 
             }
@@ -72,18 +80,13 @@
 
             function renderData(){
 
-                var scaleX = d3.scaleLinear()
-                    .domain([0,dataset.length])
-                    .range([-width/2, width]);
-
                 for(var el in dataset){
                     var element = dataset[el];
                     var value = element.coordinates;
                     var geometry = new THREE.BoxGeometry( value[0], value[1], value[2]);
                     var material = new THREE.MeshBasicMaterial( { color: pickColor(element.key) } );
                     var newCube = new THREE.Mesh( geometry, material );
-                    console.log(el);
-                    console.log(scaleX(el));
+
                     newCube.position.x = 1 * el;
                     newCube.position.y = value[1]/2;
                     //newCube.applyMatrix(new THREE.Matrix4().makeTranslation((el*1.0), 0, 0) );
@@ -94,8 +97,8 @@
             }
 
             //Global parameters
-            var height = 700;
-            var width = 850;
+            var height = window.innerHeight ;
+            var width = window.innerWidth ;
             var scene;
             var camera;
             var renderer;
@@ -113,6 +116,16 @@
                     return "blue";
             }
             init();
+
+            window.addEventListener( 'resize', function () {
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+			}, false );
+
 
         </script>
 
