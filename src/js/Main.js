@@ -12,8 +12,8 @@ var renderer;
 var cube;
 
 var dataset = [
-    { key: "Class", coordinates:[3,10,3]},
-    { key: "Functions", coordinates:[1,15,1]}
+    { key: "Class", size:[2,10,2]},
+    { key: "Functions", size:[1,15,1]}
 ];
 
 function init(){
@@ -65,7 +65,7 @@ function renderData(){
 
     for(var el in dataset){
         var element = dataset[el];
-        var value = element.coordinates;
+        var value = element.size;
         var geometry = new THREE.BoxGeometry( value[0], value[1], value[2]);
         var material = new THREE.MeshBasicMaterial( { color: pickColor(element.key) } );
         var newCube = new THREE.Mesh( geometry, material );
@@ -76,6 +76,13 @@ function renderData(){
         scene.add(newCube);
     }
 
+    var geometry = new THREE.BoxGeometry( 1, 1, 1);
+    var material = new THREE.MeshBasicMaterial( { color: "black" } );
+    var newCube = new THREE.Mesh( geometry, material );
+    newCube.position.x = -5;
+    newCube.position.y = 1/2;
+
+    scene.add(newCube);
 }
 
 init();
