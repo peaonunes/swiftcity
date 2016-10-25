@@ -22,11 +22,11 @@ function init(){
     camera.position.y = 20;
     camera.position.x = 0;
 
-    scene.background = new THREE.Color(0xffffdd);
+    scene.background = new THREE.Color(systemColors["sky"]);
 
-    var orbit = new THREE.OrbitControls( camera, renderer.domElement );
+    var orbit = new THREE.OrbitControls(camera, renderer.domElement);
     var geometry = new THREE.PlaneGeometry( 10, 10, 5 );
-    var material = new THREE.MeshBasicMaterial( {color: 0xd3d3d3, side: THREE.DoubleSide} );
+    var material = new THREE.MeshBasicMaterial( {color: systemColors["floor"], side: THREE.DoubleSide} );
     var plane = new THREE.Mesh( geometry, material );
     plane.rotation.x = Math.PI/2;
 
@@ -34,13 +34,13 @@ function init(){
 
     render(renderer);
 
-    winResize(camera,renderer,height,width);
+    winResize(camera,renderer,width,height);
 
 }
 
 function setUp(){
     scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera(150, window.innerWidth / window.innerHeight, 1, 1000);
+    camera = new THREE.PerspectiveCamera(150, width / height, 1, 1000);
 
     renderer = new THREE.WebGLRenderer();
     renderer.setSize( width, height);
@@ -67,13 +67,6 @@ function renderData(){
         scene.add(newCube);
     }
 
-}
-
-function pickColor(key) {
-    if (key == "Class")
-        return "red";
-    else (key == "Functions")
-        return "blue";
 }
 
 init();
