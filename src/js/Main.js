@@ -45,6 +45,10 @@ function setUp(){
     renderer = new THREE.WebGLRenderer();
     renderer.setSize( width, height);
     document.body.appendChild( renderer.domElement );
+
+    d3.select("body")
+        .append("h5")
+        .text("Controls");
 }
 
 function render() {
