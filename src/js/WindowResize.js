@@ -2,10 +2,10 @@
  * @author peaonunes / https://github.com/peaonunes
  */
 
-function winResize(camera, rendere){
+function winResize(camera, rendere, width, height){
     window.addEventListener( 'resize', function () {
-        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.aspect = width / height;
         camera.updateProjectionMatrix();
-        renderer.setSize( window.innerWidth, window.innerHeight );
+        renderer.setSize( width, height);
     }, false );
 }
