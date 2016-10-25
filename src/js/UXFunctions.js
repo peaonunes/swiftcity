@@ -1,3 +1,7 @@
+/**
+ * @author peaonunes / https://github.com/peaonunes
+ */
+
 function pickColor(key) {
     if (key == "Class")
         return "red";

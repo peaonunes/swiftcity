@@ -1,3 +1,7 @@
+/**
+ * @author peaonunes / https://github.com/peaonunes
+ */
+
 var controls;
 //Global parameters
 var height = window.innerHeight * 0.75 ;
@@ -46,9 +50,10 @@ function setUp(){
     renderer.setSize( width, height);
     document.body.appendChild( renderer.domElement );
 
-    d3.select("body")
-        .append("h5")
-        .text("Controls");
+    var divInformation = d3.select("body").append("div");
+    divInformation.append("h5").text("Basic controls");
+    divInformation.append("h6").text("Mouse interaction [ Zoom out: Scroll up | Zoom in : Scroll down | Camera Rotation : Pan and move]");
+    divInformation.append("h6").text("Keyboard interaction [ Move Camera up/down : UP/Down Arrows | Move Camera left/right : Left/Right Arrows ]");
 }
 
 function render() {
