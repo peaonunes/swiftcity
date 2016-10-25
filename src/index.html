@@ -6,37 +6,26 @@
 		<script src="https://d3js.org/d3.v4.min.js"></script>
         <script src="js/three.js"></script>
         <script src="js/OrbitControls.js"></script>
+        <script src="js/KeyboardControls.js"></script>
+        <script src="js/WindowResize.js"></script>
 	</head>
 	<body>
 
         <script>
 
-            var controls ;
+            var controls;
+            //Global parameters
+            var height = window.innerHeight ;
+            var width = window.innerWidth ;
+            var scene;
+            var camera;
+            var renderer;
+            var cube;
 
-            document.onkeydown = function(e) {
-                switch (e.keyCode) {
-                    case 37:
-                        camera.position.x *= 1.1;
-                        break;
-                    case 38:
-                        camera.position.y *= 0.9;
-                        break;
-                    case 39:
-                        camera.position.x *= 0.9;
-                        break;
-                    case 40:
-                        camera.position.y *= 1.1;
-                        break;
-                    case 189:
-                        camera.position.z *= 1.1;
-                        break;
-                    case 187:
-                        camera.position.z *= 0.9;
-                        break;
-                    default:
-                        console.log(e.keyCode);
-                }
-            };
+            var dataset = [
+                { key: "Class", coordinates:[1.0,1.0,1.0]},
+                { key: "Functions", coordinates:[1,2,1]}
+            ];
 
             function init(){
 
@@ -61,6 +50,8 @@
 
                 render(renderer);
 
+                winResize(camera,renderer);
+
             }
 
             function setUp(){
@@ -74,7 +65,6 @@
 
             function render() {
                 requestAnimationFrame(render);
-                //cube.rotation.y += 0.01;
                 renderer.render(scene, camera);
             }
 
@@ -89,25 +79,11 @@
 
                     newCube.position.x = 1 * el;
                     newCube.position.y = value[1]/2;
-                    //newCube.applyMatrix(new THREE.Matrix4().makeTranslation((el*1.0), 0, 0) );
-                    //newCube.faces.splice( 3, 1 );
+
                     scene.add(newCube);
                 }
 
             }
-
-            //Global parameters
-            var height = window.innerHeight ;
-            var width = window.innerWidth ;
-            var scene;
-            var camera;
-            var renderer;
-            var cube;
-
-            var dataset = [
-                { key: "Class", coordinates:[1.0,1.0,1.0]},
-                { key: "Functions", coordinates:[1,2,1]}
-            ];
 
             function pickColor(key) {
                 if (key == "Class")
@@ -115,17 +91,8 @@
                 else (key == "Functions")
                     return "blue";
             }
+
             init();
-
-            window.addEventListener( 'resize', function () {
-
-				camera.aspect = window.innerWidth / window.innerHeight;
-				camera.updateProjectionMatrix();
-
-				renderer.setSize( window.innerWidth, window.innerHeight );
-
-			}, false );
-
 
         </script>
 
