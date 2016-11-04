@@ -14,7 +14,6 @@ var incrementScale = 1.1;
 var decrementScale = 0.9;
 
 document.onkeydown = function(e) {
-    console.log(e.keyCode);
     switch (e.keyCode) {
         case 37:
             camera.position.x *= incrementScale;

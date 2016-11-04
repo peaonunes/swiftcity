@@ -11,11 +11,6 @@ var camera;
 var renderer;
 var cube;
 
-var dataset = [
-    { key: "Class", size:[2,10,2]},
-    { key: "Functions", size:[1,15,1]}
-];
-
 function init(){
 
     setUp();
@@ -40,6 +35,7 @@ function init(){
 
     winResize(camera,renderer,width,height);
 
+    districtMaker(file, scene);
 }
 
 function setUp(){
@@ -63,7 +59,7 @@ function render() {
 
 function renderData(){
 
-    for(var el in dataset){
+    /*for(var el in dataset){
         var element = dataset[el];
         var value = element.size;
         var geometry = new THREE.BoxGeometry( value[0], value[1], value[2]);
@@ -82,7 +78,7 @@ function renderData(){
     newCube.position.x = -5;
     newCube.position.y = 1/2;
 
-    scene.add(newCube);
+    scene.add(newCube);*/
 }
 
 init();
