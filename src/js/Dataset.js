@@ -4,7 +4,7 @@ var dataset = [
 ];
 
 var file = [
-    { id: 01, key: "Class", size:[3,8,3]},
+    { id: 01, key: "Class", size:[5,8,5]},
     { id: 02, key: "Functions", size:[2,9,2]},
     { id: 03, key: "Class", size:[1,3,1]},
     { id: 04, key: "Functions", size:[1,7,1]},

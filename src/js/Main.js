@@ -24,13 +24,7 @@ function init(){
     scene.background = new THREE.Color(systemColors["sky"]);
 
     var orbit = new THREE.OrbitControls(camera, renderer.domElement);
-    var geometry = new THREE.PlaneGeometry( 10, 10, 5 );
-    var material = new THREE.MeshBasicMaterial( {color: systemColors["floor"], side: THREE.DoubleSide} );
-    var plane = new THREE.Mesh( geometry, material );
-    plane.rotation.x = Math.PI/2;
-
-    scene.add( plane );
-
+    
     render(renderer);
 
     winResize(camera,renderer,width,height);

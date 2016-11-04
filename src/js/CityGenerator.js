@@ -15,26 +15,40 @@ function districtMaker(file, scene){
 
     // Fill matrix in height order
     blocksMatrix = fillMatrix(blocksMatrix, file, side);
-    console.log("matrix", blocksMatrix);
 
-    blocksMatrix = defineXZ(blocksMatrix, side);
-    console.log("offset matrix", blocksMatrix);
+    blocksMatrix = defineXZ(blocksMatrix, side, file);
 
-    renderDistrict(blocksMatrix, side, scene)
+    renderDistrict(blocksMatrix, side, scene, file);
 }
 
-function renderDistrict(blocksMatrix, side, scene){
+function renderDistrict(blocksMatrix, side, scene, file){
     for(var i = 0 ; i < side ; i++){
         for(var j = 0 ; j < side ; j++){
             var block = blocksMatrix[i][j];
             if(block == -1)
-                return;
+                continue;
             var coordinates = block.coordinates;
             var size = block.size;
             var key = block.key;
             renderCube(coordinates, size, key, scene);
         }
     }
+
+    renderFloor(file, scene);
+}
+
+function renderFloor(file, scene) {
+    var geometry = new THREE.PlaneGeometry(file.floor.width , file.floor.height);
+    var material = new THREE.MeshBasicMaterial( {color: systemColors["floor"], side: THREE.DoubleSide} );
+    var plane = new THREE.Mesh( geometry, material );
+    console.log(file.floor);
+    var x = file.floor.coordinates.x;
+    var z = file.floor.coordinates.z;
+
+    plane.rotation.x = Math.PI/2;
+    plane.position.x = x + file.floor.width/2;
+    plane.position.z = z + file.floor.height/2;
+    scene.add(plane);
 }
 
 function renderCube(coordinates, size, key, scene){
@@ -42,25 +56,36 @@ function renderCube(coordinates, size, key, scene){
     var material = new THREE.MeshBasicMaterial( { color: pickColor(key) } );
     var newCube = new THREE.Mesh( geometry, material );
 
-    newCube.position.x = coordinates.x + coordinates.x/2;
+    newCube.position.x = coordinates.x;
     newCube.position.y = size[1]/2;
-    newCube.position.z = coordinates.z + coordinates.z/2;
+    newCube.position.z = coordinates.z;
     scene.add(newCube);
 }
 
-function defineXZ(blocksMatrix, side){
+function defineXZ(blocksMatrix, side, file){
+    file["floor"] = { "width":0, "height":0, "coordinates": {"x": 0, "y": 0, "z":0 } };
+
     var x = 1; var z = 1; var offset = 1; var maxZ = 0;
+
+    file.floor.coordinates.x = 0;
+    file.floor.coordinates.z = 0;
+
+    var width = 0;
+    var height = 0;
 
     for(var i = 0 ; i < side ; i++){
         for(var j = 0 ; j < side ; j++){
             var block = blocksMatrix[i][j];
             if(block == -1)
-                return blocksMatrix;
+                continue;
 
             block["coordinates"] = {"x": 0, "y": 0, "z":0 };
 
-            block.coordinates.x = x;
-            block.coordinates.z = z;
+            block.coordinates.x = x + block.size[0]/2;
+            block.coordinates.z = z + block.size[2]/2;
+
+            width = Math.max(width, block.coordinates.x + block.size[0]);
+            height = Math.max(height, block.coordinates.z + block.size[2]);
 
             x += block.size[0] + offset;
             maxZ = Math.max(maxZ, block.size[2]);
@@ -69,6 +94,9 @@ function defineXZ(blocksMatrix, side){
         maxZ = 0;
         x = 1;
     }
+
+    file.floor.width = width;
+    file.floor.height = height;
 
     return blocksMatrix;
 }
