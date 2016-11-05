@@ -1,4 +1,8 @@
-function districtMaker(file, scene){
+/**
+ * @author peaonunes / https://github.com/peaonunes
+ */
+
+function districtMaker(file, scene, sorted){
     var length = file.length;
     var side = Math.ceil(Math.sqrt(length));
 
@@ -11,7 +15,8 @@ function districtMaker(file, scene){
     }
 
     // Sort by height
-    sortedBlocks = sortFile(file);
+    if(sorted)
+        sortFile(file);
 
     // Fill matrix in height order
     blocksMatrix = fillMatrix(blocksMatrix, file, side);
@@ -39,9 +44,9 @@ function renderDistrict(blocksMatrix, side, scene, file){
 
 function renderFloor(file, scene) {
     var geometry = new THREE.PlaneGeometry(file.floor.width , file.floor.height);
-    var material = new THREE.MeshBasicMaterial( {color: systemColors["floor"], side: THREE.DoubleSide} );
+    var material = new THREE.MeshBasicMaterial( {color: pickColor("Floor"), side: THREE.DoubleSide} );
     var plane = new THREE.Mesh( geometry, material );
-    console.log(file.floor);
+
     var x = file.floor.coordinates.x;
     var z = file.floor.coordinates.z;
 
@@ -59,13 +64,23 @@ function renderCube(coordinates, size, key, scene){
     newCube.position.x = coordinates.x;
     newCube.position.y = size[1]/2;
     newCube.position.z = coordinates.z;
+
     scene.add(newCube);
+
+    var geo = new THREE.EdgesGeometry(geometry); // or WireframeGeometry( geometry )
+    var mat = new THREE.LineBasicMaterial({ color: "#424242", linewidth: 0.5 });
+    var wireframe = new THREE.LineSegments(geo, mat);
+    wireframe.position.x = coordinates.x;
+    wireframe.position.y = size[1]/2;
+    wireframe.position.z = coordinates.z;
+
+    scene.add(wireframe);
 }
 
 function defineXZ(blocksMatrix, side, file){
     file["floor"] = { "width":0, "height":0, "coordinates": {"x": 0, "y": 0, "z":0 } };
 
-    var x = 1; var z = 1; var offset = 1; var maxZ = 0;
+    var x = 1.5; var z = 1.5; var offset = 1.5; var maxZ = 0;
 
     file.floor.coordinates.x = 0;
     file.floor.coordinates.z = 0;
@@ -92,7 +107,7 @@ function defineXZ(blocksMatrix, side, file){
         }
         z += maxZ + offset;
         maxZ = 0;
-        x = 1;
+        x = 1.5;
     }
 
     file.floor.width = width;
@@ -101,12 +116,12 @@ function defineXZ(blocksMatrix, side, file){
     return blocksMatrix;
 }
 
-function fillMatrix(blocksMatrix, file, side){
+function fillMatrix(matrix, data, side){
     var line = 0;
     var column = 0;
 
-    for (var i = 0 ; i < file.length ; i++){
-        blocksMatrix[line][column] = file[i];
+    for (var i = 0 ; i < data.length ; i++){
+        matrix[line][column] = data[i];
         column++;
         if(column == side){
             column = 0;
@@ -114,7 +129,7 @@ function fillMatrix(blocksMatrix, file, side){
         }
     }
 
-    return blocksMatrix;
+    return matrix;
 }
 
 function sortFile(file){

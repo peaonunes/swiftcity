@@ -1,3 +1,7 @@
+/**
+ * @author peaonunes / https://github.com/peaonunes
+ */
+
 var dataset = [
     { key: "Class", size:[2,10,2]},
     { key: "Functions", size:[1,15,1]}

@@ -3,13 +3,16 @@
  */
 
 function pickColor(key) {
-    if (key == "Class")
-        return "red";
-    else (key == "Functions")
-        return "blue";
+    if(systemColors[key] != null)
+        return systemColors[key];
+    else
+        return "black";
 }
 
 var systemColors = {
-    "sky" : 0xe3f2fd,
-    "floor" : 0xe0e0e0
+    "Sky" : "#e3f2fd",
+    "Floor" : "#e0e0e0",
+    "Wireframe" : "#424242",
+    "Class" : "#b71c1c",
+    "Functions" : "#0277bd"
 }

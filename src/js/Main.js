@@ -21,15 +21,13 @@ function init(){
     camera.position.y = 20;
     camera.position.x = 0;
 
-    scene.background = new THREE.Color(systemColors["sky"]);
+    scene.background = new THREE.Color(pickColor("Sky"));
 
     var orbit = new THREE.OrbitControls(camera, renderer.domElement);
-    
+
     render(renderer);
 
     winResize(camera,renderer,width,height);
-
-    districtMaker(file, scene);
 }
 
 function setUp(){
@@ -46,33 +44,15 @@ function setUp(){
     divInformation.append("h6").text("Keyboard interaction [ Move Camera up/down : UP/Down Arrows | Move Camera left/right : Left/Right Arrows ]");
 }
 
+var sort = true;
+
 function render() {
     requestAnimationFrame(render);
     renderer.render(scene, camera);
 }
 
 function renderData(){
-
-    /*for(var el in dataset){
-        var element = dataset[el];
-        var value = element.size;
-        var geometry = new THREE.BoxGeometry( value[0], value[1], value[2]);
-        var material = new THREE.MeshBasicMaterial( { color: pickColor(element.key) } );
-        var newCube = new THREE.Mesh( geometry, material );
-
-        newCube.position.x = 1 * el;
-        newCube.position.y = value[1]/2;
-
-        scene.add(newCube);
-    }
-
-    var geometry = new THREE.BoxGeometry( 1, 1, 1);
-    var material = new THREE.MeshBasicMaterial( { color: "black" } );
-    var newCube = new THREE.Mesh( geometry, material );
-    newCube.position.x = -5;
-    newCube.position.y = 1/2;
-
-    scene.add(newCube);*/
+    districtMaker(file, scene, sort);
 }
 
 init();
