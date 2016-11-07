@@ -52,7 +52,8 @@ function render() {
 }
 
 function renderData(){
-    districtMaker(file, scene, sort);
+    //districtMaker(file, scene, sort);
+    cityMaker(files, scene, sort);
 }
 
 init();

@@ -2,94 +2,100 @@
  * @author peaonunes / https://github.com/peaonunes
  */
 
-function districtMaker(file, scene, sorted){
-    var length = file.length;
-    var side = Math.ceil(Math.sqrt(length));
+function cityMaker(files, scene, sorted){
+    var length = files.length;
+    var dimension = getDimension();
 
-    var blocksMatrix = [];
-    for (var i = 0 ; i < side ; i++){
-        blocksMatrix[i] = [];
-        for (var j = 0 ; j < side ; j++){
-            blocksMatrix[i][j] = -1;
+    // Define district position and inside layout.
+    var districts = defineCityLayout();
+
+    // Sort districts by their size.
+    if(sorted)
+        sortDistricts(districts);
+
+    // Render all districts
+    for (var i = 0 ; i < districts.length ; i++){
+        var district = districts[i];
+        renderDistrict(district.blocks, district.dimension, scene, district.file);
+    }
+}
+
+function defineCityLayout(){
+    //TODO: Do the Matrix of districts to correctly plot them.
+    var districts = [];
+
+    var startX = 1.5; var startZ = 1.5; var offset = 1.5; var maxZ = 0;
+    for (var i = 0 ; i < length ; i++){
+        var file = files[i];
+        var district = districtMaker(file,sorted);
+        districts.push(district);
+    }
+
+    return districts;
+}
+
+function sortDistricts(districts){
+    return districts.sort(compareDistricts);
+}
+
+function compareDistricts(a,b) {
+    if(b.blocks.floor.width == a.blocks.floor.width)
+        return b.blocks.floor.height - a.blocks.floor.height;
+    return b.blocks.floor.width - a.blocks.floor.width;
+}
+
+function getDimension(length){
+    return Math.ceil(Math.sqrt(length));
+}
+
+function initMatrix(dimension){
+    var matrix = [];
+    for (var i = 0 ; i < dimension ; i++){
+        matrix[i] = [];
+        for (var j = 0 ; j < dimension ; j++){
+            matrix[i][j] = -1;
         }
     }
+    return matrix;
+}
+
+function districtMaker(file, sorted){
+    var length = file.length;
+    var dimension = getDimension(length);
+
+    var blocksMatrix = initMatrix(dimension);
 
     // Sort by height
     if(sorted)
-        sortFile(file);
+        sortBlocks(file);
 
     // Fill matrix in height order
-    blocksMatrix = fillMatrix(blocksMatrix, file, side);
+    blocksMatrix = fillMatrix(blocksMatrix, file, dimension);
 
-    blocksMatrix = defineXZ(blocksMatrix, side, file);
+    blocksMatrix = defineXZ(blocksMatrix, dimension, file);
 
-    renderDistrict(blocksMatrix, side, scene, file);
-}
-
-function renderDistrict(blocksMatrix, side, scene, file){
-    for(var i = 0 ; i < side ; i++){
-        for(var j = 0 ; j < side ; j++){
-            var block = blocksMatrix[i][j];
-            if(block == -1)
-                continue;
-            var coordinates = block.coordinates;
-            var size = block.size;
-            var key = block.key;
-            renderCube(coordinates, size, key, scene);
-        }
+    var district = {
+        "blocks" : blocksMatrix,
+        "dimension" : dimension,
+        "file" : file
     }
-
-    renderFloor(file, scene);
+    //renderDistrict(blocksMatrix, dimension, scene, file);
+    return district;
 }
 
-function renderFloor(file, scene) {
-    var geometry = new THREE.PlaneGeometry(file.floor.width , file.floor.height);
-    var material = new THREE.MeshBasicMaterial( {color: pickColor("Floor"), side: THREE.DoubleSide} );
-    var plane = new THREE.Mesh( geometry, material );
-
-    var x = file.floor.coordinates.x;
-    var z = file.floor.coordinates.z;
-
-    plane.rotation.x = Math.PI/2;
-    plane.position.x = x + file.floor.width/2;
-    plane.position.z = z + file.floor.height/2;
-    scene.add(plane);
-}
-
-function renderCube(coordinates, size, key, scene){
-    var geometry = new THREE.BoxGeometry( size[0], size[1], size[2]);
-    var material = new THREE.MeshBasicMaterial( { color: pickColor(key) } );
-    var newCube = new THREE.Mesh( geometry, material );
-
-    newCube.position.x = coordinates.x;
-    newCube.position.y = size[1]/2;
-    newCube.position.z = coordinates.z;
-
-    scene.add(newCube);
-
-    var geo = new THREE.EdgesGeometry(geometry); // or WireframeGeometry( geometry )
-    var mat = new THREE.LineBasicMaterial({ color: "#424242", linewidth: 0.5 });
-    var wireframe = new THREE.LineSegments(geo, mat);
-    wireframe.position.x = coordinates.x;
-    wireframe.position.y = size[1]/2;
-    wireframe.position.z = coordinates.z;
-
-    scene.add(wireframe);
-}
-
-function defineXZ(blocksMatrix, side, file){
-    file["floor"] = { "width":0, "height":0, "coordinates": {"x": 0, "y": 0, "z":0 } };
+function defineXZ(blocksMatrix, dimension, file){
+    blocksMatrix["floor"] = { "width":0, "height":0, "coordinates": {"x": 0, "y": 0, "z":0 } };
 
     var x = 1.5; var z = 1.5; var offset = 1.5; var maxZ = 0;
 
-    file.floor.coordinates.x = 0;
-    file.floor.coordinates.z = 0;
+    blocksMatrix.floor.coordinates.x = 0;
+    blocksMatrix.floor.coordinates.z = 0;
 
     var width = 0;
     var height = 0;
 
-    for(var i = 0 ; i < side ; i++){
-        for(var j = 0 ; j < side ; j++){
+    for(var i = 0 ; i < dimension ; i++){
+        for(var j = 0 ; j < dimension ; j++){
             var block = blocksMatrix[i][j];
             if(block == -1)
                 continue;
@@ -110,20 +116,20 @@ function defineXZ(blocksMatrix, side, file){
         x = 1.5;
     }
 
-    file.floor.width = width;
-    file.floor.height = height;
+    blocksMatrix.floor.width = width;
+    blocksMatrix.floor.height = height;
 
     return blocksMatrix;
 }
 
-function fillMatrix(matrix, data, side){
+function fillMatrix(matrix, data, dimension){
     var line = 0;
     var column = 0;
 
     for (var i = 0 ; i < data.length ; i++){
         matrix[line][column] = data[i];
         column++;
-        if(column == side){
+        if(column == dimension){
             column = 0;
             line++;
         }
@@ -132,7 +138,7 @@ function fillMatrix(matrix, data, side){
     return matrix;
 }
 
-function sortFile(file){
+function sortBlocks(file){
     return file.sort(compareBlocks);
 }
 

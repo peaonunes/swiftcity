@@ -21,3 +21,7 @@ var file = [
     { id: 11, key: "Class", size:[1,5,1]},
     { id: 12, key: "Class", size:[3,1,3]}
 ];
+
+var files = [
+    file
+];
