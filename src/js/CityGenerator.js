@@ -20,12 +20,13 @@ function cityMaker(files, scene, sorted){
 function defineCityLayout(cityMatrix, dimension, sorted){
     cityMatrix["floor"] = { "width":0, "height":0, "coordinates": {"x": 0, "y": 0, "z":0 } };
 
-    var startX = 1.5; var startZ = 1.5; var offset = 1.5; var maxZ = 0;
+    var startX = 1.5; var startZ = 1.5;
+    var offset = 1.5; var maxZ = 0;
+    var originalX = startX;
+    var width = 0; var height = 0;
 
     cityMatrix.floor.coordinates.x = 0;
     cityMatrix.floor.coordinates.z = 0;
-
-    var originalX = startX; var width = 0; var height = 0;
 
     for (var i = 0 ; i < dimension ; i++){
         for (var j = 0 ; j < dimension ; j++){
@@ -105,7 +106,9 @@ function districtMaker(file, sorted, x, z, offset, maxZ){
 function defineXZ(blocksMatrix, dimension, file, x, z, offset){
     blocksMatrix["floor"] = { "width":0, "height":0, "coordinates": {"x": 0, "y": 0, "z":0 } };
 
-    var startX = x; var width = 0; var height = 0; var maxZ = 0;
+    var startX = x; var startZ = z;
+    var width = 0; var height = 0;
+    var maxZ = 0;
 
     blocksMatrix.floor.coordinates.x = x;
     blocksMatrix.floor.coordinates.z = z;
@@ -118,12 +121,12 @@ function defineXZ(blocksMatrix, dimension, file, x, z, offset){
                 continue;
 
             block["coordinates"] = {"x": 0, "y": 0, "z":0 };
-
+            if (i == 1) console.log("x", x);
             block.coordinates.x = x + offset + block.size[0]/2;
             block.coordinates.z = z + offset + block.size[2]/2;
             if(i == 1) console.log("width before: ", width);
-            width = Math.max(width, block.coordinates.x + block.size[0]);
-            height = Math.max(height, block.coordinates.z + block.size[2]);
+            width = Math.max(width, (block.coordinates.x + block.size[0]) - startX);
+            height = Math.max(height, (block.coordinates.z + block.size[2]) - startZ);
             if(i == 1) console.log("width after: ", width);
             x += block.size[0] + offset;
             maxZ = Math.max(maxZ, block.size[2]);

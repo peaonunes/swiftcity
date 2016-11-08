@@ -54,6 +54,6 @@ var file3 = [
 
 var files = [
     file,
-    file2
-//    file3,
+    file2,
+    file3
 ];
