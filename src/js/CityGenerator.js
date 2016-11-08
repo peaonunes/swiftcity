@@ -25,8 +25,7 @@ function defineCityLayout(cityMatrix, dimension, sorted){
     cityMatrix.floor.coordinates.x = 0;
     cityMatrix.floor.coordinates.z = 0;
 
-    var width = 0;
-    var height = 0;
+    var originalX = startX; var width = 0; var height = 0;
 
     for (var i = 0 ; i < dimension ; i++){
         for (var j = 0 ; j < dimension ; j++){
@@ -34,12 +33,18 @@ function defineCityLayout(cityMatrix, dimension, sorted){
             if(distric == -1)
                 continue;
 
-            var districtMatrix = districtMaker(distric, sorted, startX, startZ, offset, maxZ);
+            var districtMatrix = districtMaker(distric, sorted, startX, startZ, offset);
             cityMatrix[i][j] = districtMatrix;
 
             width = Math.max(width, districtMatrix.blocks.floor.coordinates.x + districtMatrix.blocks.floor.width + offset);
             height = Math.max(height, districtMatrix.blocks.floor.coordinates.z + districtMatrix.blocks.floor.height + offset);
+
+            startX += districtMatrix.blocks.floor.width + offset;
+            maxZ = Math.max(maxZ, districtMatrix.blocks.floor.height);
         }
+        startZ += maxZ + offset;
+        maxZ = 0;
+        startX = originalX;
     }
 
     cityMatrix.floor.width = width;
@@ -97,35 +102,36 @@ function districtMaker(file, sorted, x, z, offset, maxZ){
     return district;
 }
 
-function defineXZ(blocksMatrix, dimension, file, x, z, offset, maxZ){
+function defineXZ(blocksMatrix, dimension, file, x, z, offset){
     blocksMatrix["floor"] = { "width":0, "height":0, "coordinates": {"x": 0, "y": 0, "z":0 } };
+
+    var startX = x; var width = 0; var height = 0; var maxZ = 0;
 
     blocksMatrix.floor.coordinates.x = x;
     blocksMatrix.floor.coordinates.z = z;
 
-    var width = 0;
-    var height = 0;
-
     for(var i = 0 ; i < dimension ; i++){
         for(var j = 0 ; j < dimension ; j++){
+            console.log(width);
             var block = blocksMatrix[i][j];
             if(block == -1)
                 continue;
 
-            block["coordinates"] = {"x": x, "y": 0, "z":z };
+            block["coordinates"] = {"x": 0, "y": 0, "z":0 };
 
-            block.coordinates.x = x + block.size[0]/2;
-            block.coordinates.z = z + block.size[2]/2;
-
+            block.coordinates.x = x + offset + block.size[0]/2;
+            block.coordinates.z = z + offset + block.size[2]/2;
+            if(i == 1) console.log("width before: ", width);
             width = Math.max(width, block.coordinates.x + block.size[0]);
             height = Math.max(height, block.coordinates.z + block.size[2]);
-
+            if(i == 1) console.log("width after: ", width);
             x += block.size[0] + offset;
             maxZ = Math.max(maxZ, block.size[2]);
         }
+        //console.log("width", width);
         z += maxZ + offset;
         maxZ = 0;
-        x = 1.5;
+        x = startX;
     }
 
     blocksMatrix.floor.width = width;
