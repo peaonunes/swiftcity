@@ -1,3 +1,20 @@
+/**
+ * @author peaonunes / https://github.com/peaonunes
+ */
+
+function renderCity(cityMatrix, dimension, scene) {
+    for(var i = 0 ; i < dimension ; i++){
+        for(var j = 0 ; j < dimension ; j++){
+            var district = cityMatrix[i][j];
+            if(district == -1)
+                continue;
+            renderDistrict(district.blocks, district.dimension, scene, district.file);
+        }
+    }
+
+    renderFloor(cityMatrix.floor, scene, true);
+}
+
 function renderDistrict(blocksMatrix, dimension, scene, file){
     for(var i = 0 ; i < dimension ; i++){
         for(var j = 0 ; j < dimension ; j++){
@@ -11,12 +28,13 @@ function renderDistrict(blocksMatrix, dimension, scene, file){
         }
     }
 
-    renderFloor(blocksMatrix.floor, scene);
+    renderFloor(blocksMatrix.floor, scene, false);
 }
 
-function renderFloor(floor, scene) {
+function renderFloor(floor, scene, isCity) {
     var geometry = new THREE.PlaneGeometry(floor.width , floor.height);
-    var material = new THREE.MeshBasicMaterial( {color: pickColor("Floor"), side: THREE.DoubleSide} );
+    var color = isCity ? pickColor("CityFloor") : pickColor("DistrictFloor");
+    var material = new THREE.MeshBasicMaterial( {color: color, side: THREE.DoubleSide} );
     var plane = new THREE.Mesh( geometry, material );
 
     var x = floor.coordinates.x;
@@ -25,6 +43,8 @@ function renderFloor(floor, scene) {
     plane.rotation.x = Math.PI/2;
     plane.position.x = x + floor.width/2;
     plane.position.z = z + floor.height/2;
+    plane.position.y = isCity ? -0.1 : 0;
+    console.log(plane);
     scene.add(plane);
 }
 
@@ -40,7 +60,7 @@ function renderCube(coordinates, size, key, scene){
     scene.add(newCube);
 
     var geo = new THREE.EdgesGeometry(geometry); // or WireframeGeometry( geometry )
-    var mat = new THREE.LineBasicMaterial({ color: "#424242", linewidth: 0.5 });
+    var mat = new THREE.LineBasicMaterial({ color: pickColor("Wireframe"), linewidth: 0.5 });
     var wireframe = new THREE.LineSegments(geo, mat);
     wireframe.position.x = coordinates.x;
     wireframe.position.y = size[1]/2;

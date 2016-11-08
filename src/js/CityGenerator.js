@@ -4,34 +4,48 @@
 
 function cityMaker(files, scene, sorted){
     var length = files.length;
-    var dimension = getDimension();
+    var dimension = getDimension(length);
+
+    var cityMatrix = initMatrix(dimension);
+
+    cityMatrix = fillMatrix(cityMatrix, files, dimension);
 
     // Define district position and inside layout.
-    var districts = defineCityLayout();
+    cityMatrix = defineCityLayout(cityMatrix, dimension, sorted);
 
-    // Sort districts by their size.
-    if(sorted)
-        sortDistricts(districts);
-
-    // Render all districts
-    for (var i = 0 ; i < districts.length ; i++){
-        var district = districts[i];
-        renderDistrict(district.blocks, district.dimension, scene, district.file);
-    }
+    // Render the city.
+    renderCity(cityMatrix, dimension, scene);
 }
 
-function defineCityLayout(){
-    //TODO: Do the Matrix of districts to correctly plot them.
-    var districts = [];
+function defineCityLayout(cityMatrix, dimension, sorted){
+    cityMatrix["floor"] = { "width":0, "height":0, "coordinates": {"x": 0, "y": 0, "z":0 } };
 
     var startX = 1.5; var startZ = 1.5; var offset = 1.5; var maxZ = 0;
-    for (var i = 0 ; i < length ; i++){
-        var file = files[i];
-        var district = districtMaker(file,sorted);
-        districts.push(district);
+
+    cityMatrix.floor.coordinates.x = 0;
+    cityMatrix.floor.coordinates.z = 0;
+
+    var width = 0;
+    var height = 0;
+
+    for (var i = 0 ; i < dimension ; i++){
+        for (var j = 0 ; j < dimension ; j++){
+            var distric = cityMatrix[i][j];
+            if(distric == -1)
+                continue;
+
+            var districtMatrix = districtMaker(distric, sorted, startX, startZ, offset, maxZ);
+            cityMatrix[i][j] = districtMatrix;
+
+            width = Math.max(width, districtMatrix.blocks.floor.coordinates.x + districtMatrix.blocks.floor.width + offset);
+            height = Math.max(height, districtMatrix.blocks.floor.coordinates.z + districtMatrix.blocks.floor.height + offset);
+        }
     }
 
-    return districts;
+    cityMatrix.floor.width = width;
+    cityMatrix.floor.height = height;
+
+    return cityMatrix;
 }
 
 function sortDistricts(districts){
@@ -59,7 +73,7 @@ function initMatrix(dimension){
     return matrix;
 }
 
-function districtMaker(file, sorted){
+function districtMaker(file, sorted, x, z, offset, maxZ){
     var length = file.length;
     var dimension = getDimension(length);
 
@@ -72,24 +86,22 @@ function districtMaker(file, sorted){
     // Fill matrix in height order
     blocksMatrix = fillMatrix(blocksMatrix, file, dimension);
 
-    blocksMatrix = defineXZ(blocksMatrix, dimension, file);
+    blocksMatrix = defineXZ(blocksMatrix, dimension, file, x, z, offset, maxZ);
 
     var district = {
         "blocks" : blocksMatrix,
         "dimension" : dimension,
         "file" : file
     }
-    //renderDistrict(blocksMatrix, dimension, scene, file);
+
     return district;
 }
 
-function defineXZ(blocksMatrix, dimension, file){
+function defineXZ(blocksMatrix, dimension, file, x, z, offset, maxZ){
     blocksMatrix["floor"] = { "width":0, "height":0, "coordinates": {"x": 0, "y": 0, "z":0 } };
 
-    var x = 1.5; var z = 1.5; var offset = 1.5; var maxZ = 0;
-
-    blocksMatrix.floor.coordinates.x = 0;
-    blocksMatrix.floor.coordinates.z = 0;
+    blocksMatrix.floor.coordinates.x = x;
+    blocksMatrix.floor.coordinates.z = z;
 
     var width = 0;
     var height = 0;
@@ -100,7 +112,7 @@ function defineXZ(blocksMatrix, dimension, file){
             if(block == -1)
                 continue;
 
-            block["coordinates"] = {"x": 0, "y": 0, "z":0 };
+            block["coordinates"] = {"x": x, "y": 0, "z":z };
 
             block.coordinates.x = x + block.size[0]/2;
             block.coordinates.z = z + block.size[2]/2;
