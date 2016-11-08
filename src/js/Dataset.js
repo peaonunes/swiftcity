@@ -1,5 +1,7 @@
 /**
  * @author peaonunes / https://github.com/peaonunes
+ *
+ * Stub data for tests.
  */
 
 var dataset = [

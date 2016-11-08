@@ -2,6 +2,13 @@
  * @author peaonunes / https://github.com/peaonunes
  */
 
+function runCity(files, scene, sorted, camera){
+    renderSceneProperties(scene);
+    let city = cityMaker(files, scene, sorted);
+    var cameraX = city.floor.width/2;
+    renderCamareProperties(camera, cameraX, 20, 40);
+}
+
 function cityMaker(files, scene, sorted){
     var length = files.length;
     var dimension = getDimension(length);
@@ -15,6 +22,8 @@ function cityMaker(files, scene, sorted){
 
     // Render the city.
     renderCity(cityMatrix, dimension, scene);
+
+    return cityMatrix;
 }
 
 function defineCityLayout(cityMatrix, dimension, sorted){
@@ -52,16 +61,6 @@ function defineCityLayout(cityMatrix, dimension, sorted){
     cityMatrix.floor.height = height;
 
     return cityMatrix;
-}
-
-function sortDistricts(districts){
-    return districts.sort(compareDistricts);
-}
-
-function compareDistricts(a,b) {
-    if(b.blocks.floor.width == a.blocks.floor.width)
-        return b.blocks.floor.height - a.blocks.floor.height;
-    return b.blocks.floor.width - a.blocks.floor.width;
 }
 
 function getDimension(length){
@@ -115,19 +114,17 @@ function defineXZ(blocksMatrix, dimension, file, x, z, offset){
 
     for(var i = 0 ; i < dimension ; i++){
         for(var j = 0 ; j < dimension ; j++){
-            console.log(width);
             var block = blocksMatrix[i][j];
             if(block == -1)
                 continue;
 
             block["coordinates"] = {"x": 0, "y": 0, "z":0 };
-            if (i == 1) console.log("x", x);
             block.coordinates.x = x + offset + block.size[0]/2;
             block.coordinates.z = z + offset + block.size[2]/2;
-            if(i == 1) console.log("width before: ", width);
+
             width = Math.max(width, (block.coordinates.x + block.size[0]) - startX);
             height = Math.max(height, (block.coordinates.z + block.size[2]) - startZ);
-            if(i == 1) console.log("width after: ", width);
+
             x += block.size[0] + offset;
             maxZ = Math.max(maxZ, block.size[2]);
         }

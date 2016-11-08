@@ -2,6 +2,17 @@
  * @author peaonunes / https://github.com/peaonunes
  */
 
+function renderSceneProperties(scene){
+    scene.background = new THREE.Color(pickColor("Sky"));
+}
+
+function renderCamareProperties(camera, x, y, z){
+    camera.position.x = x;
+    camera.position.y = y;
+    camera.position.z = z;
+    var orbit = new THREE.OrbitControls(camera, renderer.domElement);
+}
+
 function renderCity(cityMatrix, dimension, scene) {
     for(var i = 0 ; i < dimension ; i++){
         for(var j = 0 ; j < dimension ; j++){
@@ -32,7 +43,6 @@ function renderDistrict(blocksMatrix, dimension, scene, file){
 }
 
 function renderFloor(floor, scene, isCity) {
-    //console.log("width", floor.width);
     var geometry = new THREE.PlaneGeometry(floor.width , floor.height);
     var color = isCity ? pickColor("CityFloor") : pickColor("DistrictFloor");
     var material = new THREE.MeshBasicMaterial( {color: color, side: THREE.DoubleSide} );
@@ -41,7 +51,6 @@ function renderFloor(floor, scene, isCity) {
     var x = floor.coordinates.x;
     var z = floor.coordinates.z;
 
-    //console.log("height", floor.height);
     plane.rotation.x = Math.PI/2;
     plane.position.x = x + floor.width/2;
     plane.position.z = z + floor.height/2;
