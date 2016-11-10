@@ -6,6 +6,8 @@ function init(){
 
     setUp();
 
+    fileReader("./data/test_output.json");
+
     renderData();
 
     render(renderer);
