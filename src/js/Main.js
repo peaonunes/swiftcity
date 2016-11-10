@@ -17,17 +17,13 @@ function init(){
 
 function setUp(){
     scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera(150, width / height, 1, 1000);
-
+    camera = new THREE.PerspectiveCamera(45, width / height, 1, 1000);
     renderer = new THREE.WebGLRenderer();
     renderer.setSize(width, height);
-    var body = d3.select("body");
-    body.node().appendChild(renderer.domElement);
 
-    var divInformation = d3.select("body").append("div");
-    divInformation.append("h5").text("Basic controls");
-    divInformation.append("h6").text("Mouse interaction [ Zoom out: Scroll up | Zoom in : Scroll down | Camera Rotation : Pan and move]");
-    divInformation.append("h6").text("Keyboard interaction [ Move Camera up/down : UP/Down Arrows | Move Camera left/right : Left/Right Arrows ]");
+    insertRender(renderer);
+
+    renderAppInformation();
 }
 
 function render() {
