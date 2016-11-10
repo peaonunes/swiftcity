@@ -16,5 +16,6 @@ var systemColors = {
     "Class" : "#b71c1c",
     "Functions" : "#0277bd",
     "CityFloor" : "#757575",
-    "Wireframe" : "#424242"
+    "Wireframe" : "#424242",
+    "Enum" : "#6a1b9a"
 }
