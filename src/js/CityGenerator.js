@@ -14,8 +14,8 @@ function cityMaker(files, scene, sorted){
     var dimension = getDimension(length);
 
     var cityMatrix = initMatrix(dimension);
-
-    cityMatrix = fillMatrix(cityMatrix, files, dimension);
+    var filesArray = files.map(element => element.elements);
+    cityMatrix = fillMatrix(cityMatrix, filesArray, dimension);
 
     // Define district position and inside layout.
     cityMatrix = defineCityLayout(cityMatrix, dimension, sorted);

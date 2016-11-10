@@ -8,11 +8,13 @@ function init(){
 
     fileReader("./data/test_output.json");
 
-    renderData();
-
-    render(renderer);
-
-    winResize(camera,renderer,width,height);
+    setTimeout(function(){
+        if(!busy){
+            renderData();
+            render(renderer);
+            winResize(camera,renderer,width,height);
+        }
+    }, 100);
 }
 
 function setUp(){
@@ -22,7 +24,6 @@ function setUp(){
     renderer.setSize(width, height);
 
     insertRender(renderer);
-
     renderAppInformation();
 }
 
@@ -32,7 +33,8 @@ function render() {
 }
 
 function renderData(){
-    runCity(files, scene, sort, camera);
+    //runCity(files, scene, sort, camera);
+    runCity(projectFiles, scene, sort, camera);
 }
 
 init();
