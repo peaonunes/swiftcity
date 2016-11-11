@@ -2,6 +2,11 @@
  * @author peaonunes / https://github.com/peaonunes
  */
 
+function insertRender(renderer){
+    var cityDiv = d3.select("#city");
+    cityDiv.node().appendChild(renderer.domElement);
+}
+
 function renderSceneProperties(scene){
     scene.background = new THREE.Color(pickColor("Sky"));
 }
