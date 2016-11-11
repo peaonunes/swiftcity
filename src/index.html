@@ -5,6 +5,7 @@
 		<title>Swicity - Visualizing Swift Systems as cities!</title>
 		<script src="https://d3js.org/d3.v4.min.js"></script>
         <script src="js/three/three.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
 	</head>
@@ -12,25 +13,29 @@
 
         <nav>
             <div class="nav-wrapper red">
-                <ul class="left">
-                    <li style="padding-top:10px;">
-                        <a href="#!">
+                <div class="row">
+                    <div class="col s7 m7 l7">
+                        <a href="" class="brand-logo">
                             <img border="0" alt="W3Schools" src="./imgs/swift.png" width="32" height="32">
+                            Swicity
                         </a>
-                    </li>
-                    <li>
-                        <a href="#!" class="brand-logo">Swicity</a>
-                    </li>
-                </ul>
-                <ul class="right hide-on-med-and-down">
-                    <li>
-                        <a href="javascript:location.reload();"><i class="disabled material-icons">refresh</i></a>
-                    </li>
-                <!-- Futher options to be done.
-                <li><a href="sass.html"><i class="material-icons">input</i></a></li>
-                <li><a href="mobile.html"><i class="material-icons">more_vert</i></a></li>
-                -->
-                </ul>
+                    </div>
+                    <div style="padding-top:8px;" class="col s4 m4 l4 file-field input-field">
+                        <div class="orange btn">
+                            <span>Browse</span>
+                            <input id="fileInput" type="file">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text" placeholder="Choose your file.">
+                        </div>
+                    </div>
+                    <div class="col s1 m1 l1">
+                        <a class="center" href="javascript:updateWithFile();">
+                            <i class="disabled material-icons">refresh</i>
+                        </a>
+                    </div>
+                </div>
+
             </div>
         </nav>
 
@@ -54,7 +59,7 @@
         <script type="text/javascript" src="js/Dataset.js"></script>
         <script type="text/javascript" src="js/RenderCityModule.js"></script>
         <script type="text/javascript" src="js/AppConfiguration.js"></script>
-        <script type="text/javascript" src="js/Reader.js"></script>
+        <script type="text/javascript" src="js/ReaderModule.js"></script>
         <script type="text/javascript" src="js/RenderAppInformation.js"></script>
         <script type="text/javascript" src="js/CityGenerator.js"></script>
         <script type="text/javascript" src="js/Main.js"></script>

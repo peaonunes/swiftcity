@@ -1,26 +1,36 @@
 let projectFiles = [];
 let minMaxLoc = [Number.POSITIVE_INFINITY,0];
 let minMaxNom = [Number.POSITIVE_INFINITY,0];
-let busy = true;
+let defaultFileReader = new FileReader();
 
-function fileReader(filePath){
-    d3.json(filePath, function(error, project) {
-        if(error)
-            throw error;
+function updateWithFile() {
+    var selectedFile = document.getElementById("fileInput").files[0];
+    if(selectedFile == null){
+        Materialize.toast("You should first select a file!", 4000);
+        return;
+    }
+    defaultFileReader.readAsText(selectedFile);
+}
 
-        var project;
+defaultFileReader.onload = function(e) {
+    var fileText = e.target.result;
+    var fileData = JSON.parse(fileText);
+    var project = getProjectFrom(fileData);
+    var enums = project.enums;
+    buildProjectFiles(enums);
+    renderData();
+};
 
-        Object.keys(project).forEach(function (projectId) {
-            project = project[projectId];
-        });
+function renderData(){
+    runCity(projectFiles, scene, sort, camera);
+}
 
-        var enums = project.enums;
-        buildProjectFiles(enums);
-        console.log(projectFiles);
-        console.log("LOC", minMaxLoc);
-        console.log("NOM", minMaxNom);
-        busy = false;
+function getProjectFrom(fileData){
+    var project;
+    Object.keys(fileData).forEach(function (id) {
+        project = fileData[id];
     });
+    return project;
 }
 
 function hasFile(array, fileName){

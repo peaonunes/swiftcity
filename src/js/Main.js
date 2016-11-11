@@ -3,18 +3,9 @@
  */
 
 function init(){
-
     setUp();
-
-    fileReader("./data/test_output.json");
-
-    setTimeout(function(){
-        if(!busy){
-            renderData();
-            render(renderer);
-            winResize(camera,renderer,width,height);
-        }
-    }, 100);
+    render(renderer);
+    winResize(camera,renderer,width,height);
 }
 
 function setUp(){
@@ -30,11 +21,6 @@ function setUp(){
 function render() {
     requestAnimationFrame(render);
     renderer.render(scene, camera);
-}
-
-function renderData(){
-    //runCity(files, scene, sort, camera);
-    runCity(projectFiles, scene, sort, camera);
 }
 
 init();
