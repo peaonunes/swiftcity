@@ -1,3 +1,7 @@
+/**
+ * @author peaonunes / https://github.com/peaonunes
+ */
+
 let projectFiles = [];
 let minMaxLoc = [Number.POSITIVE_INFINITY,0];
 let minMaxNom = [Number.POSITIVE_INFINITY,0];

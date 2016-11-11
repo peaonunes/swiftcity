@@ -1,9 +1,14 @@
+/**
+ * @author peaonunes / https://github.com/peaonunes
+ */
+
 function renderAppInformation() {
     renderControlsInformation();
     renderProjectDetailsInformation();
 }
 
 function renderControlsInformation() {
+    d3.select("#controls").append("div").attr("class", "divider");
     var divInformation = d3.select("#controls").append("div");
     divInformation.append("h5")
         .text("Basic controls");
@@ -19,11 +24,11 @@ function renderProjectDetailsInformation() {
 
     projectDetails
         .append("h4")
-        .text("Project name.");
+        .text("Project name goes here");
 
     projectDetails
         .append("h6")
-        .text("Lines of code:");
+        .text("Lines of code goes here");
 
     projectDetails
         .append("h6")
