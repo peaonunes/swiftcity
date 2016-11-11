@@ -5,10 +5,87 @@
 		<title>Swicity - Visualizing Swift Systems as cities!</title>
 		<script src="https://d3js.org/d3.v4.min.js"></script>
         <script src="js/three/three.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
 	</head>
 	<body>
+        <nav>
+            <div class="navbar-fixed">
+                <div class="nav-wrapper red">
+                    <div class="row">
+                        <div class="col s7 m7 l7">
+                            <a href="" class="brand-logo">
+                                <img border="0" alt="W3Schools" src="./imgs/swift.png" width="32" height="32">
+                                Swicity v0.2
+                            </a>
+                        </div>
+                        <div style="padding-top:8px;" class="col s4 m4 l4 file-field input-field">
+                            <div class="btn">
+                                <span>Browse</span>
+                                <input id="fileInput" type="file">
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text" placeholder="Choose your file.">
+                            </div>
+                        </div>
+                        <div class="col s1 m1 l1">
+                            <a class="center" href="javascript:updateWithFile();">
+                                <i class="disabled material-icons">refresh</i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div id="#firstLayer" class="row">
+            <br>
+            <div id="city" class="col s8 m8 l8">
+            </div>
+            <div id="details" class="col s4 m4 l4">
+            </div>
+        </div>
+        <div id="#secondLayer" class="row">
+            <div id ="controls" class="col s12">
+            </div>
+        </div>
+
+        <footer class="page-footer grey darken-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col l4 s12">
+                        <h5 class="white-text">Usefull links</h5>
+                        <ul>
+                            <li>
+                                <a target="_blank" class="grey-text text-lighten-3" href="http://www.github.com/peaonunes/swiftcity">
+                                    <i class="material-icons">description</i>
+                                    Github
+                                </a>
+                            </li>
+                            <li>
+                                <a target="_blank" class="grey-text text-lighten-3" href="mailto:rngs@cin.ufpe.br">
+                                    <i class="material-icons">email</i>
+                                    Email for contact
+                                </a>
+                            </li>
+                            <li>
+                                <a target="_blank" class="grey-text text-lighten-3" href="http://github.io/peaonunes">
+                                    <i class="material-icons">person_pin</i>
+                                    About the developer
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col l6 s12">
+                        <h5 class="white-text">About the project</h5>
+                        <p class="grey-text text-lighten-4">Some explanation about what we did will go here...</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright grey darken-4">
+            </div>
+        </footer>
 
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script type="text/javascript" src="js/materialize/materialize.min.js"></script>
@@ -17,10 +94,11 @@
         <script type="text/javascript" src="js/WindowResize.js"></script>
         <script type="text/javascript" src="js/UXFunctions.js"></script>
         <script type="text/javascript" src="js/Dataset.js"></script>
-        <script type="text/javascript" src="js/CityGenerator.js"></script>
-        <script type="text/javascript" src="js/RenderModule.js"></script>
+        <script type="text/javascript" src="js/RenderCityModule.js"></script>
         <script type="text/javascript" src="js/AppConfiguration.js"></script>
-        <script type="text/javascript" src="js/Reader.js"></script>
+        <script type="text/javascript" src="js/ReaderModule.js"></script>
+        <script type="text/javascript" src="js/RenderAppInformation.js"></script>
+        <script type="text/javascript" src="js/CityGenerator.js"></script>
         <script type="text/javascript" src="js/Main.js"></script>
     </body>
 </html>

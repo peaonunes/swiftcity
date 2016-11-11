@@ -5,8 +5,8 @@
 function runCity(files, scene, sorted, camera){
     renderSceneProperties(scene);
     let city = cityMaker(files, scene, sorted);
-    var cameraX = city.floor.width/2;
-    renderCamareProperties(camera, cameraX, 20, 40);
+    var cameraX = city.floor.width;
+    renderCamareProperties(camera, cameraX, 50, 100);
 }
 
 function cityMaker(files, scene, sorted){
@@ -14,8 +14,8 @@ function cityMaker(files, scene, sorted){
     var dimension = getDimension(length);
 
     var cityMatrix = initMatrix(dimension);
-
-    cityMatrix = fillMatrix(cityMatrix, files, dimension);
+    var filesArray = files.map(element => element.elements);
+    cityMatrix = fillMatrix(cityMatrix, filesArray, dimension);
 
     // Define district position and inside layout.
     cityMatrix = defineCityLayout(cityMatrix, dimension, sorted);
