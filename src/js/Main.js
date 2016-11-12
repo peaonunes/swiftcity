@@ -15,7 +15,6 @@ function setUp(){
     renderer.setSize(width, height);
 
     insertRender(renderer);
-    renderAppInformation();
 }
 
 function render() {

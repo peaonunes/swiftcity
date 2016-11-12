@@ -21,8 +21,21 @@ defaultFileReader.onload = function(e) {
     var fileData = JSON.parse(fileText);
     var project = getProjectFrom(fileData);
     buildProjectFiles(project);
+    buildProjectInfo(project);
+    console.log(project);
     renderData();
+    renderAppInformation();
 };
+
+function buildProjectInfo(project) {
+    projectInfo.minMaxLoc = minMaxLoc;
+    projectInfo.minMaxNom = minMaxNom;
+    projectInfo.numberOfEnums = project.enums.length;
+    projectInfo.numberOfStructs = project.structs.length;
+    projectInfo.numberOfExtesions = project.extensions.length;
+    projectInfo.numberOfClasses = project.classes.length;
+    projectInfo.numberOfProtocols = project.protocols.length;
+}
 
 function renderData(){
     runCity(projectFiles, scene, sort, camera);

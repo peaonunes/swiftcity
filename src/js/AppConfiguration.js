@@ -6,3 +6,13 @@ let scene;
 let camera;
 let renderer;
 var sort = true;
+let projectInfo = {
+    name:"name",
+    numberOfEnums:0,
+    numberOfStructs:0,
+    numberOfExtesions:0,
+    numberOfClasses:0,
+    numberOfProtocols:0,
+    minMaxLoc:[],
+    minMaxNom:[]
+}
