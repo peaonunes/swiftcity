@@ -28,15 +28,13 @@ function renderProjectDetailsInformation() {
         .append("h4")
         .text("Project name goes here");
 
-    projectDetails
-        .append("div")
-        .attr("class", "col s12 m12 l12")
-        .append("h6")
-        .text("Total LOC goes here");
-
     var detailsLeft = projectDetails
         .append("div")
         .attr("class", "col s6 m6 l6");
+
+    detailsLeft
+        .append("h6")
+        .text("Total LOC goes here");
 
     detailsLeft
         .append("h6")

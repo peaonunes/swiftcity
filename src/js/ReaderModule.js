@@ -6,14 +6,19 @@ let projectFiles = [];
 let minMaxLoc = [Number.POSITIVE_INFINITY,0];
 let minMaxNom = [Number.POSITIVE_INFINITY,0];
 let defaultFileReader = new FileReader();
+let lastFileSelected = [];
 
 function updateWithFile() {
     var selectedFile = document.getElementById("fileInput").files[0];
     if(selectedFile == null){
         Materialize.toast("You should first select a file!", 4000);
         return;
+    } else if (lastFileSelected == selectedFile){
+        Materialize.toast("You just choose the same file!", 3000);
+        return;
     }
     defaultFileReader.readAsText(selectedFile);
+    lastFileSelected = selectedFile;
 }
 
 defaultFileReader.onload = function(e) {
@@ -22,7 +27,6 @@ defaultFileReader.onload = function(e) {
     var project = getProjectFrom(fileData);
     buildProjectFiles(project);
     buildProjectInfo(project);
-    console.log(project);
     renderData();
     renderAppInformation();
 };
