@@ -20,8 +20,7 @@ defaultFileReader.onload = function(e) {
     var fileText = e.target.result;
     var fileData = JSON.parse(fileText);
     var project = getProjectFrom(fileData);
-    var enums = project.enums;
-    buildProjectFiles(enums);
+    buildProjectFiles(project);
     renderData();
 };
 
@@ -37,39 +36,14 @@ function getProjectFrom(fileData){
     return project;
 }
 
-function hasFile(array, fileName){
-    for (var i = 0 ; i < array.length ; i++){
-        if (!(array[i].fileName === "") && array[i].fileName === fileName)
-            return i;
-    }
-    return -1;
-}
+function buildProjectFiles(project) {
+    projectFiles = [];
 
-function buildProjectFiles(enums) {
-    var currentEnum;
-    var fileName;
-    var obj;
-    var found;
-    var fileObj;
-
-    for(var i = 0 ; i < enums.length ; i++){
-        currentEnum = enums[i];
-        fileName = getFileName(currentEnum["source_path"]);
-
-        found = hasFile(projectFiles, fileName);
-
-        var obj = createObj("Enum", currentEnum["name"], currentEnum["number_of_lines"], currentEnum["methods"].length);
-
-        if(found == -1){
-            var fileObj = {
-                fileName: fileName,
-                elements: [obj]
-            }
-            projectFiles.push(fileObj);
-        } else {
-            projectFiles[found].elements.push(obj)
-        }
-    }
+    readElements(project.enums, "Enum");
+    readElements(project.classes, "Class");
+    readElements(project.extensions, "Extension");
+    readElements(project.structs, "Struct");
+    readElements(project.protocols, "Protocol");
 
     var heightScale = d3.scaleLinear()
         .domain(minMaxLoc)
@@ -91,6 +65,42 @@ function buildProjectFiles(enums) {
             block.size = size;
         }
     });
+}
+
+function readElements(array, elementType) {
+    var element;
+    var fileName;
+    var obj;
+    var found;
+    var fileObj;
+
+    for(var i = 0 ; i < array.length ; i++){
+        element = array[i];
+        fileName = getFileName(element["source_path"]);
+
+        found = hasFile(projectFiles, fileName);
+
+        var obj = createObj(elementType, element["name"], element["number_of_lines"], element["methods"].length);
+
+        if(found == -1){
+            var fileObj = {
+                fileName: fileName,
+                elements: [obj]
+            }
+            projectFiles.push(fileObj);
+        } else {
+            projectFiles[found].elements.push(obj)
+        }
+    }
+}
+
+
+function hasFile(array, fileName){
+    for (var i = 0 ; i < array.length ; i++){
+        if (!(array[i].fileName === "") && array[i].fileName === fileName)
+            return i;
+    }
+    return -1;
 }
 
 function createObj(keyName, objName, objLoc, objNom){
