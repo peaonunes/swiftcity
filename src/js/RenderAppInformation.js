@@ -20,7 +20,7 @@ function renderControlsInformation() {
 
 function renderProjectDetailsInformation() {
     var detailsDiv = d3.select("#details");
-    var projectDetails = detailsDiv.append("div").attr("class", "row");
+    var projectDetails = detailsDiv.append("div").attr("class", "row card collapsible popout");
 
     projectDetails
         .append("div")
@@ -28,9 +28,58 @@ function renderProjectDetailsInformation() {
         .append("h4")
         .text("Project name goes here");
 
+        var detailsRight = projectDetails
+            .append("div")
+            .attr("class", "col s6 m6 l6");
+
+        detailsRight
+            .append("div")
+            .attr("class", "col s1 m1 l1")
+            .attr("style", "margin-top:6px; height:16px; background-color: "+systemColors["Class"]+";");
+
+        detailsRight
+            .append("h6")
+            .text("Number of Classes: "+projectInfo.numberOfClasses);
+
+        detailsRight
+            .append("div")
+            .attr("class", "col s1 m1 l1")
+            .attr("style", "margin-top:6px; height:16px; background-color: "+systemColors["Struct"]+";");
+
+        detailsRight
+            .append("h6")
+            .text("Number of Structs: "+projectInfo.numberOfStructs);
+
+        detailsRight
+            .append("div")
+            .attr("class", "col s1 m1 l1")
+            .attr("style", "margin-top:6px; height:16px; background-color: "+systemColors["Extension"]+";");
+
+        detailsRight
+            .append("h6")
+            .text("Number of Extensions: "+projectInfo.numberOfExtensions);
+
+        detailsRight
+            .append("div")
+            .attr("class", "col s1 m1 l1")
+            .attr("style", "margin-top:6px; height:16px; background-color: "+systemColors["Protocol"]+";");
+
+        detailsRight
+            .append("h6")
+            .text("Number of Protocols: "+projectInfo.numberOfProtocols);
+
+        detailsRight
+            .append("div")
+            .attr("class", "col s1 m1 l1")
+            .attr("style", "margin-top:6px; height:16px; background-color: "+systemColors["Enum"]+";");
+
+        detailsRight
+            .append("h6")
+            .text("Number of Enums: "+projectInfo.numberOfEnums);
+
     var detailsLeft = projectDetails
         .append("div")
-        .attr("class", "col s6 m6 l6");
+        .attr("class", "col s5 m5 l5");
 
     detailsLeft
         .append("h6")
@@ -52,33 +101,9 @@ function renderProjectDetailsInformation() {
         .append("h6")
         .text("Max NOM in an block: "+projectInfo.minMaxNom[1]);
 
-    var detailsRight = projectDetails
-        .append("div")
-        .attr("class", "col s6 m6 l6");
+    var blockDetails = detailsDiv.append("div").attr("class", "row card");
 
-    detailsRight
-        .append("h6")
-        .text("Number of Classes: "+projectInfo.numberOfClasses);
-
-    detailsRight
-        .append("h6")
-        .text("Number of Structs: "+projectInfo.numberOfStructs);
-
-    detailsRight
-        .append("h6")
-        .text("Number of Extensions: "+projectInfo.numberOfExtesions);
-
-    detailsRight
-        .append("h6")
-        .text("Number of Protocols: "+projectInfo.numberOfProtocols);
-
-    detailsRight
-        .append("h6")
-        .text("Number of Enums: "+projectInfo.numberOfEnums);
-
-    projectDetails.append("div").attr("class", "col s12 m12 l12 divider");
-
-    projectDetails
+    blockDetails
         .append("div")
         .attr("class", "col s12 m12 l12")
         .append("h6")

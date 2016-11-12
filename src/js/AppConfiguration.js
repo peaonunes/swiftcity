@@ -10,7 +10,7 @@ let projectInfo = {
     name:"name",
     numberOfEnums:0,
     numberOfStructs:0,
-    numberOfExtesions:0,
+    numberOfExtensions:0,
     numberOfClasses:0,
     numberOfProtocols:0,
     minMaxLoc:[],

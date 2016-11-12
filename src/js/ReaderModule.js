@@ -36,7 +36,7 @@ function buildProjectInfo(project) {
     projectInfo.minMaxNom = minMaxNom;
     projectInfo.numberOfEnums = project.enums.length;
     projectInfo.numberOfStructs = project.structs.length;
-    projectInfo.numberOfExtesions = project.extensions.length;
+    projectInfo.numberOfExtensions = project.extensions.length;
     projectInfo.numberOfClasses = project.classes.length;
     projectInfo.numberOfProtocols = project.protocols.length;
 }
