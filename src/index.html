@@ -20,17 +20,19 @@
                                 Swicity v0.3
                             </a>
                         </div>
-                        <div style="padding-top:8px;" class="col s4 m4 l4 file-field input-field">
-                            <div class="btn orange ">
-                                <span>Browse</span>
-                                <input id="fileInput" type="file">
-                            </div>
-                            <div class="file-path-wrapper">
-                                <input class="file-path validate" type="text" placeholder="Choose your file.">
+                        <div style="padding-top:8px;" class="col s4 m4 l4">
+                            <div class="file-field input-field">
+                                <div class="btn waves-effect waves-light orange">
+                                    <span>Browse</span>
+                                    <input id="fileInput" type="file">
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text" placeholder="Choose your file.">
+                                </div>
                             </div>
                         </div>
                         <div class="col s1 m1 l1">
-                            <a class="center" href="javascript:updateWithFile();">
+                            <a class="center waves-effect waves-light" href="javascript:updateWithFile();">
                                 <i class="disabled material-icons">refresh</i>
                             </a>
                         </div>
@@ -54,13 +56,13 @@
                              <div class="collapsible-body white">
                                 <div class="col s6 m6 l6">
                                     <p>
-                                        <input type="checkbox" class="checkbox-orange filled-in" id="activeColor" checked="checked"/>
+                                        <input onclick="colorClicked(this);" type="checkbox" class="checkbox-orange filled-in" id="activeColor" checked="checked"/>
                                         <label for="activeColor">Coloring blocks</label>
                                     </p>
                                 </div>
                                 <div class="col s6 m6 l6">
                                     <p>
-                                        <input type="checkbox" class="checkbox-orange filled-in" id="sorteBlocks" checked="checked"/>
+                                        <input onclick="sortBlocksClicked(this);" type="checkbox" class="checkbox-orange filled-in" id="sorteBlocks" checked="checked"/>
                                         <label for="sorteBlocks">Sort district's blocks</label>
                                     </p>
                                 </div>
@@ -72,8 +74,8 @@
                                  Project name goes here
                              </div>
                              <div class="collapsible-body row white">
-                                 <table class="responsive-table">
-                                     <tbody id="tableStats" >
+                                 <table id="tableStats" class="responsive-table">
+                                     <tbody id="tableContent">
                                      </tbody>
                                  </table>
                              </div>
@@ -97,8 +99,20 @@
         </div>
         <div id="#secondLayer" class="row">
             <div id ="controls" class="col s12 m12 l12 card">
+                <div id="content"></div>
             </div>
         </div>
+
+        <div id="modal1" class="modal">
+        <div class="modal-content">
+        <h4>Modal Header</h4>
+        <p>A bunch of text</p>
+        </div>
+        <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+        </div>
+        </div>
+
 
         <footer class="page-footer grey darken-3">
             <div class="container">

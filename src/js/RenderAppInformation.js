@@ -8,7 +8,8 @@ function renderAppInformation() {
 }
 
 function renderControlsInformation() {
-    var divInformation = d3.select("#controls").append("div");
+    d3.select("#content").remove();
+    var divInformation = d3.select("#controls").append("div").attr("id", "content");
     divInformation.append("h5")
         .text("Basic controls");
     divInformation.append("h6")
@@ -29,17 +30,21 @@ function renderProjectDetailsInformation() {
         .attr("class", "material-icons")
         .text("info_outline");
 
-    var tableStats = d3.select("#tableStats");
+    d3.select("#tableContent").remove();
 
-    renderRowInfo(tableStats, "Class", "Number of Classes: "+projectInfo.numberOfClasses, "Project's LOC goes here");
-    renderRowInfo(tableStats, "Struct", "Number of Structs: "+projectInfo.numberOfStructs, "Min LOC in a block: "+projectInfo.minMaxLoc[0]);
-    renderRowInfo(tableStats, "Extension", "Number of Extensions: "+projectInfo.numberOfExtensions, "Max LOC in a block: "+projectInfo.minMaxLoc[1]);
-    renderRowInfo(tableStats, "Protocol", "Number of Protocols: "+projectInfo.numberOfProtocols, "Min NOM in a block: "+projectInfo.minMaxNom[0]);
-    renderRowInfo(tableStats, "Enum", "Number of Enums: "+projectInfo.numberOfEnums, "Max NOM in a block: "+projectInfo.minMaxNom[1]);
+    var tableContent = d3.select("#tableStats")
+        .append("tbody")
+        .attr("id", "tableContent");
+
+    renderRowInfo(tableContent, enableColor ? "Class" : "DefaultColor", "Number of Classes: "+projectInfo.numberOfClasses, "Project's LOC goes here");
+    renderRowInfo(tableContent, enableColor ? "Struct" : "DefaultColor", "Number of Structs: "+projectInfo.numberOfStructs, "Min LOC in a block: "+projectInfo.minMaxLoc[0]);
+    renderRowInfo(tableContent, enableColor ? "Extension" : "DefaultColor", "Number of Extensions: "+projectInfo.numberOfExtensions, "Max LOC in a block: "+projectInfo.minMaxLoc[1]);
+    renderRowInfo(tableContent, enableColor ? "Protocol" : "DefaultColor", "Number of Protocols: "+projectInfo.numberOfProtocols, "Min NOM in a block: "+projectInfo.minMaxNom[0]);
+    renderRowInfo(tableContent, enableColor ? "Enum" : "DefaultColor", "Number of Enums: "+projectInfo.numberOfEnums, "Max NOM in a block: "+projectInfo.minMaxNom[1]);
 }
 
-function renderRowInfo(tableStats, labelType, middleColText, rightColText) {
-    var row = tableStats
+function renderRowInfo(tableContent, labelType, middleColText, rightColText) {
+    var row = tableContent
         .append("tr")
         .attr("class", "valign-wrapper")
         .attr("style", "height: 25px");

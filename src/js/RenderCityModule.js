@@ -19,9 +19,10 @@ function renderCamareProperties(camera, x, y, z){
 }
 
 function renderCity(cityMatrix, dimension, scene) {
+    var district;
     for(var i = 0 ; i < dimension ; i++){
         for(var j = 0 ; j < dimension ; j++){
-            var district = cityMatrix[i][j];
+            district = cityMatrix[i][j];
             if(district == -1)
                 continue;
             renderDistrict(district.blocks, district.dimension, scene, district.file);
@@ -32,14 +33,22 @@ function renderCity(cityMatrix, dimension, scene) {
 }
 
 function renderDistrict(blocksMatrix, dimension, scene, file){
+    var coordinates;
+    var size;
+    var key;
     for(var i = 0 ; i < dimension ; i++){
         for(var j = 0 ; j < dimension ; j++){
             var block = blocksMatrix[i][j];
             if(block == -1)
                 continue;
-            var coordinates = block.coordinates;
-            var size = block.size;
-            var key = block.key;
+            coordinates = block.coordinates;
+            size = block.size;
+
+            if(enableColor)
+                key = block.key;
+            else
+                key = "DefaultColor";
+
             renderCube(coordinates, size, key, scene);
         }
     }
