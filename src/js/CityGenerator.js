@@ -1,6 +1,7 @@
 /**
  * @author peaonunes / https://github.com/peaonunes
  */
+let blockId = 0;
 
 function runCity(files, scene, sorted, camera){
     renderSceneProperties(scene);
@@ -33,13 +34,14 @@ function defineCityLayout(cityMatrix, dimension, sorted){
     var offset = 1.5; var maxZ = 0;
     var originalX = startX;
     var width = 0; var height = 0;
+    var distric;
 
     cityMatrix.floor.coordinates.x = 0;
     cityMatrix.floor.coordinates.z = 0;
 
     for (var i = 0 ; i < dimension ; i++){
         for (var j = 0 ; j < dimension ; j++){
-            var distric = cityMatrix[i][j];
+            distric = cityMatrix[i][j];
             if(distric == -1)
                 continue;
 
@@ -65,27 +67,13 @@ function defineCityLayout(cityMatrix, dimension, sorted){
 }
 
 function alignDistrictFloor(cityMatrix, maxZ, i, dimension){
+    var distric;
     for (var j = 0 ; j < dimension ; j++){
-        var distric = cityMatrix[i][j];
+        distric = cityMatrix[i][j];
         if (distric == -1)
             continue;
         distric.blocks.floor.height = maxZ;
     }
-}
-
-function getDimension(length){
-    return Math.ceil(Math.sqrt(length));
-}
-
-function initMatrix(dimension){
-    var matrix = [];
-    for (var i = 0 ; i < dimension ; i++){
-        matrix[i] = [];
-        for (var j = 0 ; j < dimension ; j++){
-            matrix[i][j] = -1;
-        }
-    }
-    return matrix;
 }
 
 function districtMaker(file, sorted, x, z, offset, maxZ){
@@ -122,13 +110,15 @@ function defineXZ(blocksMatrix, dimension, file, x, z, offset){
     blocksMatrix.floor.coordinates.x = x;
     blocksMatrix.floor.coordinates.z = z;
 
+    var block;
     for(var i = 0 ; i < dimension ; i++){
         for(var j = 0 ; j < dimension ; j++){
-            var block = blocksMatrix[i][j];
+            block = blocksMatrix[i][j];
             if(block == -1)
                 continue;
 
             block["coordinates"] = {"x": 0, "y": 0, "z":0 };
+            block["id"] = getBlockId();
             block.coordinates.x = x + offset + block.size[0]/2;
             block.coordinates.z = z + offset + block.size[2]/2;
 
@@ -147,6 +137,26 @@ function defineXZ(blocksMatrix, dimension, file, x, z, offset){
     blocksMatrix.floor.height = height;
 
     return blocksMatrix;
+}
+
+function getBlockId() {
+    blockId += 1;
+    return blockId;
+}
+
+function getDimension(length){
+    return Math.ceil(Math.sqrt(length));
+}
+
+function initMatrix(dimension){
+    var matrix = [];
+    for (var i = 0 ; i < dimension ; i++){
+        matrix[i] = [];
+        for (var j = 0 ; j < dimension ; j++){
+            matrix[i][j] = -1;
+        }
+    }
+    return matrix;
 }
 
 function fillMatrix(matrix, data, dimension){
