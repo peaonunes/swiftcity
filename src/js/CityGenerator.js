@@ -52,6 +52,7 @@ function defineCityLayout(cityMatrix, dimension, sorted){
             startX += districtMatrix.blocks.floor.width + offset;
             maxZ = Math.max(maxZ, districtMatrix.blocks.floor.height);
         }
+        alignDistrictFloor(cityMatrix, maxZ, i, dimension);
         startZ += maxZ + offset;
         maxZ = 0;
         startX = originalX;
@@ -61,6 +62,15 @@ function defineCityLayout(cityMatrix, dimension, sorted){
     cityMatrix.floor.height = height;
 
     return cityMatrix;
+}
+
+function alignDistrictFloor(cityMatrix, maxZ, i, dimension){
+    for (var j = 0 ; j < dimension ; j++){
+        var distric = cityMatrix[i][j];
+        if (distric == -1)
+            continue;
+        distric.blocks.floor.height = maxZ;
+    }
 }
 
 function getDimension(length){
@@ -122,13 +132,12 @@ function defineXZ(blocksMatrix, dimension, file, x, z, offset){
             block.coordinates.x = x + offset + block.size[0]/2;
             block.coordinates.z = z + offset + block.size[2]/2;
 
-            width = Math.max(width, (block.coordinates.x + block.size[0]) - startX);
-            height = Math.max(height, (block.coordinates.z + block.size[2]) - startZ);
-
             x += block.size[0] + offset;
             maxZ = Math.max(maxZ, block.size[2]);
+
+            width = Math.max(width, (block.coordinates.x + block.size[0]) - startX);
+            height = Math.max(height, (block.coordinates.z + block.size[2]) - startZ);
         }
-        //console.log("width", width);
         z += maxZ + offset;
         maxZ = 0;
         x = startX;

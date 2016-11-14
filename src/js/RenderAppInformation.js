@@ -29,7 +29,7 @@ function renderProjectDetailsInformation() {
 
     var tableStats = d3.select("#tableStats");
 
-    renderRowInfo(tableStats, "Class", "Number of Classes: "+projectInfo.numberOfClasses, "Total LOC goes here");
+    renderRowInfo(tableStats, "Class", "Number of Classes: "+projectInfo.numberOfClasses, "Project's LOC goes here");
     renderRowInfo(tableStats, "Struct", "Number of Structs: "+projectInfo.numberOfStructs, "Min LOC in an block: "+projectInfo.minMaxLoc[0]);
     renderRowInfo(tableStats, "Extension", "Number of Extensions: "+projectInfo.numberOfExtensions, "Max LOC in an block: "+projectInfo.minMaxLoc[1]);
     renderRowInfo(tableStats, "Protocol", "Number of Protocols: "+projectInfo.numberOfProtocols, "Min NOM in an block: "+projectInfo.minMaxNom[0]);
