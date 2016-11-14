@@ -6,7 +6,7 @@
 		<script src="https://d3js.org/d3.v4.min.js"></script>
         <script src="js/three/three.js"></script>
         <link rel="stylesheet" type="text/css" href="css/style.css">
-        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="css/icons.css" rel="stylesheet">
         <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
 	</head>
 	<body>
@@ -17,11 +17,11 @@
                         <div class="col s7 m7 l7">
                             <a href="" class="brand-logo">
                                 <img border="0" alt="W3Schools" src="./imgs/swift.png" width="32" height="32">
-                                Swicity v0.2
+                                Swicity v0.3
                             </a>
                         </div>
                         <div style="padding-top:8px;" class="col s4 m4 l4 file-field input-field">
-                            <div class="btn">
+                            <div class="btn orange ">
                                 <span>Browse</span>
                                 <input id="fileInput" type="file">
                             </div>
@@ -44,6 +44,35 @@
             <div id="city" class="col s8 m8 l8">
             </div>
             <div id="details" class="col s4 m4 l4">
+                <div id="projectDetails">
+                    <ul class="collapsible active" data-collapsible="accordion">
+                        <li>
+                            <div id="projectName" class="collapsible-header active">
+                                <i class="material-icons">info_outline</i>
+                                Project name goes here
+                            </div>
+                            <div class="collapsible-body row">
+                                <table class="responsive-table">
+                                    <tbody id="tableStats" >
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="card">
+                        <div class="row">
+                            <div class="col s12 m12 l12">
+                                <div class="valign-wrapper">
+                                    <i class="material-icons valign">code</i>
+                                    <span class="card-title valign">Block details goes here...</span>
+                                </div>
+                                <div id="blockDetails">
+                                    Some ufesull information could go here.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div id="#secondLayer" class="row">
@@ -55,7 +84,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col l4 s12">
-                        <h5 class="white-text">Usefull links</h5>
+                        <h5 class="white-text">Links</h5>
                         <ul>
                             <li>
                                 <a target="_blank" class="grey-text text-lighten-3" href="http://www.github.com/peaonunes/swiftcity">
