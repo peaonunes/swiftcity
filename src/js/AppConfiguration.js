@@ -7,7 +7,7 @@ let camera;
 let renderer;
 var sort = true;
 let projectInfo = {
-    name:"name",
+    name:"Project name",
     numberOfEnums:0,
     numberOfStructs:0,
     numberOfExtensions:0,
