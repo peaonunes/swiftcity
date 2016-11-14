@@ -8,7 +8,6 @@ function renderAppInformation() {
 }
 
 function renderControlsInformation() {
-    d3.select("#controls").append("div").attr("class", "divider");
     var divInformation = d3.select("#controls").append("div");
     divInformation.append("h5")
         .text("Basic controls");
@@ -21,8 +20,11 @@ function renderControlsInformation() {
 function renderProjectDetailsInformation() {
     var projectName = d3.select("#projectName");
 
+    $("#projectName").click();
+
     projectName
         .text(projectInfo.name)
+        .attr("class", "collapsible-header active")
         .append("i")
         .attr("class", "material-icons")
         .text("info_outline");

@@ -9,7 +9,7 @@
         <link href="css/icons.css" rel="stylesheet">
         <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
 	</head>
-	<body>
+	<body class="grey lighten-5">
         <nav>
             <div class="navbar-fixed">
                 <div class="nav-wrapper red">
@@ -41,22 +41,42 @@
 
         <div id="#firstLayer" class="row">
             <br>
-            <div id="city" class="col s8 m8 l8">
+            <div id="city" class="card col s8 m8 l8">
             </div>
             <div id="details" class="col s4 m4 l4">
                 <div id="projectDetails">
-                    <ul class="collapsible active" data-collapsible="accordion">
+                    <ul class="collapsible" data-collapsible="accordion">
                         <li>
-                            <div id="projectName" class="collapsible-header active">
-                                <i class="material-icons">info_outline</i>
-                                Project name goes here
-                            </div>
-                            <div class="collapsible-body row">
-                                <table class="responsive-table">
-                                    <tbody id="tableStats" >
-                                    </tbody>
-                                </table>
-                            </div>
+                             <div  id="projectOptions" class="collapsible-header active">
+                                 <i class="material-icons">settings</i>
+                                 Visualization settings
+                             </div>
+                             <div class="collapsible-body white">
+                                <div class="col s6 m6 l6">
+                                    <p>
+                                        <input type="checkbox" class="checkbox-orange filled-in" id="activeColor" checked="checked"/>
+                                        <label for="activeColor">Coloring blocks</label>
+                                    </p>
+                                </div>
+                                <div class="col s6 m6 l6">
+                                    <p>
+                                        <input type="checkbox" class="checkbox-orange filled-in" id="sorteBlocks" checked="checked"/>
+                                        <label for="sorteBlocks">Sort district's blocks</label>
+                                    </p>
+                                </div>
+                             </div>
+                        </li>
+                        <li>
+                             <div id="projectName" class="collapsible-header">
+                                 <i class="material-icons">info_outline</i>
+                                 Project name goes here
+                             </div>
+                             <div class="collapsible-body row white">
+                                 <table class="responsive-table">
+                                     <tbody id="tableStats" >
+                                     </tbody>
+                                 </table>
+                             </div>
                         </li>
                     </ul>
                     <div class="card">
@@ -76,7 +96,7 @@
             </div>
         </div>
         <div id="#secondLayer" class="row">
-            <div id ="controls" class="col s12">
+            <div id ="controls" class="col s12 m12 l12 card">
             </div>
         </div>
 
