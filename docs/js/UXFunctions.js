@@ -2,6 +2,14 @@
  * @author peaonunes / https://github.com/peaonunes
  */
 
+function colorClicked(checkbox) {
+    enableColor = checkbox.checked;
+}
+
+function sortBlocksClicked(checkbox) {
+    sortedBlocks = checkbox.checked;
+}
+
 function pickColor(key) {
     if(systemColors[key] != null)
         return systemColors[key];
@@ -21,7 +29,8 @@ var systemColors = {
     "Enum" : "#377eb8",
     "Extension" : "#4daf4a",
     "Struct" : "#984ea3",
-    "Protocol" : "#ff7f00"
+    "Protocol" : "#ff7f00",
+    "DefaultColor" : "#1976d2"
     //"Enum" : "#6a1b9a"
 }
 /*
