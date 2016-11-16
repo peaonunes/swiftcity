@@ -17,6 +17,10 @@ function pickColor(key) {
         return "black";
 }
 
+$(document).ready(function() {
+  $('.modal-trigger').leanModal();
+});
+
 var systemColors = {
     "Sky" : "#e3f2fd",
     "DistrictFloor" : "#e0e0e0",
