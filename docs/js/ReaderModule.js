@@ -14,8 +14,7 @@ function updateWithFile() {
         Materialize.toast("You should first select a file!", 4000);
         return;
     } else if (lastFileSelected == selectedFile){
-        Materialize.toast("You just choose the same file!", 3000);
-        return;
+        Materialize.toast("You just chose the same file!", 2000);
     }
     defaultFileReader.readAsText(selectedFile);
     lastFileSelected = selectedFile;
@@ -42,7 +41,12 @@ function buildProjectInfo(project) {
 }
 
 function renderData(){
-    runCity(projectFiles, scene, sort, camera);
+    clearScene(scene);
+    runCity(projectFiles, scene, sortedBlocks, camera);
+}
+
+function clearScene(scene) {
+    scene.children = [];
 }
 
 function getProjectFrom(fileData){
