@@ -17,7 +17,7 @@
                         <div class="col s7 m7 l7">
                             <a href="" class="brand-logo">
                                 <img border="0" alt="W3Schools" src="./imgs/swift.png" width="32" height="32">
-                                Swicity v0.4
+                                Swicity <sup><small>0.41</small></sup>
                             </a>
                         </div>
                         <div style="padding-top:8px;" class="col s4 m4 l4">
@@ -49,23 +49,47 @@
                 <div id="projectDetails">
                     <ul class="collapsible" data-collapsible="accordion">
                         <li>
-                             <div  id="projectOptions" class="collapsible-header active">
+                             <div id="projectOptions" class="collapsible-header active">
                                  <i class="material-icons">settings</i>
                                  Visualization settings
                              </div>
                              <div class="collapsible-body white">
-                                <div class="col s6 m6 l6">
-                                    <p>
-                                        <input onclick="colorClicked(this);" type="checkbox" class="checkbox-orange filled-in" id="activeColor" checked="checked"/>
-                                        <label for="activeColor">Coloring blocks</label>
-                                    </p>
-                                </div>
-                                <div class="col s6 m6 l6">
-                                    <p>
-                                        <input onclick="sortBlocksClicked(this);" type="checkbox" class="checkbox-orange filled-in" id="sorteBlocks" checked="checked"/>
-                                        <label for="sorteBlocks">Sort district's blocks</label>
-                                    </p>
-                                </div>
+                                <table class="responsive-table center">
+                                    <tbody>
+                                        <tr>
+                                            <td style="width: 10%" class="center-align">
+                                                <a href="#modal1" class="btn-flat center waves-effect waves-light modal-trigger">
+                                                    <i class="material-icons">live_help</i>
+                                                </a>
+                                                <div id="modal1" class="modal">
+                                                    <div class="modal-content">
+                                                        <h4><i class="material-icons">live_help</i> Settings explanation</h4>
+                                                        <div class="divider"></div>
+                                                        </br>
+                                                        <h5>Coloring blocks</h5>
+                                                        Enabling colours means that the blocks will be colored according with their category.</br>
+                                                        E. g. Structs, Enums, Classes, Protocols, Extensions.</br>
+                                                        </br>
+                                                        <h5>Sort district's blocks</h5>
+                                                        Sort the blocks means that inside each district, light-gray floor that represents a file,</br>
+                                                        the blocks will be sorted first by their height and by width as second criteria.
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">OK</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="width: 40%" class="center-align">
+                                                 <input onclick="colorClicked(this);" type="checkbox" class="checkbox-orange filled-in" id="activeColor" checked="checked"/>
+                                                 <label for="activeColor">Coloring blocks</label>
+                                            </td>
+                                            <td style="width: 50%">
+                                                <input onclick="sortBlocksClicked(this);" type="checkbox" class="checkbox-orange filled-in" id="sorteBlocks" checked="checked"/>
+                                                <label for="sorteBlocks">Sort district's blocks</label>
+                                            </td>
+                                         </tr>
+                                    </tbody>
+                                </table>
                              </div>
                         </li>
                         <li>
@@ -86,8 +110,9 @@
                             <div class="col s12 m12 l12">
                                 <div class="valign-wrapper">
                                     <i class="material-icons valign">code</i>
-                                    <span class="card-title valign">Block details goes here...</span>
+                                    <strong> Block details goes here...</strong>
                                 </div>
+                                <div class="divider"></div>
                                 <div id="blockDetails">
                                     Some useful information could go here.
                                 </div>
