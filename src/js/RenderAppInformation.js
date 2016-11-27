@@ -22,9 +22,11 @@ function renderProjectDetailsInformation() {
     var projectName = d3.select("#projectName");
 
     $("#projectName").click();
+    $("#projectOptions").click();
 
     var projectInfo = appConfiguration.projectInfo;
-    
+    var enableColor = appConfiguration.enableColor;
+
     projectName
         .text(projectInfo.name)
         .attr("class", "collapsible-header active")

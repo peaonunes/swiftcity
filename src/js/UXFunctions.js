@@ -2,14 +2,6 @@
  * @author peaonunes / https://github.com/peaonunes
  */
 
-function colorClicked(checkbox) {
-    enableColor = checkbox.checked;
-}
-
-function sortBlocksClicked(checkbox) {
-    sortedBlocks = checkbox.checked;
-}
-
 function pickColor(key) {
     if(systemColors[key] != null)
         return systemColors[key];

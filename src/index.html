@@ -51,58 +51,75 @@
                 <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">OK</a>
             </div>
         </div>
+        <div id="#settingsLayer" class="row" style="margin-bottom: 0px !important;">
+            <ul class="collapsible" data-collapsible="accordion">
+                <li>
+                     <div id="projectOptions" class="collapsible-header active">
+                         <i class="material-icons">settings</i>
+                         Visualization settings
+                     </div>
+                     <div class="collapsible-body white">
+                        <table class="responsive-table center">
+                            <tbody>
+                                <tr>
+                                    <th class="center th-settings" style="width: 5%">Help</th>
+                                    <th class="center th-settings" style="width: 15%">Color</th>
+                                    <th class="center th-settings" style="width: 15%">Sort</th>
+                                    <th class="center th-settings" style="width: 65%">Height' scale function</th>
+                                </tr>
+                                <tr id="#inputOptions">
+                                    <td style="width: 5%" class="center-align th-settings">
+                                        <a href="#modal1" class="btn-flat center waves-effect waves-light modal-trigger tooltipped" data-position="left" data-delay="30" data-tooltip="Help!">
+                                            <i class="material-icons">live_help</i>
+                                        </a>
+                                        <div id="modal1" class="modal">
+                                            <div class="modal-content">
+                                                <h4>What are these options for?</h4>
+                                                <div class="divider"></div>
+                                                </br>
+                                                <h5>Coloring blocks</h5>
+                                                Enabling colours means that the blocks will be colored according with their category.</br>
+                                                E. g. Structs, Enums, Classes, Protocols, Extensions.</br>
+                                                See legend in project details card.</br>
+                                                </br>
+                                                <h5>Sort district's blocks</h5>
+                                                Sort the blocks means that inside each district, light-gray floor that represents a file,</br>
+                                                the blocks will be sorted first by their height and by width as second criteria.
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">OK</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td style="width: 15%" class="center-align th-settings">
+                                         <input value="color" onclick="filterClicked(this);" type="checkbox" class="checkbox-orange filled-in" id="activeColor" checked="checked"/>
+                                         <label for="activeColor">Coloring blocks</label>
+                                    </td>
+                                    <td style="width: 15%" class="th-settings">
+                                        <input  value="sort" onclick="filterClicked(this);" type="checkbox" class="checkbox-orange filled-in" id="sorteBlocks" checked="checked"/>
+                                        <label for="sorteBlocks">Sort district's blocks</label>
+                                    </td>
+                                    <td style="width: 65%" class="th-settings">
+                                        <input checked onclick="filterClicked(this);" class="radio-orange filled-in" type="radio" name="scale" value="linear" id="linear"/>
+                                        <label for="linear">Linear</label>
+                                        <input onclick="filterClicked(this);" class="radio-orange filled-in" type="radio" name="scale" value="log15" id="log15"/>
+                                        <label for="log15">Log1.5</label>
+                                        <input onclick="filterClicked(this);" class="radio-orange filled-in" type="radio" name="scale" value="sqrt" id="sqrt"/>
+                                        <label for="sqrt">Sqrt</label>
+                                    </td>
+                                 </tr>
+                            </tbody>
+                        </table>
+                     </div>
+                </li>
+            </ul>
+        </div>
         <div id="#firstLayer" class="row">
-            <br>
             <div id="city" class="card col s8 m8 l8">
             </div>
             <div id="details" class="col s4 m4 l4">
                 <div id="projectDetails">
                     <ul class="collapsible" data-collapsible="accordion">
-                        <li>
-                             <div id="projectOptions" class="collapsible-header active">
-                                 <i class="material-icons">settings</i>
-                                 Visualization settings
-                             </div>
-                             <div class="collapsible-body white">
-                                <table class="responsive-table center">
-                                    <tbody>
-                                        <tr>
-                                            <td style="width: 10%" class="center-align">
-                                                <a href="#modal1" class="btn-flat center waves-effect waves-light modal-trigger tooltipped" data-position="left" data-delay="30" data-tooltip="Help!">
-                                                    <i class="material-icons">live_help</i>
-                                                </a>
-                                                <div id="modal1" class="modal">
-                                                    <div class="modal-content">
-                                                        <h4>What are these options for?</h4>
-                                                        <div class="divider"></div>
-                                                        </br>
-                                                        <h5>Coloring blocks</h5>
-                                                        Enabling colours means that the blocks will be colored according with their category.</br>
-                                                        E. g. Structs, Enums, Classes, Protocols, Extensions.</br>
-                                                        See legend in project details card.</br>
-                                                        </br>
-                                                        <h5>Sort district's blocks</h5>
-                                                        Sort the blocks means that inside each district, light-gray floor that represents a file,</br>
-                                                        the blocks will be sorted first by their height and by width as second criteria.
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">OK</a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td style="width: 40%" class="center-align">
-                                                 <input onclick="colorClicked(this);" type="checkbox" class="checkbox-orange filled-in" id="activeColor" checked="checked"/>
-                                                 <label for="activeColor">Coloring blocks</label>
-                                            </td>
-                                            <td style="width: 50%">
-                                                <input onclick="sortBlocksClicked(this);" type="checkbox" class="checkbox-orange filled-in" id="sorteBlocks" checked="checked"/>
-                                                <label for="sorteBlocks">Sort district's blocks</label>
-                                            </td>
-                                         </tr>
-                                    </tbody>
-                                </table>
-                             </div>
-                        </li>
                         <li>
                              <div id="projectName" class="collapsible-header">
                                  <i class="material-icons">info</i>
@@ -187,6 +204,7 @@
         <script type="text/javascript" src="js/ReaderModule.js"></script>
         <script type="text/javascript" src="js/RenderAppInformation.js"></script>
         <script type="text/javascript" src="js/CityGenerator.js"></script>
+        <script type="text/javascript" src="js/Filters.js"></script>
         <script type="text/javascript" src="js/Main.js"></script>
     </body>
 </html>

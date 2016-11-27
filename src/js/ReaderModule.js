@@ -7,17 +7,41 @@ let minMaxLoc = [Number.POSITIVE_INFINITY,0];
 let minMaxNom = [Number.POSITIVE_INFINITY,0];
 let defaultFileReader = new FileReader();
 let lastFileSelected = [];
+let lastFilters = [];
 
 function updateWithFile() {
     var selectedFile = document.getElementById("fileInput").files[0];
+    var filterChanged = filtersChanged();
     if(selectedFile == null){
         Materialize.toast("You should first select a file!", 4000);
         return;
     } else if (lastFileSelected == selectedFile){
-        Materialize.toast("You just chose the same file!", 2000);
+        if(!filterChanged){
+            Materialize.toast("You just chose the same file!", 2000);
+            return;
+        }
+        console.log("Some changes");
+    } else {
+        projectFiles = [];
     }
     defaultFileReader.readAsText(selectedFile);
     lastFileSelected = selectedFile;
+    console.log(selectedFile);
+}
+
+function filtersChanged() {
+    
+    if (lastFilters.length != filtersOn.length)
+        return true;
+    else {
+        var filter;
+        for (var i = 0 ; i < filtersOn.length ; i++){
+            filter = filtersOn[i];
+            if(!lastFilters.contains(filter))
+                return true;
+        }
+        return false;
+    }
 }
 
 defaultFileReader.onload = function(e) {
@@ -59,8 +83,6 @@ function getProjectFrom(fileData){
 }
 
 function buildProjectFiles(project) {
-    projectFiles = [];
-
     readElements(project.enums, "Enum");
     readElements(project.classes, "Class");
     readElements(project.extensions, "Extension");
@@ -68,8 +90,8 @@ function buildProjectFiles(project) {
     readElements(project.protocols, "Protocol");
 
     var heightScale = d3.scaleLinear()
-        //.scaleLog
         //.base(2)
+        //.domain([Math.exp(minMaxLoc[0]), Math.exp(minMaxLoc[1])])
         .domain(minMaxLoc)
         .range([1, 15]);
 

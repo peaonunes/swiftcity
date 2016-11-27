@@ -7,6 +7,7 @@ let appConfiguration = {
     renderer : [],
     sortedBlocks : true,
     enableColor : true,
+    filters : ["color", "sort", "linear"],
     projectInfo : {
         name:"Project name",
         numberOfEnums:0,
