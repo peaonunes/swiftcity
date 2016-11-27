@@ -3,14 +3,14 @@
  */
 let blockId = 0;
 
-function runCity(files, scene, sorted, camera){
-    renderSceneProperties(scene);
-    let city = cityMaker(files, scene, sorted);
+function runCity(files){
+    renderSceneProperties();
+    let city = cityMaker(files);
     var cameraX = city.floor.width;
-    renderCamareProperties(camera, cameraX, 50, 150);
+    renderCamareProperties(cameraX, 50, 150);
 }
 
-function cityMaker(files, scene, sorted){
+function cityMaker(files){
     var length = files.length;
     var dimension = getDimension(length);
 
@@ -19,12 +19,17 @@ function cityMaker(files, scene, sorted){
     cityMatrix = fillMatrix(cityMatrix, filesArray, dimension);
 
     // Define district position and inside layout.
-    cityMatrix = defineCityLayout(cityMatrix, dimension, sorted);
+    cityMatrix = defineCityLayout(cityMatrix, dimension);
 
     // Render the city.
-    renderCity(cityMatrix, dimension, scene);
+    renderCity(cityMatrix, dimension);
 
     return cityMatrix;
+}
+
+function _defineCityLayout(cityMatrix, dimension) {
+    var sorted = appConfiguration.sortedBlocks;
+    return defineCityLayout(cityMatrix, dimension, sorted);
 }
 
 function defineCityLayout(cityMatrix, dimension, sorted){

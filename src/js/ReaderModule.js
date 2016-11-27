@@ -31,21 +31,22 @@ defaultFileReader.onload = function(e) {
 };
 
 function buildProjectInfo(project) {
-    projectInfo.minMaxLoc = minMaxLoc;
-    projectInfo.minMaxNom = minMaxNom;
-    projectInfo.numberOfEnums = project.enums.length;
-    projectInfo.numberOfStructs = project.structs.length;
-    projectInfo.numberOfExtensions = project.extensions.length;
-    projectInfo.numberOfClasses = project.classes.length;
-    projectInfo.numberOfProtocols = project.protocols.length;
+    appConfiguration.projectInfo.minMaxLoc = minMaxLoc;
+    appConfiguration.projectInfo.minMaxNom = minMaxNom;
+    appConfiguration.projectInfo.numberOfEnums = project.enums.length;
+    appConfiguration.projectInfo.numberOfStructs = project.structs.length;
+    appConfiguration.projectInfo.numberOfExtensions = project.extensions.length;
+    appConfiguration.projectInfo.numberOfClasses = project.classes.length;
+    appConfiguration.projectInfo.numberOfProtocols = project.protocols.length;
 }
 
 function renderData(){
-    clearScene(scene);
-    runCity(projectFiles, scene, sortedBlocks, camera);
+    clearScene();
+    runCity(projectFiles);
 }
 
 function clearScene(scene) {
+    var scene = appConfiguration.scene;
     scene.children = [];
 }
 
@@ -67,6 +68,8 @@ function buildProjectFiles(project) {
     readElements(project.protocols, "Protocol");
 
     var heightScale = d3.scaleLinear()
+        //.scaleLog
+        //.base(2)
         .domain(minMaxLoc)
         .range([1, 15]);
 

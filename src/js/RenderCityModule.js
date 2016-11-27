@@ -8,17 +8,21 @@ function insertRender(renderer){
 }
 
 function renderSceneProperties(scene){
+    var scene = appConfiguration.scene;
     scene.background = new THREE.Color(pickColor("Sky"));
 }
 
-function renderCamareProperties(camera, x, y, z){
+function renderCamareProperties(x, y, z){
+    var camera = appConfiguration.camera;
+    var renderer = appConfiguration.renderer;
     camera.position.x = x;
     camera.position.y = y;
     camera.position.z = z;
     var orbit = new THREE.OrbitControls(camera, renderer.domElement);
 }
 
-function renderCity(cityMatrix, dimension, scene) {
+function renderCity(cityMatrix, dimension) {
+    var scene = appConfiguration.scene;
     var district;
     for(var i = 0 ; i < dimension ; i++){
         for(var j = 0 ; j < dimension ; j++){
@@ -44,7 +48,7 @@ function renderDistrict(blocksMatrix, dimension, scene, file){
             coordinates = block.coordinates;
             size = block.size;
 
-            if(enableColor)
+            if(appConfiguration.enableColor)
                 key = block.key;
             else
                 key = "DefaultColor";
@@ -80,7 +84,7 @@ function renderFloor(floor, scene, isCity) {
     wireframe.position.x = x + floor.width/2;
     wireframe.position.z = z + floor.height/2;
     wireframe.position.y = isCity ? -0.5 : 0;
-    
+
     scene.add(wireframe);
 }
 

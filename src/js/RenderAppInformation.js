@@ -23,6 +23,8 @@ function renderProjectDetailsInformation() {
 
     $("#projectName").click();
 
+    var projectInfo = appConfiguration.projectInfo;
+    
     projectName
         .text(projectInfo.name)
         .attr("class", "collapsible-header active")
