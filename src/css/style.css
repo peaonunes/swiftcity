@@ -18,6 +18,32 @@
 }
 
 .td-settings {
-    padding-top: 0px !important;
+    padding-top: 5px !important;
     padding-bottom: 5px !important;
+}
+
+.settings-layer-design {
+    margin-bottom: 0px !important;
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+}
+
+.first-layer-design {
+    margin-bottom: 0px !important;
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+}
+
+.city-internal {
+    padding-left: 5px !important;
+    padding-top: 5px !important;
+    padding-right: 0px!important;
+}
+
+.label-fonts {
+    font-size: 0.875em;
+}
+
+.details-design {
+    padding-right: 0px !important;
 }

@@ -51,7 +51,7 @@
                 <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">OK</a>
             </div>
         </div>
-        <div id="#settingsLayer" class="row" style="margin-bottom: 0px !important;">
+        <div id="#settingsLayer" class="row settings-layer-design">
             <ul class="collapsible" data-collapsible="accordion">
                 <li>
                      <div id="projectOptions" class="collapsible-header active">
@@ -61,17 +61,12 @@
                      <div class="collapsible-body white">
                         <table class="responsive-table center">
                             <tbody>
-                                <tr>
-                                    <th class="center th-settings" style="width: 5%">Help</th>
-                                    <th class="center th-settings" style="width: 15%">Color</th>
-                                    <th class="center th-settings" style="width: 15%">Sort</th>
-                                    <th class="center th-settings" style="width: 65%">Height' scale function</th>
-                                </tr>
                                 <tr id="#inputOptions">
-                                    <td style="width: 5%" class="center-align td-settings">
-                                        <a href="#modal1" class="btn-flat center waves-effect waves-light modal-trigger tooltipped" data-position="left" data-delay="30" data-tooltip="Help!">
+                                    <td style="width: 20%" class="center-align td-settings">
+                                        <a id="helpbutton" href="#modal1" class="btn-flat center waves-effect waves-light modal-trigger tooltipped" data-position="right" data-delay="30" data-tooltip="Help!">
                                             <i class="material-icons">live_help</i>
                                         </a>
+                                        <label for="helpbutton">Click me for help</label>
                                         <div id="modal1" class="modal">
                                             <div class="modal-content">
                                                 <h4>What are these options for?</h4>
@@ -91,15 +86,15 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td style="width: 15%" class="center-align td-settings">
+                                    <td style="width: 25%" class="center-align td-settings">
                                          <input value="color" onclick="filterClicked(this);" type="checkbox" class="checkbox-orange filled-in" id="activeColor" checked="checked"/>
                                          <label for="activeColor">Coloring blocks</label>
                                     </td>
-                                    <td style="width: 15%" class="td-settings">
+                                    <td style="width: 25%" class="td-settings">
                                         <input  value="sort" onclick="filterClicked(this);" type="checkbox" class="checkbox-orange filled-in" id="sorteBlocks" checked="checked"/>
                                         <label for="sorteBlocks">Sort district's blocks</label>
                                     </td>
-                                    <td style="width: 65%" class="td-settings">
+                                    <td style="width: 30%" class="td-settings">
                                         <input checked onclick="filterClicked(this);" class="radio-orange filled-in" type="radio" name="scale" value="linear" id="linear"/>
                                         <label for="linear">Linear</label>
                                         <input onclick="filterClicked(this);" class="radio-orange filled-in" type="radio" name="scale" value="log15" id="log15"/>
@@ -114,10 +109,10 @@
                 </li>
             </ul>
         </div>
-        <div id="#firstLayer" class="row">
-            <div id="city" class="card col s8 m8 l8">
+        <div id="#firstLayer" class="row first-layer-design">
+            <div id="city" class="card col s8 m8 l8 city-internal">
             </div>
-            <div id="details" class="col s4 m4 l4">
+            <div id="details" class="col s4 m4 l4 details-design">
                 <div id="projectDetails">
                     <ul class="collapsible" data-collapsible="accordion">
                         <li>
