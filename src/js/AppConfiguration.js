@@ -8,6 +8,7 @@ let appConfiguration = {
     sortedBlocks : true,
     enableColor : true,
     filters : ["color", "sort", "linear"],
+    filterChanged : null,
     projectInfo : {
         name:"Project name",
         numberOfEnums:0,

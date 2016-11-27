@@ -6,6 +6,8 @@ function filterClicked(object) {
     var value = object.value;
     var type = radios.indexOf(value);
     changeFiltersState(value, type);
+    appConfiguration.filterChanged = value;
+    updateWithFile();
 }
 
 let radios = ["linear", "log15", "sqrt"];

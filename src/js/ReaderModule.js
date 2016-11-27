@@ -3,42 +3,51 @@
  */
 
 let projectFiles = [];
+
 let minMaxLoc = [Number.POSITIVE_INFINITY,0];
 let minMaxNom = [Number.POSITIVE_INFINITY,0];
 let defaultFileReader = new FileReader();
+
 let lastFileSelected = [];
 let lastFilters = [];
+let scales = {
+    "linear" : d3.scaleLinear(),
+    "sqrt" : d3.scaleSqrt(),
+    "log15" : d3.scaleLog().base(1.5)
+};
 
 function updateWithFile() {
     var selectedFile = document.getElementById("fileInput").files[0];
     var filterChanged = filtersChanged();
     if(selectedFile == null){
-        Materialize.toast("You should first select a file!", 4000);
+        showToast("You should first select a file!", 4000);
         return;
     } else if (lastFileSelected == selectedFile){
         if(!filterChanged){
-            Materialize.toast("You just chose the same file!", 2000);
+            showToast("You just chose the same file!", 2000);
             return;
         }
-        console.log("Some changes");
+        showToast("Some filters has changed", 2000);
+        projectFiles = [];
     } else {
         projectFiles = [];
     }
     defaultFileReader.readAsText(selectedFile);
     lastFileSelected = selectedFile;
-    console.log(selectedFile);
 }
 
 function filtersChanged() {
-    
-    if (lastFilters.length != filtersOn.length)
+    var filters = appConfiguration.filters;
+    if (lastFilters.length != filters.length)
         return true;
     else {
         var filter;
-        for (var i = 0 ; i < filtersOn.length ; i++){
-            filter = filtersOn[i];
-            if(!lastFilters.contains(filter))
+        for (var i = 0 ; i < filters.length ; i++){
+            filter = filters[i];
+            if(lastFilters.indexOf(filter) < 0){
+                lastFilters = filters;
                 return true;
+            }
         }
         return false;
     }
@@ -55,13 +64,15 @@ defaultFileReader.onload = function(e) {
 };
 
 function buildProjectInfo(project) {
-    appConfiguration.projectInfo.minMaxLoc = minMaxLoc;
-    appConfiguration.projectInfo.minMaxNom = minMaxNom;
-    appConfiguration.projectInfo.numberOfEnums = project.enums.length;
-    appConfiguration.projectInfo.numberOfStructs = project.structs.length;
-    appConfiguration.projectInfo.numberOfExtensions = project.extensions.length;
-    appConfiguration.projectInfo.numberOfClasses = project.classes.length;
-    appConfiguration.projectInfo.numberOfProtocols = project.protocols.length;
+    var projectInfo = appConfiguration.projectInfo;
+    projectInfo.minMaxLoc = minMaxLoc;
+    projectInfo.minMaxNom = minMaxNom;
+    projectInfo.numberOfEnums = project.enums.length;
+    projectInfo.numberOfStructs = project.structs.length;
+    projectInfo.numberOfExtensions = project.extensions.length;
+    projectInfo.numberOfClasses = project.classes.length;
+    projectInfo.numberOfProtocols = project.protocols.length;
+    appConfiguration.projectInfo = projectInfo;
 }
 
 function renderData(){
@@ -89,9 +100,7 @@ function buildProjectFiles(project) {
     readElements(project.structs, "Struct");
     readElements(project.protocols, "Protocol");
 
-    var heightScale = d3.scaleLinear()
-        //.base(2)
-        //.domain([Math.exp(minMaxLoc[0]), Math.exp(minMaxLoc[1])])
+    var heightScale = getScale(appConfiguration.filters)
         .domain(minMaxLoc)
         .range([1, 15]);
 
@@ -140,7 +149,6 @@ function readElements(array, elementType) {
     }
 }
 
-
 function hasFile(array, fileName){
     for (var i = 0 ; i < array.length ; i++){
         if (!(array[i].fileName === "") && array[i].fileName === fileName)
@@ -170,4 +178,20 @@ function getFileName(source_path){
     var endName = source_path.length-1;
     var fileName = source_path.substring(startName, endName);
     return fileName;
+}
+
+function getScale(filters){
+    var filter;
+    var scale;
+    for (var i = 0; i < filters.length; i++) {
+        filter = filters[i];
+        scale = scales[filter];
+        if(scale != null)
+            return scale;
+    }
+    console.log(">> ERROR: No scale matched.");
+}
+
+function showToast(message, duration) {
+    Materialize.toast(message, duration);
 }

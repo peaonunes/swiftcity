@@ -19,7 +19,7 @@ function cityMaker(files){
     cityMatrix = fillMatrix(cityMatrix, filesArray, dimension);
 
     // Define district position and inside layout.
-    cityMatrix = defineCityLayout(cityMatrix, dimension);
+    cityMatrix = _defineCityLayout(cityMatrix, dimension);
 
     // Render the city.
     renderCity(cityMatrix, dimension);
@@ -28,7 +28,8 @@ function cityMaker(files){
 }
 
 function _defineCityLayout(cityMatrix, dimension) {
-    var sorted = appConfiguration.sortedBlocks;
+    var sorted = appConfiguration.filters.indexOf("sort") > -1 ? true : false;
+    console.log(sorted);
     return defineCityLayout(cityMatrix, dimension, sorted);
 }
 
