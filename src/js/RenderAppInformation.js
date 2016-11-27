@@ -25,7 +25,7 @@ function renderProjectDetailsInformation() {
     $("#projectOptions").click();
 
     var projectInfo = appConfiguration.projectInfo;
-    var enableColor = appConfiguration.enableColor;
+    var enableColor = appConfiguration.filters.indexOf("color") > -1 ? true : false;
 
     projectName
         .text(projectInfo.name)

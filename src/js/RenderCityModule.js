@@ -48,7 +48,7 @@ function renderDistrict(blocksMatrix, dimension, scene, file){
             coordinates = block.coordinates;
             size = block.size;
 
-            if(appConfiguration.enableColor)
+            if(appConfiguration.filters.indexOf("color") > -1)
                 key = block.key;
             else
                 key = "DefaultColor";
@@ -103,7 +103,7 @@ function renderCube(coordinates, size, key, scene){
     var mat = new THREE.LineBasicMaterial({ color: pickColor("Wireframe"), linewidth: 0.5 });
     var wireframe = new THREE.LineSegments(geo, mat);
     wireframe.position.x = coordinates.x;
-    wireframe.position.y = size[1]/2;
+    wireframe.position.y = size[1]/2 + 0.5;
     wireframe.position.z = coordinates.z;
 
     scene.add(wireframe);

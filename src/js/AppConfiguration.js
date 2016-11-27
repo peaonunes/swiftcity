@@ -5,8 +5,6 @@ let appConfiguration = {
     width : window.innerWidth * 0.65,
     camera : [],
     renderer : [],
-    sortedBlocks : true,
-    enableColor : true,
     filters : ["color", "sort", "linear"],
     filterChanged : null,
     projectInfo : {

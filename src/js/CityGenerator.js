@@ -29,7 +29,6 @@ function cityMaker(files){
 
 function _defineCityLayout(cityMatrix, dimension) {
     var sorted = appConfiguration.filters.indexOf("sort") > -1 ? true : false;
-    console.log(sorted);
     return defineCityLayout(cityMatrix, dimension, sorted);
 }
 
