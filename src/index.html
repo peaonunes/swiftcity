@@ -80,6 +80,16 @@
                                                 <h5>Sort district's blocks</h5>
                                                 Sort the blocks means that inside each district, light-gray floor that represents a file,</br>
                                                 the blocks will be sorted first by their height and by width as second criteria.
+                                                </br>
+                                                </br>
+                                                <h5>Height' scale options</h5>
+                                                There are four possible scales for the height of the blocks in the view.</br>
+                                                <ul>
+                                                    <li><strong>Linear</strong>, it the default, with the domain [min, max] of LOC.</li>
+                                                    <li><strong>Logarithmic</strong> scale, base 1.5, with the domain [min, max] of LOC.</li>
+                                                    <li><strong>SQRT</strong> scale which is basically a scale with the exponent 0.5. Also with the domain [min, max] of LOC.</li>
+                                                    <li><strong>Boxplot</strong> is a scale suggested in the literature by Wettel to normalize. To do this, the boxplot of heights is calculated, each boxplot element (min, q1, median, q3, max) is a value of the domain and the image associates the range of height values. In this case the element belongs to a set of boxplot will have height mapped to that associated value.</li>
+                                                </ul>
                                             </div>
                                             <div class="modal-footer">
                                                 <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">OK</a>

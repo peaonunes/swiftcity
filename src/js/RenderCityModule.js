@@ -13,6 +13,8 @@ function renderSceneProperties(scene){
 }
 
 function renderCamareProperties(x, y, z){
+    if(appConfiguration.filterChanged != null)
+        return;
     var camera = appConfiguration.camera;
     var renderer = appConfiguration.renderer;
     camera.position.x = x;
