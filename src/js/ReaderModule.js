@@ -29,9 +29,11 @@ function updateWithFile() {
             showToast("You just chose the same file!", 2000);
             return;
         }
+        appConfiguration.holdCamera = true;
         showToast("Reloading with: "+appConfiguration.filterChanged+"...", 2000);
         projectFiles = [];
     } else {
+        appConfiguration.holdCamera = false;
         projectFiles = [];
     }
     defaultFileReader.readAsText(selectedFile);

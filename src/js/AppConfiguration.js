@@ -4,6 +4,7 @@ let appConfiguration = {
     height : window.innerHeight * 0.75,
     width : window.innerWidth * 0.65,
     camera : [],
+    holdCamera : false,
     renderer : [],
     filters : ["color", "sort", "linear"],
     filterChanged : null,
