@@ -3,21 +3,58 @@
  */
 
 let projectFiles = [];
+
 let minMaxLoc = [Number.POSITIVE_INFINITY,0];
 let minMaxNom = [Number.POSITIVE_INFINITY,0];
+let locs = [];
 let defaultFileReader = new FileReader();
+
 let lastFileSelected = [];
+let lastFilters = [];
+let scales = {
+    "linear" : d3.scaleLinear(),
+    "sqrt" : d3.scaleSqrt(),
+    "log15" : d3.scaleLog().base(1.5),
+    "boxplot" : "boxplot"
+};
 
 function updateWithFile() {
     var selectedFile = document.getElementById("fileInput").files[0];
+    var filterChanged = filtersChanged();
     if(selectedFile == null){
-        Materialize.toast("You should first select a file!", 4000);
+        showToast("You should first select a file!", 4000);
         return;
     } else if (lastFileSelected == selectedFile){
-        Materialize.toast("You just chose the same file!", 2000);
+        if(!filterChanged){
+            showToast("You just chose the same file!", 2000);
+            return;
+        }
+        appConfiguration.holdCamera = true;
+        showToast("Reloading with: "+appConfiguration.filterChanged+"...", 2000);
+        projectFiles = [];
+    } else {
+        appConfiguration.holdCamera = false;
+        projectFiles = [];
     }
     defaultFileReader.readAsText(selectedFile);
     lastFileSelected = selectedFile;
+}
+
+function filtersChanged() {
+    var filters = appConfiguration.filters;
+    if (lastFilters.length != filters.length)
+        return true;
+    else {
+        var filter;
+        for (var i = 0 ; i < filters.length ; i++){
+            filter = filters[i];
+            if(lastFilters.indexOf(filter) < 0){
+                lastFilters = filters;
+                return true;
+            }
+        }
+        return false;
+    }
 }
 
 defaultFileReader.onload = function(e) {
@@ -31,6 +68,7 @@ defaultFileReader.onload = function(e) {
 };
 
 function buildProjectInfo(project) {
+    var projectInfo = appConfiguration.projectInfo;
     projectInfo.minMaxLoc = minMaxLoc;
     projectInfo.minMaxNom = minMaxNom;
     projectInfo.numberOfEnums = project.enums.length;
@@ -38,14 +76,16 @@ function buildProjectInfo(project) {
     projectInfo.numberOfExtensions = project.extensions.length;
     projectInfo.numberOfClasses = project.classes.length;
     projectInfo.numberOfProtocols = project.protocols.length;
+    appConfiguration.projectInfo = projectInfo;
 }
 
 function renderData(){
-    clearScene(scene);
-    runCity(projectFiles, scene, sortedBlocks, camera);
+    clearScene();
+    runCity(projectFiles);
 }
 
 function clearScene(scene) {
+    var scene = appConfiguration.scene;
     scene.children = [];
 }
 
@@ -58,17 +98,24 @@ function getProjectFrom(fileData){
 }
 
 function buildProjectFiles(project) {
-    projectFiles = [];
-
     readElements(project.enums, "Enum");
     readElements(project.classes, "Class");
     readElements(project.extensions, "Extension");
     readElements(project.structs, "Struct");
     readElements(project.protocols, "Protocol");
 
-    var heightScale = d3.scaleLinear()
-        .domain(minMaxLoc)
-        .range([1, 15]);
+    var heightScale = getScale(appConfiguration.filters);
+    if(heightScale === "boxplot"){
+        var boxplot = getBoxplot(locs);
+        console.log(boxplot);
+        heightScale = d3.scaleLinear()
+            .domain(boxplot)
+            .range([1,4,7,10,12,15]);
+    } else {
+        heightScale
+            .domain(minMaxLoc)
+            .range([1, 15]);
+    }
 
     var widthScale = d3.scaleLinear()
         .domain(minMaxNom)
@@ -115,7 +162,6 @@ function readElements(array, elementType) {
     }
 }
 
-
 function hasFile(array, fileName){
     for (var i = 0 ; i < array.length ; i++){
         if (!(array[i].fileName === "") && array[i].fileName === fileName)
@@ -125,6 +171,7 @@ function hasFile(array, fileName){
 }
 
 function createObj(keyName, objName, objLoc, objNom){
+    locs.push(objLoc);
     minMaxLoc[0] = Math.min(objLoc, minMaxLoc[0]);
     minMaxLoc[1] = Math.max(objLoc, minMaxLoc[1]);
     minMaxNom[0] = Math.min(objNom, minMaxNom[0]);
@@ -145,4 +192,20 @@ function getFileName(source_path){
     var endName = source_path.length-1;
     var fileName = source_path.substring(startName, endName);
     return fileName;
+}
+
+function getScale(filters){
+    var filter;
+    var scale;
+    for (var i = 0; i < filters.length; i++) {
+        filter = filters[i];
+        scale = scales[filter];
+        if(scale != null)
+            return scale;
+    }
+    console.log(">> ERROR: No scale matched.");
+}
+
+function showToast(message, duration) {
+    Materialize.toast(message, duration);
 }

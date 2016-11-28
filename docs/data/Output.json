@@ -1069,7 +1069,7 @@
             "return_type": "()",
             "number_of_ifs": 1,
             "parameter_types": [
-              "(DayView) -\u003e ()"
+              "(DayView) -> ()"
             ],
             "node_type": "method",
             "number_of_if_lets": 1,
@@ -1556,7 +1556,7 @@
           }
         ],
         "number_of_if_nil": 1,
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVSet.swift:47:8",
+        "name": "CVSet<T>",
         "start_line": 47,
         "source_path": "/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVSet.swift",
         "number_of_lines": 17,
@@ -1582,7 +1582,7 @@
             "end_line": 76
           }
         ],
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVSet.swift:67:9",
+        "name": "CVSet<T>",
         "start_line": 67,
         "source_path": "/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVSet.swift",
         "number_of_lines": 11,
@@ -1594,7 +1594,7 @@
         "number_of_methods": 1,
         "methods": [
           {
-            "return_type": "AnyGenerator\u003cT\u003e",
+            "return_type": "AnyGenerator<T>",
             "number_of_lets_with_optional_type": 1,
             "parameter_types": [],
             "node_type": "method",
@@ -1608,7 +1608,7 @@
             "end_line": 88
           }
         ],
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVSet.swift:81:2",
+        "name": "CVSet<T>",
         "start_line": 81,
         "number_of_lets": 1,
         "source_path": "/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVSet.swift",
@@ -1643,7 +1643,7 @@
         "end_line": 251,
         "node_type": "extension",
         "number_of_if_lets": 2,
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarView.swift:205:1",
+        "name": "CVCalendarView",
         "number_of_forced_unwrappings": 4,
         "number_of_lets": 9,
         "source_path": "/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarView.swift"
@@ -1670,7 +1670,7 @@
             "end_line": 262
           }
         ],
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarView.swift:255:1",
+        "name": "CVCalendarView",
         "start_line": 255,
         "source_path": "/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarView.swift",
         "number_of_lines": 9,
@@ -1751,7 +1751,7 @@
             "number_of_ifs": 1,
             "parameter_types": [
               "CalendarMode",
-              "() -\u003e ()"
+              "() -> ()"
             ],
             "start_line": 288,
             "returns_optional_type": false,
@@ -1765,7 +1765,7 @@
             "number_of_lets": 1
           }
         ],
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarView.swift:267:1",
+        "name": "CVCalendarView",
         "number_of_forced_unwrappings": 14,
         "start_line": 267,
         "number_of_lets": 1,
@@ -1794,7 +1794,7 @@
             "end_line": 333
           }
         ],
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarView.swift:322:9",
+        "name": "CVCalendarView",
         "number_of_forced_unwrappings": 1,
         "start_line": 322,
         "source_path": "/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarView.swift",
@@ -1855,7 +1855,7 @@
             "end_line": 49
           }
         ],
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarTouchController.swift:29:1",
+        "name": "CVCalendarTouchController",
         "start_line": 29,
         "source_path": "/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarTouchController.swift",
         "number_of_lines": 22,
@@ -1961,7 +1961,7 @@
         "end_line": 131,
         "node_type": "extension",
         "number_of_if_lets": 1,
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarTouchController.swift:54:9",
+        "name": "CVCalendarTouchController",
         "number_of_forced_unwrappings": 19,
         "number_of_lets": 5,
         "source_path": "/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarTouchController.swift",
@@ -1986,7 +1986,7 @@
             "end_line": 130
           }
         ],
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarViewAppearance.swift:123:1",
+        "name": "UIColor",
         "start_line": 123,
         "number_of_lets": 3,
         "source_path": "/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarViewAppearance.swift",
@@ -2028,7 +2028,7 @@
             "end_line": 283
           }
         ],
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarMonthContentViewController.swift:254:1",
+        "name": "CVCalendarMonthContentViewController",
         "number_of_forced_unwrappings": 4,
         "start_line": 254,
         "number_of_lets": 10,
@@ -2104,7 +2104,7 @@
             "number_of_lets": 1
           }
         ],
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarMonthContentViewController.swift:288:1",
+        "name": "CVCalendarMonthContentViewController",
         "number_of_forced_unwrappings": 10,
         "start_line": 288,
         "number_of_lets": 4,
@@ -2190,7 +2190,7 @@
         "end_line": 421,
         "node_type": "extension",
         "number_of_if_lets": 2,
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarMonthContentViewController.swift:371:1",
+        "name": "CVCalendarMonthContentViewController",
         "number_of_forced_unwrappings": 6,
         "number_of_lets": 3,
         "source_path": "/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarMonthContentViewController.swift",
@@ -2214,7 +2214,7 @@
             "end_line": 83
           }
         ],
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarMonthView.swift:74:1",
+        "name": "CVCalendarMonthView",
         "number_of_forced_unwrappings": 7,
         "start_line": 74,
         "number_of_lets": 1,
@@ -2245,7 +2245,7 @@
             "end_line": 100
           }
         ],
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarMonthView.swift:88:1",
+        "name": "CVCalendarMonthView",
         "number_of_forced_unwrappings": 3,
         "start_line": 88,
         "source_path": "/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarMonthContentViewController.swift",
@@ -2283,7 +2283,7 @@
             "end_line": 125
           }
         ],
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarMonthView.swift:105:1",
+        "name": "CVCalendarMonthView",
         "number_of_forced_unwrappings": 3,
         "start_line": 105,
         "number_of_lets": 1,
@@ -2341,7 +2341,7 @@
             "end_line": 176
           }
         ],
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarMonthView.swift:130:1",
+        "name": "CVCalendarMonthView",
         "number_of_forced_unwrappings": 6,
         "start_line": 130,
         "number_of_lets": 6,
@@ -2358,7 +2358,7 @@
             "return_type": "()",
             "number_of_ifs": 2,
             "parameter_types": [
-              "Void -\u003e Void",
+              "Void -> Void",
               "Bool",
               "[AnyObject?]"
             ],
@@ -2373,7 +2373,7 @@
           }
         ],
         "number_of_if_nil": 1,
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarMonthView.swift:181:1",
+        "name": "CVCalendarMonthView",
         "start_line": 181,
         "source_path": "/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarMonthContentViewController.swift",
         "number_of_lines": 15,
@@ -2397,7 +2397,7 @@
             "end_line": 90
           }
         ],
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVAuxiliaryView.swift:86:1",
+        "name": "CVAuxiliaryView",
         "start_line": 86,
         "source_path": "/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVAuxiliaryView.swift",
         "number_of_lines": 6,
@@ -2457,7 +2457,7 @@
             "end_line": 148
           }
         ],
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVAuxiliaryView.swift:93:1",
+        "name": "CVAuxiliaryView",
         "number_of_forced_unwrappings": 3,
         "start_line": 93,
         "number_of_lets": 13,
@@ -2522,7 +2522,7 @@
             "end_line": 51
           }
         ],
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarDayViewControlCoordinator.swift:32:1",
+        "name": "CVCalendarDayViewControlCoordinator",
         "start_line": 32,
         "source_path": "/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarDayViewControlCoordinator.swift",
         "number_of_lines": 21,
@@ -2561,7 +2561,7 @@
             "end_line": 65
           }
         ],
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarDayViewControlCoordinator.swift:56:9",
+        "name": "CVCalendarDayViewControlCoordinator",
         "number_of_forced_unwrappings": 2,
         "start_line": 56,
         "source_path": "/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarDayViewControlCoordinator.swift",
@@ -2605,7 +2605,7 @@
           }
         ],
         "number_of_if_nil": 1,
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarDayViewControlCoordinator.swift:70:1",
+        "name": "CVCalendarDayViewControlCoordinator",
         "start_line": 70,
         "source_path": "/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarDayViewControlCoordinator.swift",
         "number_of_lines": 29,
@@ -2668,7 +2668,7 @@
         "node_type": "extension",
         "number_of_guard_lets": 1,
         "number_of_if_lets": 4,
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarWeekContentViewController.swift:262:1",
+        "name": "CVCalendarWeekContentViewController",
         "number_of_forced_unwrappings": 21,
         "source_path": "/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarWeekContentViewController.swift"
       },
@@ -2707,7 +2707,7 @@
             "end_line": 353
           }
         ],
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarWeekContentViewController.swift:323:1",
+        "name": "CVCalendarWeekContentViewController",
         "number_of_forced_unwrappings": 4,
         "start_line": 323,
         "number_of_lets": 11,
@@ -2788,7 +2788,7 @@
         "end_line": 443,
         "node_type": "extension",
         "number_of_if_lets": 4,
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarWeekContentViewController.swift:359:1",
+        "name": "CVCalendarWeekContentViewController",
         "number_of_forced_unwrappings": 11,
         "number_of_lets": 3,
         "source_path": "/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarWeekContentViewController.swift"
@@ -2860,7 +2860,7 @@
             "end_line": 494
           }
         ],
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarWeekContentViewController.swift:447:1",
+        "name": "CVCalendarWeekContentViewController",
         "start_line": 447,
         "number_of_lets": 2,
         "source_path": "/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarWeekContentViewController.swift",
@@ -2917,7 +2917,7 @@
             "end_line": 173
           }
         ],
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarWeekView.swift:126:1",
+        "name": "CVCalendarWeekView",
         "number_of_forced_unwrappings": 7,
         "start_line": 126,
         "number_of_lets": 6,
@@ -2960,7 +2960,7 @@
             "number_of_lets": 2
           }
         ],
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarWeekView.swift:178:1",
+        "name": "CVCalendarWeekView",
         "number_of_forced_unwrappings": 5,
         "start_line": 178,
         "number_of_lets": 3,
@@ -2977,7 +2977,7 @@
             "return_type": "()",
             "number_of_ifs": 2,
             "parameter_types": [
-              "Void -\u003e Void",
+              "Void -> Void",
               "Bool",
               "[AnyObject?]"
             ],
@@ -2992,7 +2992,7 @@
           }
         ],
         "number_of_if_nil": 1,
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarWeekView.swift:209:1",
+        "name": "CVCalendarWeekView",
         "start_line": 209,
         "source_path": "/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarWeekView.swift",
         "number_of_lines": 15,
@@ -3043,7 +3043,7 @@
         "end_line": 48,
         "node_type": "extension",
         "number_of_if_lets": 1,
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarViewAnimator.swift:31:1",
+        "name": "CVCalendarViewAnimator",
         "number_of_forced_unwrappings": 2,
         "number_of_lets": 3,
         "source_path": "/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarViewAnimator.swift",
@@ -3076,7 +3076,7 @@
             "end_line": 59
           }
         ],
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarViewAnimator.swift:52:1",
+        "name": "CVCalendarViewAnimator",
         "start_line": 52,
         "source_path": "/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarViewAnimator.swift",
         "number_of_lines": 9,
@@ -3138,7 +3138,7 @@
             "end_line": 113
           }
         ],
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarViewAnimator.swift:64:9",
+        "name": "CVCalendarViewAnimator",
         "number_of_forced_unwrappings": 1,
         "start_line": 64,
         "source_path": "/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarViewAnimator.swift",
@@ -3162,7 +3162,7 @@
             "end_line": 58
           }
         ],
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVDate.swift:47:1",
+        "name": "CVDate",
         "start_line": 47,
         "number_of_lets": 2,
         "source_path": "/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVDate.swift",
@@ -3198,7 +3198,7 @@
             "end_line": 73
           }
         ],
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVDate.swift:61:1",
+        "name": "CVDate",
         "start_line": 61,
         "number_of_lets": 2,
         "source_path": "/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVDate.swift",
@@ -3226,7 +3226,7 @@
             "end_line": 82
           }
         ],
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVDate.swift:77:9",
+        "name": "CVDate",
         "start_line": 77,
         "number_of_lets": 1,
         "source_path": "/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVDate.swift",
@@ -3253,7 +3253,7 @@
             "end_line": 72
           }
         ],
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarContentViewController.swift:63:1",
+        "name": "CVCalendarContentViewController",
         "start_line": 63,
         "source_path": "/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarContentViewController.swift",
         "number_of_lines": 11,
@@ -3276,7 +3276,7 @@
             "end_line": 88
           }
         ],
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarContentViewController.swift:77:1",
+        "name": "CVCalendarContentViewController",
         "number_of_forced_unwrappings": 4,
         "start_line": 77,
         "source_path": "/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarContentViewController.swift",
@@ -3303,7 +3303,7 @@
             "end_line": 107
           }
         ],
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarContentViewController.swift:94:1",
+        "name": "CVCalendarContentViewController",
         "start_line": 94,
         "source_path": "/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarContentViewController.swift",
         "number_of_lines": 15,
@@ -3329,7 +3329,7 @@
             "end_line": 119
           }
         ],
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarContentViewController.swift:112:1",
+        "name": "CVCalendarContentViewController",
         "start_line": 112,
         "source_path": "/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarContentViewController.swift",
         "number_of_lines": 9,
@@ -3339,7 +3339,7 @@
         "node_type": "extension",
         "number_of_methods": 0,
         "methods": [],
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarContentViewController.swift:125:1",
+        "name": "CVCalendarContentViewController",
         "start_line": 125,
         "source_path": "/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarContentViewController.swift",
         "number_of_lines": 1,
@@ -3415,7 +3415,7 @@
             "end_line": 137
           }
         ],
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarContentViewController.swift:128:1",
+        "name": "CVCalendarContentViewController",
         "start_line": 128,
         "source_path": "/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarContentViewController.swift",
         "number_of_lines": 11,
@@ -3440,7 +3440,7 @@
             "end_line": 153
           }
         ],
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarContentViewController.swift:142:1",
+        "name": "CVCalendarContentViewController",
         "start_line": 142,
         "number_of_lets": 1,
         "source_path": "/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarContentViewController.swift",
@@ -3524,7 +3524,7 @@
             "end_line": 191
           }
         ],
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarContentViewController.swift:158:1",
+        "name": "CVCalendarContentViewController",
         "number_of_forced_unwrappings": 2,
         "start_line": 158,
         "number_of_lets": 6,
@@ -3585,7 +3585,7 @@
             "end_line": 254
           }
         ],
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarContentViewController.swift:196:1",
+        "name": "CVCalendarContentViewController",
         "start_line": 196,
         "source_path": "/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarContentViewController.swift",
         "number_of_vars": 3,
@@ -3608,7 +3608,7 @@
             "end_line": 262
           }
         ],
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarContentViewController.swift:257:1",
+        "name": "UIView",
         "start_line": 257,
         "source_path": "/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarContentViewController.swift",
         "number_of_lines": 7,
@@ -3705,7 +3705,7 @@
         "end_line": 297,
         "node_type": "extension",
         "number_of_if_lets": 10,
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarDayView.swift:150:1",
+        "name": "CVCalendarDayView",
         "number_of_forced_unwrappings": 36,
         "number_of_lets": 10,
         "source_path": "/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarDayView.swift",
@@ -3742,7 +3742,7 @@
         "end_line": 363,
         "node_type": "extension",
         "number_of_if_lets": 5,
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarDayView.swift:301:1",
+        "name": "CVCalendarDayView",
         "number_of_forced_unwrappings": 3,
         "number_of_lets": 4,
         "source_path": "/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarDayView.swift",
@@ -3775,7 +3775,7 @@
             "end_line": 375
           }
         ],
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarDayView.swift:368:1",
+        "name": "CGFloat",
         "start_line": 368,
         "source_path": "/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarDayView.swift",
         "number_of_lines": 9,
@@ -3821,7 +3821,7 @@
             "end_line": 405
           }
         ],
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarDayView.swift:378:1",
+        "name": "CVCalendarDayView",
         "start_line": 378,
         "number_of_lets": 10,
         "source_path": "/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarDayView.swift",
@@ -3875,7 +3875,7 @@
         "end_line": 500,
         "node_type": "extension",
         "number_of_if_lets": 4,
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarDayView.swift:410:1",
+        "name": "CVCalendarDayView",
         "number_of_forced_unwrappings": 30,
         "number_of_lets": 1,
         "source_path": "/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarDayView.swift",
@@ -3903,7 +3903,7 @@
           }
         ],
         "number_of_if_nil": 1,
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarDayView.swift:505:1",
+        "name": "CVCalendarDayView",
         "number_of_forced_unwrappings": 2,
         "start_line": 505,
         "number_of_lets": 1,
@@ -3920,7 +3920,7 @@
             "return_type": "()",
             "number_of_ifs": 2,
             "parameter_types": [
-              "Void -\u003e Void",
+              "Void -> Void",
               "Bool",
               "[AnyObject?]"
             ],
@@ -3935,7 +3935,7 @@
           }
         ],
         "number_of_if_nil": 1,
-        "name": "location\u003d/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarDayView.swift:529:1",
+        "name": "CVCalendarDayView",
         "start_line": 529,
         "source_path": "/Users/Marcel/Documents/Development/CVCalendarz/CVCalendar/CVCalendarDayView.swift",
         "number_of_lines": 15,
