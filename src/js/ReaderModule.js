@@ -6,6 +6,7 @@ let projectFiles = [];
 
 let minMaxLoc = [Number.POSITIVE_INFINITY,0];
 let minMaxNom = [Number.POSITIVE_INFINITY,0];
+let locs = [];
 let defaultFileReader = new FileReader();
 
 let lastFileSelected = [];
@@ -13,7 +14,8 @@ let lastFilters = [];
 let scales = {
     "linear" : d3.scaleLinear(),
     "sqrt" : d3.scaleSqrt(),
-    "log15" : d3.scaleLog().base(1.5)
+    "log15" : d3.scaleLog().base(1.5),
+    "boxplot" : "boxplot"
 };
 
 function updateWithFile() {
@@ -27,7 +29,7 @@ function updateWithFile() {
             showToast("You just chose the same file!", 2000);
             return;
         }
-        showToast("Some filters has changed", 2000);
+        showToast("Reloading with: "+appConfiguration.filterChanged+"...", 2000);
         projectFiles = [];
     } else {
         projectFiles = [];
@@ -100,9 +102,18 @@ function buildProjectFiles(project) {
     readElements(project.structs, "Struct");
     readElements(project.protocols, "Protocol");
 
-    var heightScale = getScale(appConfiguration.filters)
-        .domain(minMaxLoc)
-        .range([1, 15]);
+    var heightScale = getScale(appConfiguration.filters);
+    if(heightScale === "boxplot"){
+        var boxplot = getBoxplot(locs);
+        console.log(boxplot);
+        heightScale = d3.scaleLinear()
+            .domain(boxplot)
+            .range([1,4,7,10,12,15]);
+    } else {
+        heightScale
+            .domain(minMaxLoc)
+            .range([1, 15]);
+    }
 
     var widthScale = d3.scaleLinear()
         .domain(minMaxNom)
@@ -158,6 +169,7 @@ function hasFile(array, fileName){
 }
 
 function createObj(keyName, objName, objLoc, objNom){
+    locs.push(objLoc);
     minMaxLoc[0] = Math.min(objLoc, minMaxLoc[0]);
     minMaxLoc[1] = Math.max(objLoc, minMaxLoc[1]);
     minMaxNom[0] = Math.min(objNom, minMaxNom[0]);

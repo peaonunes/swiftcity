@@ -10,7 +10,7 @@ function filterClicked(object) {
     updateWithFile();
 }
 
-let radios = ["linear", "log15", "sqrt"];
+let radios = ["linear", "log15", "sqrt", "boxplot"];
 
 function changeFiltersState(value, type) {
     var filters = appConfiguration.filters;

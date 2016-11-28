@@ -63,10 +63,10 @@
                             <tbody>
                                 <tr id="#inputOptions">
                                     <td style="width: 20%" class="center-align td-settings">
+                                        <label for="helpbutton">Click me for help</label>
                                         <a id="helpbutton" href="#modal1" class="btn-flat center waves-effect waves-light modal-trigger tooltipped" data-position="right" data-delay="30" data-tooltip="Help!">
                                             <i class="material-icons">live_help</i>
                                         </a>
-                                        <label for="helpbutton">Click me for help</label>
                                         <div id="modal1" class="modal">
                                             <div class="modal-content">
                                                 <h4>What are these options for?</h4>
@@ -101,6 +101,8 @@
                                         <label for="log15">Log1.5</label>
                                         <input onclick="filterClicked(this);" class="radio-orange filled-in" type="radio" name="scale" value="sqrt" id="sqrt"/>
                                         <label for="sqrt">Sqrt</label>
+                                        <input onclick="filterClicked(this);" class="radio-orange filled-in" type="radio" name="scale" value="boxplot" id="boxplot"/>
+                                        <label for="boxplot">Boxplot</label>
                                     </td>
                                  </tr>
                             </tbody>
@@ -200,6 +202,7 @@
         <script type="text/javascript" src="js/RenderAppInformation.js"></script>
         <script type="text/javascript" src="js/CityGenerator.js"></script>
         <script type="text/javascript" src="js/Filters.js"></script>
+        <script type="text/javascript" src="js/Boxplot.js"></script>
         <script type="text/javascript" src="js/Main.js"></script>
     </body>
 </html>
