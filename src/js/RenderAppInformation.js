@@ -22,6 +22,10 @@ function renderProjectDetailsInformation() {
     var projectName = d3.select("#projectName");
 
     $("#projectName").click();
+    $("#projectOptions").click();
+
+    var projectInfo = appConfiguration.projectInfo;
+    var enableColor = appConfiguration.filters.indexOf("color") > -1 ? true : false;
 
     projectName
         .text(projectInfo.name)
@@ -53,16 +57,20 @@ function renderRowInfo(tableContent, labelType, middleColText, rightColText) {
         .attr("style", "width: 10%")
         .attr("class", "right-align")
         .append("i")
-        .attr("class", "material-icons valign")
+        .attr("class", "material-icons valign tooltipped")
+        .attr("data-position","left")
+        .attr("data-delay","30")
+        .attr("data-tooltip","Hide/Unhide")
         .attr("style", "color: "+systemColors[labelType])
         .text("label");
 
     row.append("td")
-        .attr("style", "width: 40%")
-        .attr("class", "left-align")
+        .attr("style", "width: 40%;")
+        .attr("class", "left-align label-fonts")
         .text(middleColText);
 
     row.append("td")
         .attr("style", "width: 50%")
+        .attr("class", "label-fonts")
         .text(rightColText);
 }

@@ -4,22 +4,24 @@
 
 function init(){
     setUp();
-    render(renderer);
-    winResize(camera,renderer,width,height);
+    winResize(appConfiguration.camera,appConfiguration.renderer,appConfiguration.width,appConfiguration.height);
 }
 
 function setUp(){
-    scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera(45, width / height, 1, 1000);
-    renderer = new THREE.WebGLRenderer();
-    renderer.setSize(width, height);
+    var width = appConfiguration.width;
+    var height = appConfiguration.height;
+    appConfiguration.scene = new THREE.Scene();
+    appConfiguration.camera = new THREE.PerspectiveCamera(45, width / height, 1, 1000);
+    appConfiguration.renderer = new THREE.WebGLRenderer();
+    appConfiguration.renderer.setSize(width, height);
 
-    insertRender(renderer);
+    insertRender(appConfiguration.renderer);
+    render();
 }
 
 function render() {
     requestAnimationFrame(render);
-    renderer.render(scene, camera);
+    appConfiguration.renderer.render(appConfiguration.scene, appConfiguration.camera);
 }
 
 init();

@@ -8,17 +8,23 @@ function insertRender(renderer){
 }
 
 function renderSceneProperties(scene){
+    var scene = appConfiguration.scene;
     scene.background = new THREE.Color(pickColor("Sky"));
 }
 
-function renderCamareProperties(camera, x, y, z){
+function renderCamareProperties(x, y, z){
+    if(appConfiguration.holdCamera)
+        return;
+    var camera = appConfiguration.camera;
+    var renderer = appConfiguration.renderer;
     camera.position.x = x;
     camera.position.y = y;
     camera.position.z = z;
     var orbit = new THREE.OrbitControls(camera, renderer.domElement);
 }
 
-function renderCity(cityMatrix, dimension, scene) {
+function renderCity(cityMatrix, dimension) {
+    var scene = appConfiguration.scene;
     var district;
     for(var i = 0 ; i < dimension ; i++){
         for(var j = 0 ; j < dimension ; j++){
@@ -44,7 +50,7 @@ function renderDistrict(blocksMatrix, dimension, scene, file){
             coordinates = block.coordinates;
             size = block.size;
 
-            if(enableColor)
+            if(appConfiguration.filters.indexOf("color") > -1)
                 key = block.key;
             else
                 key = "DefaultColor";
@@ -57,7 +63,7 @@ function renderDistrict(blocksMatrix, dimension, scene, file){
 }
 
 function renderFloor(floor, scene, isCity) {
-    var geometry = new THREE.PlaneGeometry(floor.width , floor.height);
+    var geometry = new THREE.BoxGeometry(floor.width, floor.height, 1);
     var color = isCity ? pickColor("CityFloor") : pickColor("DistrictFloor");
     var material = new THREE.MeshBasicMaterial( {color: color, side: THREE.DoubleSide} );
     var plane = new THREE.Mesh( geometry, material );
@@ -68,9 +74,20 @@ function renderFloor(floor, scene, isCity) {
     plane.rotation.x = Math.PI/2;
     plane.position.x = x + floor.width/2;
     plane.position.z = z + floor.height/2;
-    plane.position.y = isCity ? -0.1 : 0;
+    plane.position.y = isCity ? -0.5 : 0;
 
     scene.add(plane);
+
+    var geo = new THREE.EdgesGeometry(geometry); // or WireframeGeometry( geometry )
+    var mat = new THREE.LineBasicMaterial({ color: pickColor("Wireframe"), linewidth: 0.5 });
+    var wireframe = new THREE.LineSegments(geo, mat);
+
+    wireframe.rotation.x = Math.PI/2;
+    wireframe.position.x = x + floor.width/2;
+    wireframe.position.z = z + floor.height/2;
+    wireframe.position.y = isCity ? -0.5 : 0;
+
+    scene.add(wireframe);
 }
 
 function renderCube(coordinates, size, key, scene){
@@ -79,7 +96,7 @@ function renderCube(coordinates, size, key, scene){
     var newCube = new THREE.Mesh( geometry, material );
 
     newCube.position.x = coordinates.x;
-    newCube.position.y = size[1]/2;
+    newCube.position.y = size[1]/2 + 0.5;
     newCube.position.z = coordinates.z;
 
     scene.add(newCube);
@@ -88,7 +105,7 @@ function renderCube(coordinates, size, key, scene){
     var mat = new THREE.LineBasicMaterial({ color: pickColor("Wireframe"), linewidth: 0.5 });
     var wireframe = new THREE.LineSegments(geo, mat);
     wireframe.position.x = coordinates.x;
-    wireframe.position.y = size[1]/2;
+    wireframe.position.y = size[1]/2 + 0.5;
     wireframe.position.z = coordinates.z;
 
     scene.add(wireframe);
