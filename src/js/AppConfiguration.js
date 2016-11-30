@@ -14,7 +14,7 @@ let appConfiguration = {
             return false;
     },
     filterChanged : null,
-    dealExtension : true,
+    stackExtensions : true,
     projectInfo : {
         name:"Project name",
         numberOfEnums:0,

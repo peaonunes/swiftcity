@@ -15,18 +15,19 @@ $(document).ready(function() {
 
 var systemColors = {
     "Sky" : "#e3f2fd",
-    "DistrictFloor" : "#e0e0e0",
+    "DistrictFloor" : "#bdbdbd",
     "Wireframe" : "#424242",
     //"Class" : "#b71c1c",
     //"Functions" : "#0277bd",
-    "CityFloor" : "#757575",
+    "CityFloor" : "#616161",
     "Wireframe" : "#424242",
     "Class" : "#e41a1c",
     "Enum" : "#377eb8",
     "Extension" : "#4daf4a",
     "Struct" : "#984ea3",
     "Protocol" : "#ff7f00",
-    "DefaultColor" : "#607d8b"
+    "DefaultColor" : "#607d8b",
+    "NeighFloor" : "#e0e0e0"
     //"Enum" : "#6a1b9a"
 }
 /*

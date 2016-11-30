@@ -2,6 +2,12 @@
  * @author peaonunes / https://github.com/peaonunes
  */
 
+ let floors = {
+     "0" : "CityFloor",
+     "1" : "DistrictFloor",
+     "2" : "NeighFloor"
+ };
+
 function insertRender(renderer){
     var cityDiv = d3.select("#city");
     cityDiv.node().appendChild(renderer.domElement);
@@ -35,7 +41,7 @@ function renderCity(cityMatrix, dimension) {
         }
     }
 
-    renderFloor(cityMatrix.floor, scene, true);
+    renderFloor(cityMatrix.floor, scene, floors["0"]);
 }
 
 function renderDistrict(blocksMatrix, dimension, scene, file){
@@ -55,19 +61,54 @@ function renderDistrict(blocksMatrix, dimension, scene, file){
             else
                 key = "DefaultColor";
 
-            if(block.children.length > 0)
-                renderCubeWithExtensions(coordinates, size, key, scene, block.children);
-            else
-                renderCube(coordinates, size, key, scene);
+            if(appConfiguration.stackExtensions){
+                if(block.children.length > 0){
+                    renderCubeWithExtensions(coordinates, size, key, scene, block.children);
+                } else {
+                    renderCube(coordinates, size, key, scene);
+                }
+            }
+            else {
+                if(block.blocks != null){
+                    renderNeigh(block.blocks, block.dimension, scene, block.file);
+                } else {
+                    renderCube(coordinates, size, key, scene);
+                }
+            }
         }
     }
 
-    renderFloor(blocksMatrix.floor, scene, false);
+    renderFloor(blocksMatrix.floor, scene, floors["1"]);
 }
 
-function renderFloor(floor, scene, isCity) {
+function renderNeigh(neighMatrix, dimension, scene, file){
+    var coordinates;
+    var size;
+    var key;
+    for(var i = 0 ; i < dimension ; i++){
+        for(var j = 0 ; j < dimension ; j++){
+            var block = neighMatrix[i][j];
+            if(block == -1)
+                continue;
+
+            coordinates = block.coordinates;
+            size = block.size;
+
+            if(appConfiguration.colorEnabled())
+                key = block.color;
+            else
+                key = "DefaultColor";
+
+            renderCube(coordinates, size, key, scene);
+        }
+    }
+
+    renderFloor(neighMatrix.floor, scene, floors["2"]);
+}
+
+function renderFloor(floor, scene, type) {
     var geometry = new THREE.BoxGeometry(floor.width, floor.height, 1);
-    var color = isCity ? pickColor("CityFloor") : pickColor("DistrictFloor");
+    var color = pickColor(type);
     var material = new THREE.MeshBasicMaterial( {color: color, side: THREE.DoubleSide} );
     var plane = new THREE.Mesh( geometry, material );
 
@@ -77,7 +118,7 @@ function renderFloor(floor, scene, isCity) {
     plane.rotation.x = Math.PI/2;
     plane.position.x = x + floor.width/2;
     plane.position.z = z + floor.height/2;
-    plane.position.y = isCity ? -0.5 : 0;
+    plane.position.y = getFloorOffeset(type);
 
     scene.add(plane);
 
@@ -88,9 +129,22 @@ function renderFloor(floor, scene, isCity) {
     wireframe.rotation.x = Math.PI/2;
     wireframe.position.x = x + floor.width/2;
     wireframe.position.z = z + floor.height/2;
-    wireframe.position.y = isCity ? -0.5 : 0;
+    wireframe.position.y = getFloorOffeset(type);
 
     scene.add(wireframe);
+}
+
+function getFloorOffeset(type) {
+    switch (type) {
+        case "CityFloor":
+            return -0.5;
+        case "DistrictFloor":
+            return -0.25;
+        case "NeighFloor":
+            return 0;
+        default:
+            return 0;
+    }
 }
 
 function renderCube(coordinates, size, key, scene){

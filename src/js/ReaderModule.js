@@ -16,7 +16,9 @@ let scales = {
     "linear" : d3.scaleLinear(),
     "sqrt" : d3.scaleSqrt(),
     "log15" : d3.scaleLog().base(1.5),
-    "boxplot" : "boxplot"
+    "boxplot" : "boxplot",
+    "heightScale" : [],
+    "widthScale" : []
 };
 
 function updateWithFile() {
@@ -107,19 +109,19 @@ function buildProjectFiles(project) {
     readElements(project.protocols, "Protocol");
     readElements(project.extensions, "Extension");
 
-    var heightScale = getScale(appConfiguration.filters);
-    if(heightScale === "boxplot"){
+    scales.heightScale = getScale(appConfiguration.filters);
+    if(scales.heightScale === "boxplot"){
         var boxplot = getBoxplot(locs);
-        heightScale = d3.scaleLinear()
+        scales.heightScale = d3.scaleLinear()
             .domain(boxplot)
             .range([1,4,7,10,12,15]);
     } else {
-        heightScale
+        scales.heightScale
             .domain(minMaxLoc)
             .range([1, 15]);
     }
 
-    var widthScale = d3.scaleLinear()
+    scales.widthScale = d3.scaleLinear()
         .domain(minMaxNom)
         .range([1, 10]);
 
@@ -142,11 +144,11 @@ function buildProjectFiles(project) {
                 }
             }
 
-            size = [widthScale(block.nom), heightScale(block.loc),widthScale(block.nom)];
+            size = [scales.widthScale(block.nom), scales.heightScale(block.loc),scales.widthScale(block.nom)];
             block.size = size;
             for (var j = 0; j < block.children.length; j++) {
                 child = block.children[j];
-                size = [widthScale(child.nom), heightScale(child.loc),widthScale(child.nom)];
+                size = [scales.widthScale(child.nom), scales.heightScale(child.loc),scales.widthScale(child.nom)];
                 child.size = size;
             }
         }
@@ -198,35 +200,27 @@ function readElements(array, elementType) {
             if(match > -1){
                 var matchedComponent = projectObjs[match];
                 matchedComponent.children.push(component);
-                //matchedComponent.children = pushInOrder(matchedComponent.children, component);
+            } else {
+                addToProject(found, component, fileName);
             }
-        }
-
-        projectObjs.push(component);
-
-        if(found == -1){
-            var fileObj = {
-                fileName: fileName,
-                elements: [component]
-            }
-            projectFiles.push(fileObj);
         } else {
-            projectFiles[found].elements.push(component)
+            addToProject(found, component, fileName);
         }
     }
 }
 
-function pushInOrder(array, element) {
-    var current;
-    for (var i = 0; i < array.length; i++) {
-        current = array[i];
-        if(element.nom >= current.nom){
-            array = array.splice(i, 0, element);
-            break;
+function addToProject(found, component, fileName) {
+    projectObjs.push(component);
+
+    if(found == -1){
+        var fileObj = {
+            fileName: fileName,
+            elements: [component]
         }
-        current++;
+        projectFiles.push(fileObj);
+    } else {
+        projectFiles[found].elements.push(component)
     }
-    return array;
 }
 
 function isExtensionOf(array, extensionName) {

@@ -122,16 +122,28 @@ function defineXZ(blocksMatrix, dimension, file, x, z, offset){
             if(block == -1)
                 continue;
 
-            block["coordinates"] = {"x": 0, "y": 0, "z":0 };
-            block["id"] = getBlockId();
-            block.coordinates.x = x + offset + block.size[0]/2;
-            block.coordinates.z = z + offset + block.size[2]/2;
+            if(block.children.length > 0 && !appConfiguration.stackExtensions){
+                block.children.push(block);
+                var neighMatrix = neighMaker(block.children, x, z, offset, maxZ);
+                blocksMatrix[i][j] = neighMatrix;
 
-            x += block.size[0] + offset;
-            maxZ = Math.max(maxZ, block.size[2]);
+                x += neighMatrix.blocks.floor.width + offset;
+                maxZ = Math.max(maxZ, neighMatrix.blocks.floor.height);
 
-            width = Math.max(width, (block.coordinates.x + block.size[0]) - startX);
-            height = Math.max(height, (block.coordinates.z + block.size[2]) - startZ);
+                width = Math.max(width, neighMatrix.blocks.floor.coordinates.x + neighMatrix.blocks.floor.width + offset - startX);
+                height = Math.max(height, neighMatrix.blocks.floor.coordinates.z + neighMatrix.blocks.floor.height + offset - startZ);
+            } else {
+                block["coordinates"] = {"x": 0, "y": 0, "z":0 };
+                block["id"] = getBlockId();
+                block.coordinates.x = x + offset + block.size[0]/2;
+                block.coordinates.z = z + offset + block.size[2]/2;
+
+                x += block.size[0] + offset;
+                maxZ = Math.max(maxZ, block.size[2]);
+
+                width = Math.max(width, (block.coordinates.x + block.size[0]) - startX);
+                height = Math.max(height, (block.coordinates.z + block.size[2]) - startZ);
+            }
         }
         z += maxZ + offset;
         maxZ = 0;
@@ -142,6 +154,65 @@ function defineXZ(blocksMatrix, dimension, file, x, z, offset){
     blocksMatrix.floor.height = height;
 
     return blocksMatrix;
+}
+
+function neighMaker(children, x, z, offset, maxZ){
+    var length = children.length;
+    var dimension = getDimension(length);
+
+    var neighMatrix = initMatrix(dimension);
+
+    neighMatrix = fillMatrix(neighMatrix, children, dimension);
+
+    neighMatrix = defineNiegh(neighMatrix, dimension, children, x, z, offset, maxZ);
+
+    var neigh = {
+        "blocks" : neighMatrix,
+        "dimension" : dimension,
+        "file" : children
+    }
+
+    return neigh;
+}
+
+function defineNiegh(neighMatrix, dimension, children, x, z, offset, maxZ) {
+    neighMatrix["floor"] = { "width":0, "height":0, "coordinates": {"x": 0, "y": 0, "z":0 } };
+
+    var startX = x; var startZ = z;
+    var width = 0; var height = 0;
+    var maxZ = 0;
+
+    neighMatrix.floor.coordinates.x = x + offset;
+    neighMatrix.floor.coordinates.z = z + offset;
+
+    var block;
+    for(var i = 0 ; i < dimension ; i++){
+        for(var j = 0 ; j < dimension ; j++){
+            block = neighMatrix[i][j];
+            if(block == -1)
+                continue;
+
+            block["coordinates"] = {"x": 0, "y": 0, "z":0 };
+            block["id"] = getBlockId();
+            block.coordinates.x = x + 2*offset + block.size[0]/2;
+            block.coordinates.z = z + 2*offset + block.size[2]/2;
+
+            x += block.size[0] + 2*offset;
+            maxZ = Math.max(maxZ, block.size[2]);
+
+            width = Math.max(width, (block.coordinates.x + block.size[0]) - startX);
+            height = Math.max(height, (block.coordinates.z + block.size[2]) - startZ);
+
+        }
+        z += maxZ + offset;
+        maxZ = 0;
+        x = startX;
+    }
+
+    neighMatrix.floor.width = width;
+    neighMatrix.floor.height = height;
+
+    return neighMatrix;
 }
 
 function getBlockId() {
