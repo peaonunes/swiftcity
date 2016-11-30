@@ -26,7 +26,7 @@ var systemColors = {
     "Extension" : "#4daf4a",
     "Struct" : "#984ea3",
     "Protocol" : "#ff7f00",
-    "DefaultColor" : "#1976d2"
+    "DefaultColor" : "#607d8b"
     //"Enum" : "#6a1b9a"
 }
 /*

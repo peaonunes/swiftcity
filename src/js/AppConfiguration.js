@@ -7,7 +7,14 @@ let appConfiguration = {
     holdCamera : false,
     renderer : [],
     filters : ["color", "sort", "linear"],
+    colorEnabled : function() {
+        if(this.filters.indexOf("color") > -1)
+            return true;
+        else
+            return false;
+    },
     filterChanged : null,
+    dealExtension : true,
     projectInfo : {
         name:"Project name",
         numberOfEnums:0,

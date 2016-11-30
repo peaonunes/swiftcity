@@ -3,6 +3,7 @@
  */
 
 let projectFiles = [];
+let projectObjs = [];
 
 let minMaxLoc = [Number.POSITIVE_INFINITY,0];
 let minMaxNom = [Number.POSITIVE_INFINITY,0];
@@ -32,9 +33,11 @@ function updateWithFile() {
         appConfiguration.holdCamera = true;
         showToast("Reloading with: "+appConfiguration.filterChanged+"...", 2000);
         projectFiles = [];
+        projectObjs = [];
     } else {
         appConfiguration.holdCamera = false;
         projectFiles = [];
+        projectObjs = [];
     }
     defaultFileReader.readAsText(selectedFile);
     lastFileSelected = selectedFile;
@@ -100,14 +103,13 @@ function getProjectFrom(fileData){
 function buildProjectFiles(project) {
     readElements(project.enums, "Enum");
     readElements(project.classes, "Class");
-    readElements(project.extensions, "Extension");
     readElements(project.structs, "Struct");
     readElements(project.protocols, "Protocol");
+    readElements(project.extensions, "Extension");
 
     var heightScale = getScale(appConfiguration.filters);
     if(heightScale === "boxplot"){
         var boxplot = getBoxplot(locs);
-        console.log(boxplot);
         heightScale = d3.scaleLinear()
             .domain(boxplot)
             .range([1,4,7,10,12,15]);
@@ -121,26 +123,66 @@ function buildProjectFiles(project) {
         .domain(minMaxNom)
         .range([1, 10]);
 
-    var block;
-    var size;
-    var elements;
+    var elements; var block;
+    var larger; var largerChild;
+    var size; var child;
 
     Object.keys(projectFiles).forEach(function (fileId) {
         elements = projectFiles[fileId].elements;
         for (var i = 0 ; i < elements.length ; i++){
             block = elements[i];
+
+            if(block.children.length > 0){
+                block.children = block.children.sort(function(a, b){ return b.nom - a.nom });
+                largerChild = block.children[0];
+                larger = isGreater(block.nom, largerChild.nom);
+                if(!larger){
+                    swapBlocks(elements, i, largerChild);
+                    block = elements[i];
+                }
+            }
+
             size = [widthScale(block.nom), heightScale(block.loc),widthScale(block.nom)];
             block.size = size;
+            for (var j = 0; j < block.children.length; j++) {
+                child = block.children[j];
+                size = [widthScale(child.nom), heightScale(child.loc),widthScale(child.nom)];
+                child.size = size;
+            }
         }
     });
+
+}
+
+function swapBlocks(elements, i, largerChild) {
+    var block = elements[i];
+    var newComp = createComponent(largerChild.key, largerChild.nama, largerChild.loc, largerChild.nom, largerChild.methods, []);
+    var children = block.children.slice();
+    children.shift();
+    children.push(block);
+    children.sort(compareSizes);
+    newComp.children = children;
+    elements[i] = newComp;
+}
+
+function compareSizes(a,b) {
+    if(b.nom == a.nom)
+        return b.loc - a.loc;
+    return b.nom - a.nom;
+}
+
+function isGreater(a, b) {
+    if(a > b)
+        return true;
+    else
+        return false;
 }
 
 function readElements(array, elementType) {
     var element;
     var fileName;
-    var obj;
     var found;
-    var fileObj;
+    var match;
 
     for(var i = 0 ; i < array.length ; i++){
         element = array[i];
@@ -148,18 +190,51 @@ function readElements(array, elementType) {
 
         found = hasFile(projectFiles, fileName);
 
-        var obj = createObj(elementType, element["name"], element["number_of_lines"], element["methods"].length);
+        var component = createComponent(elementType, element["name"], element["number_of_lines"], element["methods"].length, element["methods"], []);
+
+        if(elementType === "Extension")
+        {
+            match = isExtensionOf(projectObjs, element["name"]);
+            if(match > -1){
+                var matchedComponent = projectObjs[match];
+                matchedComponent.children.push(component);
+                //matchedComponent.children = pushInOrder(matchedComponent.children, component);
+            }
+        }
+
+        projectObjs.push(component);
 
         if(found == -1){
             var fileObj = {
                 fileName: fileName,
-                elements: [obj]
+                elements: [component]
             }
             projectFiles.push(fileObj);
         } else {
-            projectFiles[found].elements.push(obj)
+            projectFiles[found].elements.push(component)
         }
     }
+}
+
+function pushInOrder(array, element) {
+    var current;
+    for (var i = 0; i < array.length; i++) {
+        current = array[i];
+        if(element.nom >= current.nom){
+            array = array.splice(i, 0, element);
+            break;
+        }
+        current++;
+    }
+    return array;
+}
+
+function isExtensionOf(array, extensionName) {
+    for (var i = 0 ; i < array.length ; i++){
+        if (!(array[i].name === "") && array[i].name === extensionName && array[i].key != "Extension")
+            return i;
+    }
+    return -1;
 }
 
 function hasFile(array, fileName){
@@ -170,7 +245,7 @@ function hasFile(array, fileName){
     return -1;
 }
 
-function createObj(keyName, objName, objLoc, objNom){
+function createComponent(keyName, objName, objLoc, objNom, objMethods, objExtensions){
     locs.push(objLoc);
     minMaxLoc[0] = Math.min(objLoc, minMaxLoc[0]);
     minMaxLoc[1] = Math.max(objLoc, minMaxLoc[1]);
@@ -182,7 +257,10 @@ function createObj(keyName, objName, objLoc, objNom){
         size:[0,0,0],
         name: objName,
         loc: objLoc,
-        nom: objNom
+        nom: objNom,
+        methods: objMethods,
+        children: objExtensions,
+        color: keyName
     }
     return obj;
 }

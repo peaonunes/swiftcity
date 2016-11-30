@@ -7,7 +7,7 @@ function insertRender(renderer){
     cityDiv.node().appendChild(renderer.domElement);
 }
 
-function renderSceneProperties(scene){
+function renderSceneProperties(){
     var scene = appConfiguration.scene;
     scene.background = new THREE.Color(pickColor("Sky"));
 }
@@ -50,12 +50,15 @@ function renderDistrict(blocksMatrix, dimension, scene, file){
             coordinates = block.coordinates;
             size = block.size;
 
-            if(appConfiguration.filters.indexOf("color") > -1)
-                key = block.key;
+            if(appConfiguration.colorEnabled())
+                key = block.color;
             else
                 key = "DefaultColor";
 
-            renderCube(coordinates, size, key, scene);
+            if(block.children.length > 0)
+                renderCubeWithExtensions(coordinates, size, key, scene, block.children);
+            else
+                renderCube(coordinates, size, key, scene);
         }
     }
 
@@ -109,4 +112,64 @@ function renderCube(coordinates, size, key, scene){
     wireframe.position.z = coordinates.z;
 
     scene.add(wireframe);
+}
+
+function renderCubeWithExtensions(coordinates, size, key, scene, children){
+    var geometry = new THREE.BoxGeometry( size[0], size[1], size[2]);
+    var material = new THREE.MeshBasicMaterial( { color: pickColor(key) } );
+    var newCube = new THREE.Mesh( geometry, material );
+
+    newCube.position.x = coordinates.x;
+    newCube.position.y = size[1]/2 + 0.5;
+    newCube.position.z = coordinates.z;
+
+    scene.add(newCube);
+
+    var geo = new THREE.EdgesGeometry(geometry); // or WireframeGeometry( geometry )
+    var mat = new THREE.LineBasicMaterial({ color: pickColor("Wireframe"), linewidth: 0.5 });
+    var wireframe = new THREE.LineSegments(geo, mat);
+    wireframe.position.x = coordinates.x;
+    wireframe.position.y = size[1]/2 + 0.5;
+    wireframe.position.z = coordinates.z;
+
+    scene.add(wireframe);
+
+    var child;
+    var block;
+    var baseSize = size;
+    var baseXYZ = {
+        x: coordinates.x,
+        y: size[1],
+        z: coordinates.z
+    };
+
+    for (var i = 0; i < children.length; i++) {
+        child = children[i];
+        block = getBlockFrom(baseXYZ, child.size, child.key);
+        scene.add(block[0]);
+        scene.add(block[1]);
+        baseXYZ = block[2];
+        baseCube = block[0]
+    }
+}
+
+function getBlockFrom(baseXYZ, size, key) {
+    var geometry = new THREE.BoxGeometry( size[0], size[1], size[2]);
+    var material = new THREE.MeshBasicMaterial( { color: appConfiguration.colorEnabled() ? pickColor(key) : pickColor("DefaultColor")} );
+    var newCube = new THREE.Mesh( geometry, material );
+
+    newCube.position.x = baseXYZ.x;
+    newCube.position.y = baseXYZ.y + size[1]/2 + 0.5;
+    newCube.position.z = baseXYZ.z;
+
+    var geo = new THREE.EdgesGeometry(geometry); // or WireframeGeometry( geometry )
+    var mat = new THREE.LineBasicMaterial({ color: pickColor("Wireframe"), linewidth: 0.5 });
+    var wireframe = new THREE.LineSegments(geo, mat);
+    wireframe.position.x = baseXYZ.x;
+    wireframe.position.y = baseXYZ.y + size[1]/2 + 0.5;
+    wireframe.position.z = baseXYZ.z;
+
+    baseXYZ.y = baseXYZ.y + size[1];
+    var block = [newCube, wireframe, baseXYZ];
+    return block;
 }
