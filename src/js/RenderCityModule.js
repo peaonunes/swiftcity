@@ -23,9 +23,8 @@ function renderCamareProperties(x, y, z){
         return;
     var camera = appConfiguration.camera;
     var renderer = appConfiguration.renderer;
-    camera.position.x = x;
-    camera.position.y = y;
-    camera.position.z = z;
+    camera.position.set(x,y,z);
+    appConfiguration.camera.lookAt(appConfiguration.scene.position);
     var orbit = new THREE.OrbitControls(camera, renderer.domElement);
 }
 
@@ -63,16 +62,16 @@ function renderDistrict(blocksMatrix, dimension, scene, file){
 
             if(appConfiguration.stackExtensions()){
                 if(block.children.length > 0){
-                    renderCubeWithExtensions(coordinates, size, key, scene, block.children);
+                    renderCubeWithExtensions(coordinates, size, key, scene, block.children, block);
                 } else {
-                    renderCube(coordinates, size, key, scene);
+                    renderCube(coordinates, size, key, scene, block);
                 }
             }
             else {
                 if(block.blocks != null){
-                    renderNeigh(block.blocks, block.dimension, scene, block.file);
+                    renderNeigh(block.blocks, block.dimension, scene, block.file, block);
                 } else {
-                    renderCube(coordinates, size, key, scene);
+                    renderCube(coordinates, size, key, scene, block);
                 }
             }
         }
@@ -81,7 +80,7 @@ function renderDistrict(blocksMatrix, dimension, scene, file){
     renderFloor(blocksMatrix.floor, scene, floors["1"]);
 }
 
-function renderNeigh(neighMatrix, dimension, scene, file){
+function renderNeigh(neighMatrix, dimension, scene, file, block){
     var coordinates;
     var size;
     var key;
@@ -111,6 +110,7 @@ function renderFloor(floor, scene, type) {
     var color = pickColor(type);
     var material = new THREE.MeshBasicMaterial( {color: color, side: THREE.DoubleSide} );
     var plane = new THREE.Mesh( geometry, material );
+    plane["bora"] = "";
 
     var x = floor.coordinates.x;
     var z = floor.coordinates.z;
@@ -120,6 +120,7 @@ function renderFloor(floor, scene, type) {
     plane.position.z = z + floor.height/2;
     plane.position.y = getFloorOffeset(type);
 
+    appConfiguration.targetList.push(plane);
     scene.add(plane);
 
     var geo = new THREE.EdgesGeometry(geometry); // or WireframeGeometry( geometry )
@@ -147,10 +148,11 @@ function getFloorOffeset(type) {
     }
 }
 
-function renderCube(coordinates, size, key, scene){
+function renderCube(coordinates, size, key, scene, block){
     var geometry = new THREE.BoxGeometry( size[0], size[1], size[2]);
     var material = new THREE.MeshBasicMaterial( { color: pickColor(key) } );
     var newCube = new THREE.Mesh( geometry, material );
+    newCube["bora"] = block;
 
     newCube.position.x = coordinates.x;
     newCube.position.y = size[1]/2 + 0.5;
@@ -168,10 +170,11 @@ function renderCube(coordinates, size, key, scene){
     scene.add(wireframe);
 }
 
-function renderCubeWithExtensions(coordinates, size, key, scene, children){
+function renderCubeWithExtensions(coordinates, size, key, scene, children, block){
     var geometry = new THREE.BoxGeometry( size[0], size[1], size[2]);
     var material = new THREE.MeshBasicMaterial( { color: pickColor(key) } );
     var newCube = new THREE.Mesh( geometry, material );
+    newCube["bora"] = block;
 
     newCube.position.x = coordinates.x;
     newCube.position.y = size[1]/2 + 0.5;
@@ -199,7 +202,7 @@ function renderCubeWithExtensions(coordinates, size, key, scene, children){
 
     for (var i = 0; i < children.length; i++) {
         child = children[i];
-        block = getBlockFrom(baseXYZ, child.size, child.key);
+        block = getBlockFrom(baseXYZ, child.size, child.key, child);
         scene.add(block[0]);
         scene.add(block[1]);
         baseXYZ = block[2];
@@ -207,10 +210,11 @@ function renderCubeWithExtensions(coordinates, size, key, scene, children){
     }
 }
 
-function getBlockFrom(baseXYZ, size, key) {
+function getBlockFrom(baseXYZ, size, key, block) {
     var geometry = new THREE.BoxGeometry( size[0], size[1], size[2]);
     var material = new THREE.MeshBasicMaterial( { color: appConfiguration.colorEnabled() ? pickColor(key) : pickColor("DefaultColor")} );
     var newCube = new THREE.Mesh( geometry, material );
+    newCube["bora"] = block;
 
     newCube.position.x = baseXYZ.x;
     newCube.position.y = baseXYZ.y + size[1]/2 + 0.5;
@@ -226,4 +230,10 @@ function getBlockFrom(baseXYZ, size, key) {
     baseXYZ.y = baseXYZ.y + size[1];
     var block = [newCube, wireframe, baseXYZ];
     return block;
+}
+
+function setDetails(newCube, block) {
+    console.log(newCube.name);
+    newCube["name"] = "hey";
+    console.log(newCube.name);
 }

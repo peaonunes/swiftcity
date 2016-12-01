@@ -5,7 +5,10 @@ let appConfiguration = {
     width : window.innerWidth * 0.65,
     camera : [],
     holdCamera : false,
+    raycaster : null,
+    mouse : null,
     renderer : [],
+    targetList : [],
     filters : ["color", "sort", "linear", "stack"],
     colorEnabled : function() {
         if(this.filters.indexOf("color") > -1)
