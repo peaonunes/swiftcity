@@ -2,6 +2,7 @@
  * @author peaonunes / https://github.com/peaonunes
  */
 let blockId = 0;
+let sorted = false;
 
 function runCity(files){
     renderSceneProperties();
@@ -28,11 +29,11 @@ function cityMaker(files){
 }
 
 function _defineCityLayout(cityMatrix, dimension) {
-    var sorted = appConfiguration.filters.indexOf("sort") > -1 ? true : false;
-    return defineCityLayout(cityMatrix, dimension, sorted);
+    sorted = appConfiguration.filters.indexOf("sort") > -1 ? true : false;
+    return defineCityLayout(cityMatrix, dimension);
 }
 
-function defineCityLayout(cityMatrix, dimension, sorted){
+function defineCityLayout(cityMatrix, dimension){
     cityMatrix["floor"] = { "width":0, "height":0, "coordinates": {"x": 0, "y": 0, "z":0 } };
 
     var startX = 1.5; var startZ = 1.5;
@@ -50,7 +51,7 @@ function defineCityLayout(cityMatrix, dimension, sorted){
             if(distric == -1)
                 continue;
 
-            var districtMatrix = districtMaker(distric, sorted, startX, startZ, offset);
+            var districtMatrix = districtMaker(distric, startX, startZ, offset);
             cityMatrix[i][j] = districtMatrix;
 
             width = Math.max(width, districtMatrix.blocks.floor.coordinates.x + districtMatrix.blocks.floor.width + offset);
@@ -81,15 +82,11 @@ function alignDistrictFloor(cityMatrix, maxZ, i, dimension){
     }
 }
 
-function districtMaker(file, sorted, x, z, offset, maxZ){
+function districtMaker(file, x, z, offset, maxZ){
     var length = file.length;
     var dimension = getDimension(length);
 
     var blocksMatrix = initMatrix(dimension);
-
-    // Sort by height
-    if(sorted)
-        sortBlocks(file);
 
     // Fill matrix in height order
     blocksMatrix = fillMatrix(blocksMatrix, file, dimension);
@@ -122,7 +119,7 @@ function defineXZ(blocksMatrix, dimension, file, x, z, offset){
             if(block == -1)
                 continue;
 
-            if(block.children.length > 0 && !appConfiguration.stackExtensions){
+            if(block.children.length > 0 && !appConfiguration.stackExtensions()){
                 block.children.push(block);
                 var neighMatrix = neighMaker(block.children, x, z, offset, maxZ);
                 blocksMatrix[i][j] = neighMatrix;
@@ -161,6 +158,9 @@ function neighMaker(children, x, z, offset, maxZ){
     var dimension = getDimension(length);
 
     var neighMatrix = initMatrix(dimension);
+
+    if(sorted)
+        sortBlocks(children);
 
     neighMatrix = fillMatrix(neighMatrix, children, dimension);
 
@@ -251,8 +251,8 @@ function fillMatrix(matrix, data, dimension){
     return matrix;
 }
 
-function sortBlocks(file){
-    return file.sort(compareBlocks);
+function sortBlocks(items){
+    return items.sort(compareBlocks);
 }
 
 function compareBlocks(a,b) {

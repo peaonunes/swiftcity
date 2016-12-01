@@ -99,13 +99,19 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td style="width: 25%" class="center-align td-settings">
+                                    <td style="width: 15%" class="center-align td-settings">
                                          <input value="color" onclick="filterClicked(this);" type="checkbox" class="checkbox-orange filled-in" id="activeColor" checked="checked"/>
                                          <label for="activeColor">Coloring blocks</label>
                                     </td>
-                                    <td style="width: 25%" class="td-settings">
+                                    <td style="width: 15%" class="td-settings">
                                         <input  value="sort" onclick="filterClicked(this);" type="checkbox" class="checkbox-orange filled-in" id="sorteBlocks" checked="checked"/>
                                         <label for="sorteBlocks">Sort district's blocks</label>
+                                    </td>
+                                    <td style="width: 20%" class="td-settings">
+                                        <input checked onclick="filterClicked(this);" class="radio-orange filled-in" type="radio" name="extensions" value="stack" id="stack"/>
+                                        <label for="stack">Stack up</label>
+                                        <input onclick="filterClicked(this);" class="radio-orange filled-in" type="radio" name="extensions" value="group" id="group"/>
+                                        <label for="group">Group</label>
                                     </td>
                                     <td style="width: 30%" class="td-settings">
                                         <input checked onclick="filterClicked(this);" class="radio-orange filled-in" type="radio" name="scale" value="linear" id="linear"/>

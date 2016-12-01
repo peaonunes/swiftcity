@@ -6,7 +6,7 @@ let appConfiguration = {
     camera : [],
     holdCamera : false,
     renderer : [],
-    filters : ["color", "sort", "linear"],
+    filters : ["color", "sort", "linear", "stack"],
     colorEnabled : function() {
         if(this.filters.indexOf("color") > -1)
             return true;
@@ -14,7 +14,14 @@ let appConfiguration = {
             return false;
     },
     filterChanged : null,
-    stackExtensions : true,
+    stackExtensions : function() {
+        if(this.filters.indexOf("stack") > -1)
+            return true;
+        else if (this.filters.indexOf("group") > -1)
+            return false;
+        else
+            return 0;
+    },
     projectInfo : {
         name:"Project name",
         numberOfEnums:0,

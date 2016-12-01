@@ -275,7 +275,7 @@ function getScale(filters){
         if(scale != null)
             return scale;
     }
-    console.log(">> ERROR: No scale matched.");
+    console.log(">> ERROR: No scale matched.\n",filters);
 }
 
 function showToast(message, duration) {

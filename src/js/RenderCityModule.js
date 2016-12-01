@@ -61,7 +61,7 @@ function renderDistrict(blocksMatrix, dimension, scene, file){
             else
                 key = "DefaultColor";
 
-            if(appConfiguration.stackExtensions){
+            if(appConfiguration.stackExtensions()){
                 if(block.children.length > 0){
                     renderCubeWithExtensions(coordinates, size, key, scene, block.children);
                 } else {
