@@ -14,25 +14,23 @@ $(document).ready(function() {
 });
 
 var systemColors = {
+    "Class" : "#EF5350",
+    "Enum" : "#42A5F5",
+    "Extension" : "#FFA726",
+    "Struct" : "#7E57C2",
+    "Protocol" : "#66BB6A",
     "Sky" : "#e3f2fd",
-    "DistrictFloor" : "#e0e0e0",
-    "Wireframe" : "#424242",
-    //"Class" : "#b71c1c",
-    //"Functions" : "#0277bd",
     "CityFloor" : "#757575",
+    "DistrictFloor" : "#bdbdbd",
+    "NeighFloor" : "#e0e0e0",
     "Wireframe" : "#424242",
+    "DefaultColor" : "#607d8b"
+};
+
+var blocksPallet = {
     "Class" : "#e41a1c",
     "Enum" : "#377eb8",
     "Extension" : "#4daf4a",
     "Struct" : "#984ea3",
     "Protocol" : "#ff7f00",
-    "DefaultColor" : "#1976d2"
-    //"Enum" : "#6a1b9a"
-}
-/*
-"Class" : "#fbb4ae",
-"Enum" : "#b3cde3",
-"Extension" : "#ccebc5",
-"Struct" : "#decbe4",
-"Protocol" : "#fed9a6"
-*/
+};
