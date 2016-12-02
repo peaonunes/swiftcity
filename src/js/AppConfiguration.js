@@ -7,6 +7,10 @@ let appConfiguration = {
     holdCamera : false,
     raycaster : null,
     mouse : null,
+    blockSelection : {
+        "lastColor" : null,
+        "currentSelection" : null
+    },
     renderer : [],
     targetList : [],
     filters : ["color", "sort", "linear", "stack"],

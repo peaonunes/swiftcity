@@ -110,7 +110,7 @@ function renderFloor(floor, scene, type) {
     var color = pickColor(type);
     var material = new THREE.MeshBasicMaterial( {color: color, side: THREE.DoubleSide} );
     var plane = new THREE.Mesh( geometry, material );
-    plane["bora"] = "";
+    plane["blockInformation"] = floor;
 
     var x = floor.coordinates.x;
     var z = floor.coordinates.z;
