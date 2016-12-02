@@ -13,39 +13,38 @@
         <nav>
             <div class="navbar-fixed">
                 <div class="nav-wrapper red">
-                    <div class="row">
-                        <div class="col s7 m7 l7">
-                            <a href="#appInfo" class="brand-logo modal-trigger">
+                    <ul>
+                        <li>
+                            <a href="#appInfo" style="padding-left: 10px" class="brand-logo modal-trigger">
                                 <i class="material-icons white-text">info_outline</i>
-                                Swicity <sup><small>0.6</small></sup>
+                                Swicity <sup><small>0.7</small></sup>
                             </a>
-                        </div>
-                        <div style="padding-top:8px;" class="col s4 m4 l4">
-                            <div class="file-field input-field">
-                                <div class="btn waves-effect waves-light orange">
-                                    <span>Browse</span>
+                        </li>
+                    </ul>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li>
+                            <div class="file-field input-field" style="padding-top: 7px">
+                                <div class="btn orange">
+                                    <span>BROWSE</span>
                                     <input id="fileInput" type="file">
                                 </div>
                                 <div class="file-path-wrapper">
                                     <input class="file-path validate" type="text" placeholder="Choose your file.">
                                 </div>
                             </div>
-                        </div>
-                        <div class="col s1 m1 l1">
-                            <a class="center waves-effect waves-light tooltipped" data-position="left" data-delay="30" data-tooltip="Load file!" href="javascript:updateWithFile();">
-                                <i class="disabled material-icons">system_update_alt</i>
+                        </li>
+                        <li>
+                            <a class="center waves-effect waves-light tooltipped" data-position="left" data-delay="30" data-tooltip="Load and run file!" href="javascript:updateWithFile();">
+                                <i class="disabled material-icons">play_arrow</i>
                             </a>
-                            <a class="center waves-effect waves-light tooltipped" data-position="left" data-delay="30" data-tooltip="Refresh!" href="javascript:updateWithFile();">
-                                <i class="disabled material-icons">refresh</i>
-                            </a>
-                        </div>
-                    </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </nav>
         <div id="appInfo" class="modal">
             <div class="modal-content center">
-                <h4>What is Swicity<sup><small>0.6</small></sup>?</h4>
+                <h4>What is Swicity<sup><small>0.7</small></sup>?</h4>
                 <div class="divider"></div>
                 </br>
                 Hey, I'm going to put some info here, for real!
@@ -54,106 +53,124 @@
                 <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">OK</a>
             </div>
         </div>
-        <div id="#settingsLayer" class="row settings-layer-design">
-            <ul class="collapsible" data-collapsible="accordion">
-                <li>
-                     <div id="projectOptions" class="collapsible-header active">
-                         <i class="material-icons">settings</i>
-                         Visualization settings
-                     </div>
-                     <div class="collapsible-body white">
-                        <table class="responsive-table center">
-                            <tbody>
-                                <tr id="#inputOptions">
-                                    <td style="width: 20%" class="center-align td-settings">
-                                        <label for="helpbutton">Click me for help</label>
-                                        <a id="helpbutton" href="#modal1" class="btn-flat center waves-effect waves-light modal-trigger tooltipped" data-position="right" data-delay="30" data-tooltip="Help!">
-                                            <i class="material-icons">live_help</i>
-                                        </a>
-                                        <div id="modal1" class="modal">
-                                            <div class="modal-content">
-                                                <h4>What are these options for?</h4>
-                                                <div class="divider"></div>
-                                                </br>
-                                                <h5>Coloring blocks</h5>
-                                                Enabling colours means that the blocks will be colored according with their category.</br>
-                                                E. g. Structs, Enums, Classes, Protocols, Extensions.</br>
-                                                See legend in project details card.</br>
-                                                </br>
-                                                <h5>Sort district's blocks</h5>
-                                                Sort the blocks means that inside each district, light-gray floor that represents a file,</br>
-                                                the blocks will be sorted first by their height and by width as second criteria.
-                                                </br>
-                                                </br>
-                                                <h5>Handling extensions relations</h5>
-                                                Extensions are part of some others types, they extends the behavior of others type by</br>
-                                                adding functionally, conforming with protocols, etc. With this option you can choose between:</br>
-                                                <ul>
-                                                    <li><strong>Stack up</strong> the elements and extensions related, blocks are sorted by width first, height after.</li>
-                                                    <li><strong>Group by</strong> floor, add a new level in topology meaning the elements inside are related.</li>
-                                                </ul>
-                                                Note: If an extension is isolated, neither stacked up or gruped by it means that it is an extension of</br>
-                                                a primitive type or an API type, or third part type...
-                                                </br>
-                                                </br>
-                                                <h5>Height' scale options</h5>
-                                                There are four possible scales for the height of the blocks in the view.</br>
-                                                <ul>
-                                                    <li><strong>Linear</strong>, it the default, with the domain [min, max] of LOC.</li>
-                                                    <li><strong>Logarithmic</strong> scale, base 1.5, with the domain [min, max] of LOC.</li>
-                                                    <li><strong>SQRT</strong> scale which is basically a scale with the exponent 0.5. </br>Also with the domain [min, max] of LOC.</li>
-                                                    <li><strong>Boxplot</strong> is a scale suggested in the literature by Wettel to normalize.</br>
-                                                    To do this, the boxplot of heights is calculated, each boxplot element (min, q1, median, q3, max)</br>
-                                                    is a value of the domain and the image associates the range of height values. In this case the element</br>
-                                                    belongs to a set of boxplot will have height mapped to that associated value.</li>
-                                                </ul>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">OK</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td style="width: 15%" class="center-align td-settings">
-                                         <input value="color" onclick="filterClicked(this);" type="checkbox" class="checkbox-orange filled-in" id="activeColor" checked="checked"/>
-                                         <label for="activeColor">Coloring blocks</label>
-                                    </td>
-                                    <td style="width: 15%" class="td-settings">
-                                        <input  value="sort" onclick="filterClicked(this);" type="checkbox" class="checkbox-orange filled-in" id="sorteBlocks" checked="checked"/>
-                                        <label for="sorteBlocks">Sort district's blocks</label>
-                                    </td>
-                                    <td style="width: 20%" class="td-settings">
-                                        <input checked onclick="filterClicked(this);" class="radio-orange filled-in" type="radio" name="extensions" value="stack" id="stack"/>
-                                        <label for="stack">Stack up</label>
-                                        <input onclick="filterClicked(this);" class="radio-orange filled-in" type="radio" name="extensions" value="group" id="group"/>
-                                        <label for="group">Group</label>
-                                    </td>
-                                    <td style="width: 30%" class="td-settings">
-                                        <input checked onclick="filterClicked(this);" class="radio-orange filled-in" type="radio" name="scale" value="linear" id="linear"/>
-                                        <label for="linear">Linear</label>
-                                        <input onclick="filterClicked(this);" class="radio-orange filled-in" type="radio" name="scale" value="log15" id="log15"/>
-                                        <label for="log15">Log1.5</label>
-                                        <input onclick="filterClicked(this);" class="radio-orange filled-in" type="radio" name="scale" value="sqrt" id="sqrt"/>
-                                        <label for="sqrt">Sqrt</label>
-                                        <input onclick="filterClicked(this);" class="radio-orange filled-in" type="radio" name="scale" value="boxplot" id="boxplot"/>
-                                        <label for="boxplot">Boxplot</label>
-                                    </td>
-                                 </tr>
-                            </tbody>
-                        </table>
-                     </div>
-                </li>
-            </ul>
-        </div>
-        <div id="#firstLayer" class="row first-layer-design">
+        <div id="firstLayer" class="row first-layer-design">
             <div id="city" class="card col s8 m8 l8 city-internal">
             </div>
             <div id="details" class="col s4 m4 l4 details-design">
                 <div id="projectDetails">
                     <ul class="collapsible" data-collapsible="accordion">
                         <li>
+                             <div id="projectOptions" class="collapsible-header active">
+                                 <i class="material-icons">settings</i>
+                                 Visualization settings
+                             </div>
+                             <div class="collapsible-body white">
+                                <table class="responsive-table center">
+                                    <tbody>
+                                        <tr id="#firstRow" style="padding: 10px;">
+                                            <p class="label-fonts" style="padding: 10px !important;"><strong>Color objects by category and sort blocks inside districs.</strong></p>
+                                            <td style="width: 20%" class="center-align td-settings">
+                                                <a id="helpbutton" href="#modal1" class="btn-flat center waves-effect waves-light modal-trigger tooltipped" data-position="right" data-delay="30" data-tooltip="What is this?">
+                                                    <i class="material-icons">live_help</i>
+                                                </a>
+                                                <div id="modal1" class="modal">
+                                                    <div class="modal-content">
+                                                        <h4>What are these options for?</h4>
+                                                        <div class="divider"></div>
+                                                        </br>
+                                                        <h5>Coloring blocks</h5>
+                                                        Enabling colours means that the blocks will be colored according with their category.</br>
+                                                        E. g. Structs, Enums, Classes, Protocols, Extensions.</br>
+                                                        See legend in project details card.</br>
+                                                        </br>
+                                                        <h5>Sort district's blocks</h5>
+                                                        Sort the blocks means that inside each district, light-gray floor that represents a file,</br>
+                                                        the blocks will be sorted first by their height and by width as second criteria.
+                                                        </br>
+                                                        </br>
+                                                        <h5>Handling extensions relations</h5>
+                                                        Extensions are part of some others types, they extends the behavior of others type by</br>
+                                                        adding functionally, conforming with protocols, etc. With this option you can choose between:</br>
+                                                        <ul>
+                                                            <li><strong>Stack up</strong> the elements and extensions related, blocks are sorted by width first, height after.</li>
+                                                            <li><strong>Group by</strong> floor, add a new level in topology meaning the elements inside are related.</li>
+                                                        </ul>
+                                                        Note: If an extension is isolated, neither stacked up or gruped by it means that it is an extension of</br>
+                                                        a primitive type or an API type, or third part type...
+                                                        </br>
+                                                        </br>
+                                                        <h5>Height' scale options</h5>
+                                                        There are four possible scales for the height of the blocks in the view.</br>
+                                                        <ul>
+                                                            <li><strong>Linear</strong>, it the default, with the domain [min, max] of LOC.</li>
+                                                            <li><strong>Logarithmic</strong> scale, base 1.5, with the domain [min, max] of LOC.</li>
+                                                            <li><strong>SQRT</strong> scale which is basically a scale with the exponent 0.5. </br>Also with the domain [min, max] of LOC.</li>
+                                                            <li><strong>Boxplot</strong> is a scale suggested in the literature by Wettel to normalize.</br>
+                                                            To do this, the boxplot of heights is calculated, each boxplot element (min, q1, median, q3, max)</br>
+                                                            is a value of the domain and the image associates the range of height values. In this case the element</br>
+                                                            belongs to a set of boxplot will have height mapped to that associated value.</li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">OK</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="width: 40%" class="td-settings">
+                                                 <input value="color" onclick="filterClicked(this);" type="checkbox" class="checkbox-orange filled-in" id="activeColor" checked="checked"/>
+                                                 <label class="label-fonts" for="activeColor">Coloring blocks</label>
+                                            </td>
+                                            <td style="width: 40%" class="td-settings">
+                                                <input  value="sort" onclick="filterClicked(this);" type="checkbox" class="checkbox-orange filled-in" id="sorteBlocks" checked="checked"/>
+                                                <label class="label-fonts" for="sorteBlocks">Sort district's blocks</label>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table class="responsive-table center">
+                                    <p class="label-fonts" style="padding: 10px !important;"><strong>Related extensions to others types on:</strong></p>
+                                    <tbody>
+                                        <tr id="secondRow">
+                                            <td style="width: 50%" class="td-settings">
+                                                <input checked onclick="filterClicked(this);" class="radio-orange filled-in" type="radio" name="extensions" value="stack" id="stack"/>
+                                                <label class="label-fonts" for="stack">Stacking up blocks</label>
+                                            </td>
+                                            <td style="width: 50%" class="td-settings">
+                                                <input onclick="filterClicked(this);" class="radio-orange filled-in" type="radio" name="extensions" value="group" id="group"/>
+                                                <label class="label-fonts" for="group">Grouping by floor</label>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table class="responsive-table center">
+                                    <p class="label-fonts" style="padding: 10px !important;"><strong>Scale height of the blocks based on:</strong></p>
+                                    <tbody>
+                                        <tr id="thirdRow">
+                                            <td style="width: 25%" class="td-settings">
+                                                <input checked onclick="filterClicked(this);" class="radio-orange filled-in" type="radio" name="scale" value="linear" id="linear"/>
+                                                <label class="label-fonts" for="linear">Linear</label>
+                                            </td>
+                                            <td style="width: 25%" class="td-settings">
+                                                <input onclick="filterClicked(this);" class="radio-orange filled-in" type="radio" name="scale" value="log15" id="log15"/>
+                                                <label class="label-fonts" for="log15">Log1.5</label>
+                                            </td>
+                                            <td style="width: 25%" class="td-settings">
+                                                <input onclick="filterClicked(this);" class="radio-orange filled-in" type="radio" name="scale" value="sqrt" id="sqrt"/>
+                                                <label class="label-fonts" for="sqrt">Sqrt</label>
+                                            </td>
+                                            <td style="width: 25%" class="td-settings">
+                                                <input onclick="filterClicked(this);" class="radio-orange filled-in" type="radio" name="scale" value="boxplot" id="boxplot"/>
+                                                <label class="label-fonts" for="boxplot">Boxplot</label>
+                                            </td>
+                                         </tr>
+                                    </tbody>
+                                </table>
+                             </div>
+                        </li>
+                        <li>
                              <div id="projectName" class="collapsible-header">
                                  <i class="material-icons">info</i>
-                                 Project name goes here
+                                 Project information
                              </div>
                              <div class="collapsible-body row white">
                                  <table id="tableStats" class="responsive-table">
@@ -165,14 +182,20 @@
                     </ul>
                     <div class="card">
                         <div class="row">
-                            <div class="col s12 m12 l12">
-                                <div class="valign-wrapper">
-                                    <i class="material-icons valign">code</i>
-                                    <strong> Block details goes here...</strong>
+                            <div class="col s12 m12 l12" style="overflow: scroll; padding: 10px; max-height: 350px;">
+                                <div class="valign-wrapper" style="padding-bottom: 5px">
+                                    <i class="col s1 m1 l1 material-icons valign">code</i>
+                                    <strong class="col s11 m11 l11"> Selected block information</strong>
                                 </div>
                                 <div class="divider"></div>
-                                <div id="blockDetails">
-                                    Some useful information could go here.
+                                <div id="blockDetails" style="padding: 10px;">
+                                    <p id="blockName">Block name goes here.</p>
+                                    <p id="blockType">Block type goes here.</p>
+                                    <p id="blockLOC">Lines of code goes here.</p>
+                                    <p id="blockNOM">Number of methods goes here.</p>
+                                    <div id="blockMethods">
+                                        Methods details
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -180,8 +203,8 @@
                 </div>
             </div>
         </div>
-        <div id="#secondLayer" class="row">
-            <div id ="controls" class="col s12 m12 l12 card">
+        <div id="#secondLayer" class="row card" style="margin: 10px !important">
+            <div id ="controls" class="col s12 m12 l12">
                 <div id="content"></div>
             </div>
         </div>
@@ -232,10 +255,11 @@
         <script type="text/javascript" src="js/RenderCityModule.js"></script>
         <script type="text/javascript" src="js/AppConfiguration.js"></script>
         <script type="text/javascript" src="js/ReaderModule.js"></script>
-        <script type="text/javascript" src="js/RenderAppInformation.js"></script>
+        <script type="text/javascript" src="js/RenderUIInformation.js"></script>
         <script type="text/javascript" src="js/CityGenerator.js"></script>
         <script type="text/javascript" src="js/Filters.js"></script>
         <script type="text/javascript" src="js/Boxplot.js"></script>
+        <script type="text/javascript" src="js/Selection.js"></script>
         <script type="text/javascript" src="js/Main.js"></script>
     </body>
 </html>

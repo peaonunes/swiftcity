@@ -34,7 +34,7 @@ function _defineCityLayout(cityMatrix, dimension) {
 }
 
 function defineCityLayout(cityMatrix, dimension){
-    cityMatrix["floor"] = { "width":0, "height":0, "coordinates": {"x": 0, "y": 0, "z":0 } };
+    cityMatrix["floor"] = { "id" : getBlockId(), "width":0, "height":0, "coordinates": {"x": 0, "y": 0, "z":0 } };
 
     var startX = 1.5; var startZ = 1.5;
     var offset = 1.5; var maxZ = 0;
@@ -103,7 +103,7 @@ function districtMaker(file, x, z, offset, maxZ){
 }
 
 function defineXZ(blocksMatrix, dimension, file, x, z, offset){
-    blocksMatrix["floor"] = { "width":0, "height":0, "coordinates": {"x": 0, "y": 0, "z":0 } };
+    blocksMatrix["floor"] = { "id": getBlockId(), "file": file, "width":0, "height":0, "coordinates": {"x": 0, "y": 0, "z":0 } };
 
     var startX = x; var startZ = z;
     var width = 0; var height = 0;
@@ -176,7 +176,7 @@ function neighMaker(children, x, z, offset, maxZ){
 }
 
 function defineNiegh(neighMatrix, dimension, children, x, z, offset, maxZ) {
-    neighMatrix["floor"] = { "width":0, "height":0, "coordinates": {"x": 0, "y": 0, "z":0 } };
+    neighMatrix["floor"] = { "id": getBlockId(), "width":0, "height":0, "coordinates": {"x": 0, "y": 0, "z":0 } };
 
     var startX = x; var startZ = z;
     var width = 0; var height = 0;
