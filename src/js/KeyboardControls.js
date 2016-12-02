@@ -40,6 +40,10 @@ document.onkeydown = function(event) {
             stopPropagationIfValid(event);
             camera.position.z += decrementScale;
             break;
+        case 80:
+            stopPropagationIfValid(event);
+            window.open(appConfiguration.renderer.domElement.toDataURL("image/png"), "Final");
+            break;
         default:
             console.log(">> Warning:\n>> The following number Key was not recognised: "+event.keyCode);
     }

@@ -12,7 +12,9 @@ function setUp(){
     var height = appConfiguration.height;
     appConfiguration.scene = new THREE.Scene();
     appConfiguration.camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 20000);
-    appConfiguration.renderer = new THREE.WebGLRenderer();
+    appConfiguration.renderer = new THREE.WebGLRenderer({
+         preserveDrawingBuffer: true
+    });
     appConfiguration.raycaster = new THREE.Raycaster();
     appConfiguration.mouse = new THREE.Vector3();
     appConfiguration.renderer.setSize(width, height);
@@ -40,9 +42,12 @@ function onDocumentMouseDown(event) {
 
         mouse.x = ((event.clientX / appConfiguration.renderer.domElement.width) * 2 - 1);
         mouse.x = appConfiguration.mouse.x - marginWidthError;
-        mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+        var rect = appConfiguration.renderer.domElement.getBoundingClientRect();
+
+        mouse.y = - (event.clientY / (appConfiguration.renderer.domElement.height + rect.top)) * 2 + 1;
         mouse.y = appConfiguration.mouse.y - marginHeightError;
-        mouse.z  = z = -1/Math.tan(22.5*Math.PI/180);
+
+        mouse.z = -1/Math.tan(22.5*Math.PI/180);
 
         raycaster.setFromCamera(mouse,appConfiguration.camera);
 

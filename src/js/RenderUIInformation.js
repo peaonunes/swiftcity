@@ -19,8 +19,8 @@ function renderControlsInformation() {
     + "<table class='responsive-table stripped'><thead><tr><th>Zoom out</th><th>Zoom In</th><th>Rotation</th><th>Position</th></tr></thead>"
     + "<tbody><tr><td>Scroll up</td><td>Scroll down</td><td>Pan and move</td><td>Right click</td></tr></tbody></table></div>"
     + "<div class='col s6 m6 l6'><strong>Keybord</strong>"
-    + "<table><thead><tr><th>Move up/down</th><th>Move left/right</th><th>Zoom In</th><th>Zoom out</th></tr></thead>"
-    + "<tbody><tr><td>UP/Down Arrows</td><td>Left/Right Arrows</td><td>+</td><td>_</td></tr></tbody></table></div>";
+    + "<table><thead><tr><th>Move up/down</th><th>Move left/right</th><th>Zoom In/Out</th><th>Print sceen</th></tr></thead>"
+    + "<tbody><tr><td>UP/Down Arrows</td><td>Left/Right Arrows</td><td>+/-</td><td>P</td></tr></tbody></table></div>";
 
     divInformation.html(controlsHmlt);
 }
@@ -29,7 +29,6 @@ function renderProjectDetailsInformation() {
     var projectName = d3.select("#projectName");
 
     $("#projectName").click();
-    $("#projectOptions").click();
 
     var projectInfo = appConfiguration.projectInfo;
     var enableColor = appConfiguration.filters.indexOf("color") > -1 ? true : false;
