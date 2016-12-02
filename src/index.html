@@ -144,7 +144,7 @@
                 </li>
             </ul>
         </div>
-        <div id="#firstLayer" class="row first-layer-design">
+        <div id="firstLayer" class="row first-layer-design">
             <div id="city" class="card col s8 m8 l8 city-internal">
             </div>
             <div id="details" class="col s4 m4 l4 details-design">
@@ -153,7 +153,7 @@
                         <li>
                              <div id="projectName" class="collapsible-header">
                                  <i class="material-icons">info</i>
-                                 Project name goes here
+                                 Project information
                              </div>
                              <div class="collapsible-body row white">
                                  <table id="tableStats" class="responsive-table">
@@ -165,14 +165,20 @@
                     </ul>
                     <div class="card">
                         <div class="row">
-                            <div class="col s12 m12 l12" style="padding : 10px">
-                                <div class="valign-wrapper" style="padding-bottom : 5px">
+                            <div class="col s12 m12 l12" style="overflow: scroll; padding: 10px; max-height: 350px;">
+                                <div class="valign-wrapper" style="padding-bottom: 5px">
                                     <i class="col s1 m1 l1 material-icons valign">code</i>
                                     <strong class="col s11 m11 l11"> Selected block information</strong>
                                 </div>
                                 <div class="divider"></div>
-                                <div id="blockDetails" style="padding: 10px">
-                                    Some useful information could go here.
+                                <div id="blockDetails" style="padding: 10px;">
+                                    <p id="blockName">Block name goes here.</p>
+                                    <p id="blockType">Block type goes here.</p>
+                                    <p id="blockLOC">Lines of code goes here.</p>
+                                    <p id="blockNOM">Number of methods goes here.</p>
+                                    <div id="blockMethods">
+                                        Methods details
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -232,7 +238,7 @@
         <script type="text/javascript" src="js/RenderCityModule.js"></script>
         <script type="text/javascript" src="js/AppConfiguration.js"></script>
         <script type="text/javascript" src="js/ReaderModule.js"></script>
-        <script type="text/javascript" src="js/RenderAppInformation.js"></script>
+        <script type="text/javascript" src="js/RenderUIInformation.js"></script>
         <script type="text/javascript" src="js/CityGenerator.js"></script>
         <script type="text/javascript" src="js/Filters.js"></script>
         <script type="text/javascript" src="js/Boxplot.js"></script>

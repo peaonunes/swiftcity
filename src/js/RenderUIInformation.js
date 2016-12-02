@@ -58,9 +58,6 @@ function renderRowInfo(tableContent, labelType, middleColText, rightColText) {
         .attr("class", "right-align")
         .append("i")
         .attr("class", "material-icons valign tooltipped")
-        .attr("data-position","left")
-        .attr("data-delay","30")
-        .attr("data-tooltip","Hide/Unhide")
         .attr("style", "color: "+systemColors[labelType])
         .text("label");
 
@@ -73,4 +70,55 @@ function renderRowInfo(tableContent, labelType, middleColText, rightColText) {
         .attr("style", "width: 50%")
         .attr("class", "label-fonts")
         .text(rightColText);
+}
+
+function renderBlockInformation(block) {
+    if(block == null){
+        var blockDetails = d3.select("#blockDetails");
+        var detailsName = blockDetails.select("#blockName").html("Block name goes here.");
+        var detailsType = blockDetails.select("#blockType").html("Block type goes here.");
+        var detailsLOC = blockDetails.select("#blockLOC").html("Lines of code goes here");
+        var detailsNom = blockDetails.select("#blockNOM").html("Number of methods goes here");
+        var detailsMethods = blockDetails.select("#blockMethods").html("Methods details");
+    } else {
+        var blockInformation = block.blockInformation;
+        var blockName = blockInformation.name;
+        var blockType = blockInformation.key;
+        var blockLOC = blockInformation.loc;
+        var blockNOM = blockInformation.nom;
+        var blockMethods = blockInformation.methods;
+
+        var blockDetails = d3.select("#blockDetails");
+        var detailsName = blockDetails.select("#blockName");
+        detailsName.html("<strong>Name: </strong>"+blockName);
+
+        var detailsType = blockDetails.select("#blockType");
+        detailsType.html("<strong>Type: </strong>"+blockType);
+
+        var detailsLOC = blockDetails.select("#blockLOC");
+        detailsLOC.html("<strong>Lines of code: </strong>"+blockLOC);
+
+        var detailsNom = blockDetails.select("#blockNOM");
+        detailsNom.html("<strong>Number of methods: </strong>"+blockNOM);
+
+        var detailsMethods = blockDetails.select("#blockMethods");
+        var methodsHtml = "";
+        if(blockMethods.length > 0){
+            var table = detailsMethods.append("table").attr("class", "responsive-table highlight bordered");
+            var header = table.append("thead").append("tr");
+            header.append("th").attr("width","50%").text("Name");
+            header.append("th").attr("width","10%").text("LOC");
+            header.append("th").attr("width","40%").text("Return");
+            var body = table.append("tbody");
+            var tr;
+            body.selectAll("tr").data(blockMethods).enter().each(function (d) {
+                tr = body.append("tr");
+                tr.append("td").attr("style","text-overflow: ellipsis; max-width: 50px; overflow: hidden;").attr("width","60%").text(d.name);
+                tr.append("td").attr("style","overflow: hidden;").attr("width","10%").text(d.number_of_lines);
+                tr.append("td").attr("style","overflow: hidden;").attr("width","30%").text(d.return_type);
+            });
+        } else {
+            detailsMethods.html("<strog>There are no methods.</strong>")
+        }//.label-fonts
+    }
 }

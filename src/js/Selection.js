@@ -16,12 +16,14 @@ function selectClickedBlock(block) {
     var newMaterial = new THREE.MeshBasicMaterial({color: "#fafafa", side: THREE.DoubleSide});
     block.material = newMaterial;
     appConfiguration.blockSelection.currentSelection = block;
+    renderBlockInformation(block);
 }
 
 function deselectCurrentBlock() {
     var lastColor = appConfiguration.blockSelection.lastColor;
     var newMaterial = new THREE.MeshBasicMaterial({color: lastColor, side: THREE.DoubleSide});
     appConfiguration.blockSelection.currentSelection.material = newMaterial;
+    renderBlockInformation(null);
 }
 
 function getColorFromMaterial(block) {
