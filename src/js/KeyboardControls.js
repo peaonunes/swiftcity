@@ -10,31 +10,46 @@
  // 189 >> - key -> Descrease the camera Z
  // 187 >> + key -> Increase the camera Z
 
-var incrementScale = 1.1;
-var decrementScale = 0.9;
+var incrementScale = +0.5;
+var decrementScale = -0.5;
 
-document.onkeydown = function(e) {
+document.onkeydown = function(event) {
     var camera = appConfiguration.camera;
-    switch (e.keyCode) {
+    switch (event.keyCode) {
         case 37:
-            camera.position.x *= incrementScale;
+            stopPropagationIfValid(event);
+            camera.position.x += incrementScale;
             break;
         case 38:
-            camera.position.y *= decrementScale;
+            stopPropagationIfValid(event);
+            camera.position.y += decrementScale;
             break;
         case 39:
-            camera.position.x *= decrementScale;
+            stopPropagationIfValid(event);
+            camera.position.x += decrementScale;
             break;
         case 40:
-            camera.position.y *= incrementScale;
+            stopPropagationIfValid(event);
+            camera.position.y += incrementScale;
             break;
         case 189:
-            camera.position.z *= incrementScale;
+            stopPropagationIfValid(event);
+            camera.position.z += incrementScale;
             break;
         case 187:
-            camera.position.z *= decrementScale;
+            stopPropagationIfValid(event);
+            camera.position.z += decrementScale;
+            break;
+        case 80:
+            stopPropagationIfValid(event);
+            window.open(appConfiguration.renderer.domElement.toDataURL("image/png"), "Final");
             break;
         default:
-            console.log(">> Warning:\n>> The following number Key was not recognised: "+e.keyCode);
+            console.log(">> Warning:\n>> The following number Key was not recognised: "+event.keyCode);
     }
 };
+
+function stopPropagationIfValid(event) {
+    event.stopPropagation();
+    event.preventDefault();
+}
