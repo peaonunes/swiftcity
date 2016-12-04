@@ -4,7 +4,6 @@
 
 function init(){
     setUp();
-    winResize(appConfiguration.camera,appConfiguration.renderer,appConfiguration.width,appConfiguration.height);
 }
 
 function setUp(){
