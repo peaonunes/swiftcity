@@ -1,7 +1,6 @@
 /**
  * @author peaonunes / https://github.com/peaonunes
  */
-let blockId = 0;
 let sorted = false;
 
 function runCity(files){
@@ -216,8 +215,7 @@ function defineNiegh(neighMatrix, dimension, children, x, z, offset, maxZ) {
 }
 
 function getBlockId() {
-    blockId += 1;
-    return blockId;
+    return appConfiguration.idGenerator.getId();
 }
 
 function getDimension(length){

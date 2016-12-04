@@ -4,10 +4,10 @@
 
 let projectFiles = [];
 let projectObjs = [];
+let locs = [];
 
 let minMaxLoc = [Number.POSITIVE_INFINITY,0];
 let minMaxNom = [Number.POSITIVE_INFINITY,0];
-let locs = [];
 let defaultFileReader = new FileReader();
 
 let lastFileSelected = [];
@@ -34,15 +34,21 @@ function updateWithFile() {
         }
         appConfiguration.holdCamera = true;
         showToast("Reloading with: "+appConfiguration.filterChanged+"...", 2000);
-        projectFiles = [];
-        projectObjs = [];
+        restartAppData();
     } else {
         appConfiguration.holdCamera = false;
-        projectFiles = [];
-        projectObjs = [];
+        restartAppData();
     }
     defaultFileReader.readAsText(selectedFile);
     lastFileSelected = selectedFile;
+}
+
+function restartAppData() {
+    projectFiles = [];
+    projectObjs = [];
+    locs = [];
+    appConfiguration.projectInfo.totalLOC = 0;
+    appConfiguration.targetList = [];
 }
 
 function filtersChanged() {
@@ -245,6 +251,7 @@ function createComponent(keyName, objName, objLoc, objNom, objMethods, objExtens
     minMaxLoc[1] = Math.max(objLoc, minMaxLoc[1]);
     minMaxNom[0] = Math.min(objNom, minMaxNom[0]);
     minMaxNom[1] = Math.max(objNom, minMaxNom[1]);
+    appConfiguration.projectInfo.totalLOC += objLoc;
 
     var obj = {
         key: keyName,

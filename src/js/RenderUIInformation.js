@@ -46,7 +46,7 @@ function renderProjectDetailsInformation() {
         .append("tbody")
         .attr("id", "tableContent");
 
-    renderRowInfo(tableContent, enableColor ? "Class" : "DefaultColor", "Number of Classes: "+projectInfo.numberOfClasses, "Project's LOC goes here");
+    renderRowInfo(tableContent, enableColor ? "Class" : "DefaultColor", "Number of Classes: "+projectInfo.numberOfClasses, "Project's total LOC: "+projectInfo.totalLOC);
     renderRowInfo(tableContent, enableColor ? "Struct" : "DefaultColor", "Number of Structs: "+projectInfo.numberOfStructs, "Min LOC in a block: "+projectInfo.minMaxLoc[0]);
     renderRowInfo(tableContent, enableColor ? "Extension" : "DefaultColor", "Number of Extensions: "+projectInfo.numberOfExtensions, "Max LOC in a block: "+projectInfo.minMaxLoc[1]);
     renderRowInfo(tableContent, enableColor ? "Protocol" : "DefaultColor", "Number of Protocols: "+projectInfo.numberOfProtocols, "Min NOM in a block: "+projectInfo.minMaxNom[0]);
