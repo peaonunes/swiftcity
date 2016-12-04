@@ -34,7 +34,7 @@ function renderProjectDetailsInformation() {
     var enableColor = appConfiguration.filters.indexOf("color") > -1 ? true : false;
 
     projectName
-        .text(projectInfo.name)
+        .text("Project information")
         .attr("class", "collapsible-header active")
         .append("i")
         .attr("class", "material-icons")

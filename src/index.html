@@ -12,7 +12,7 @@
 	<body class="grey lighten-5">
         <nav>
             <div class="navbar-fixed">
-                <div class="nav-wrapper red">
+                <div class="nav-wrapper deep-orange">
                     <ul>
                         <li>
                             <a href="#appInfo" style="padding-left: 10px" class="brand-logo modal-trigger">
@@ -29,7 +29,7 @@
                                     <input id="fileInput" type="file">
                                 </div>
                                 <div class="file-path-wrapper">
-                                    <input class="file-path validate" type="text" placeholder="Choose your file.">
+                                    <input class="file-path validate" type="text" placeholder="Upload the project file...">
                                 </div>
                             </div>
                         </li>
@@ -58,7 +58,7 @@
             </div>
             <div id="details" class="col s4 m4 l4 details-design">
                 <div id="projectDetails">
-                    <ul class="collapsible" data-collapsible="accordion">
+                    <ul class="collapsible" data-collapsible="accordion" style="margin-top: 1px !important;">
                         <li>
                              <div id="projectOptions" class="collapsible-header active">
                                  <i class="material-icons">settings</i>
@@ -70,7 +70,7 @@
                                         <tr id="#firstRow" style="padding: 10px;">
                                             <p class="label-fonts" style="padding: 10px !important;"><strong>Color objects by category and sort blocks inside districs.</strong></p>
                                             <td style="width: 20%" class="center-align td-settings">
-                                                <a id="helpbutton" href="#modal1" class="btn-flat center waves-effect waves-light modal-trigger tooltipped" data-position="right" data-delay="30" data-tooltip="What is this?">
+                                                <a id="helpbutton" href="#modal1" class="btn-flat center waves-effect waves-light modal-trigger tooltipped" data-position="top" data-delay="30" data-tooltip="What is this?">
                                                     <i class="material-icons">live_help</i>
                                                 </a>
                                                 <div id="modal1" class="modal">
@@ -118,7 +118,7 @@
                                             </td>
                                             <td style="width: 40%" class="td-settings">
                                                  <input value="color" onclick="filterClicked(this);" type="checkbox" class="checkbox-orange filled-in" id="activeColor" checked="checked"/>
-                                                 <label class="label-fonts" for="activeColor">Coloring blocks</label>
+                                                 <label class="label-fonts" for="activeColor">Enable colors</label>
                                             </td>
                                             <td style="width: 40%" class="td-settings">
                                                 <input  value="sort" onclick="filterClicked(this);" type="checkbox" class="checkbox-orange filled-in" id="sorteBlocks" checked="checked"/>

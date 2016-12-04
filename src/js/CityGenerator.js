@@ -138,8 +138,8 @@ function defineXZ(blocksMatrix, dimension, file, x, z, offset){
                 x += block.size[0] + offset;
                 maxZ = Math.max(maxZ, block.size[2]);
 
-                width = Math.max(width, (block.coordinates.x + block.size[0]) - startX);
-                height = Math.max(height, (block.coordinates.z + block.size[2]) - startZ);
+                width = Math.max(width, x + offset - startX);
+                height = Math.max(height, (z + offset + offset + block.size[2]) - startZ);
             }
         }
         z += maxZ + offset;

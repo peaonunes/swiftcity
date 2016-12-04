@@ -90,7 +90,7 @@ function renderNeigh(neighMatrix, dimension, scene, file, block){
 function renderFloor(floor, scene, type) {
     var geometry = new THREE.BoxGeometry(floor.width, floor.height, 1);
     var color = pickColor(type);
-    var material = new THREE.MeshBasicMaterial( {color: color, side: THREE.DoubleSide} );
+    var material = new THREE.MeshBasicMaterial( {color: color } );
     var plane = new THREE.Mesh( geometry, material );
 
     var x = floor.coordinates.x;
@@ -118,9 +118,9 @@ function renderFloor(floor, scene, type) {
 function getFloorOffeset(type) {
     switch (type) {
         case "CityFloor":
-            return -0.5;
+            return -0.3;
         case "DistrictFloor":
-            return -0.25;
+            return -0.2;
         case "NeighFloor":
             return 0;
         default:
@@ -217,7 +217,7 @@ function getBlockFrom(baseXYZ, size, key, block) {
 
     newCube["blockInformation"] = block;
     addToTargetList(newCube);
-    
+
     newCube.position.x = baseXYZ.x;
     newCube.position.y = baseXYZ.y + size[1]/2 + 0.5;
     newCube.position.z = baseXYZ.z;
