@@ -11,7 +11,7 @@ let minMaxNom = [Number.POSITIVE_INFINITY,0];
 let defaultFileReader = new FileReader();
 
 let lastFileSelected = [];
-let lastFilters = [];
+
 let scales = {
     "linear" : d3.scaleLinear(),
     "sqrt" : d3.scaleSqrt(),
@@ -23,12 +23,11 @@ let scales = {
 
 function updateWithFile() {
     var selectedFile = document.getElementById("fileInput").files[0];
-    var filterChanged = filtersChanged();
     if(selectedFile == null){
         showToast("You should first select a file!", 4000);
         return;
     } else if (lastFileSelected == selectedFile){
-        if(!filterChanged){
+        if(filtersChanged() == false){
             showToast("You just chose the same file!", 2000);
             return;
         }
@@ -44,28 +43,23 @@ function updateWithFile() {
 }
 
 function restartAppData() {
+    renderBlockInformation(null);
+    scales["heightScale"] = [];
+    scales["widthScale"] = [];
     projectFiles = [];
     projectObjs = [];
     locs = [];
+    minMaxLoc = [Number.POSITIVE_INFINITY,0];
+    minMaxNom = [Number.POSITIVE_INFINITY,0];
     appConfiguration.projectInfo.totalLOC = 0;
     appConfiguration.targetList = [];
 }
 
 function filtersChanged() {
-    var filters = appConfiguration.filters;
-    if (lastFilters.length != filters.length)
+    if(appConfiguration.filterChanged != null && appConfiguration.filterChanged != false)
         return true;
-    else {
-        var filter;
-        for (var i = 0 ; i < filters.length ; i++){
-            filter = filters[i];
-            if(lastFilters.indexOf(filter) < 0){
-                lastFilters = filters;
-                return true;
-            }
-        }
+    else
         return false;
-    }
 }
 
 defaultFileReader.onload = function(e) {
@@ -198,7 +192,7 @@ function readElements(array, elementType) {
 
         found = hasFile(projectFiles, fileName);
 
-        var component = createComponent(elementType, element["name"], element["number_of_lines"], element["methods"].length, element["methods"], []);
+        var component = createComponent(elementType, element["name"], element["number_of_lines"], element["methods"].length, element["methods"], [], element["start_line"], element["end_line"], fileName);
 
         if(elementType === "Extension")
         {
@@ -245,7 +239,7 @@ function hasFile(array, fileName){
     return -1;
 }
 
-function createComponent(keyName, objName, objLoc, objNom, objMethods, objExtensions){
+function createComponent(keyName, objName, objLoc, objNom, objMethods, objExtensions, objBegin, objEnd, objFileName){
     locs.push(objLoc);
     minMaxLoc[0] = Math.min(objLoc, minMaxLoc[0]);
     minMaxLoc[1] = Math.max(objLoc, minMaxLoc[1]);
@@ -259,16 +253,19 @@ function createComponent(keyName, objName, objLoc, objNom, objMethods, objExtens
         name: objName,
         loc: objLoc,
         nom: objNom,
+        startLine: objBegin,
+        endLine: objEnd,
         methods: objMethods,
         children: objExtensions,
-        color: keyName
+        color: keyName,
+        fileName: objFileName
     }
     return obj;
 }
 
 function getFileName(source_path){
     var startName = source_path.lastIndexOf("/") + 1;
-    var endName = source_path.length-1;
+    var endName = source_path.length;
     var fileName = source_path.substring(startName, endName);
     return fileName;
 }

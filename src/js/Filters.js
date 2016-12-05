@@ -6,7 +6,10 @@ function filterClicked(object) {
     var value = object.value;
     var filterType = getFilterType(value);
     changeFiltersState(value, filterType);
-    appConfiguration.filterChanged = value;
+    if(appConfiguration.filterChanged == null)
+        appConfiguration.filterChanged = value;
+    else
+        appConfiguration.filterChanged = appConfiguration.filterChanged == value ? false : true;
     updateWithFile();
 }
 

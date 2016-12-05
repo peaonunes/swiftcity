@@ -18,8 +18,8 @@ function renderControlsInformation() {
     + "<div class='col s6 m6 l6'><strong>Mouse</strong>"
     + "<table class='responsive-table stripped'><thead><tr><th>Zoom out</th><th>Zoom In</th><th>Rotation</th><th>Position</th></tr></thead>"
     + "<tbody><tr><td>Scroll up</td><td>Scroll down</td><td>Pan and move</td><td>Right click</td></tr></tbody></table></div>"
-    + "<div class='col s6 m6 l6'><strong>Keybord</strong>"
-    + "<table><thead><tr><th>Move up/down</th><th>Move left/right</th><th>Zoom In/Out</th><th>Print sceen</th></tr></thead>"
+    + "<div class='col s6 m6 l6'><strong>Keyboard</strong>"
+    + "<table><thead><tr><th>Move up/down</th><th>Move left/right</th><th>Zoom In/Out</th><th>Screenshot</th></tr></thead>"
     + "<tbody><tr><td>UP/Down Arrows</td><td>Left/Right Arrows</td><td>+/-</td><td>P</td></tr></tbody></table></div>";
 
     divInformation.html(controlsHmlt);
@@ -81,11 +81,12 @@ function renderRowInfo(tableContent, labelType, middleColText, rightColText) {
 function renderBlockInformation(block) {
     if(block == null){
         var blockDetails = d3.select("#blockDetails");
-        var detailsName = blockDetails.select("#blockName").html("Block name goes here.");
-        var detailsType = blockDetails.select("#blockType").html("Block type goes here.");
-        var detailsLOC = blockDetails.select("#blockLOC").html("Lines of code goes here");
-        var detailsNom = blockDetails.select("#blockNOM").html("Number of methods goes here");
-        var detailsMethods = blockDetails.select("#blockMethods").html("Methods details");
+        blockDetails.select("#blockFile").html("Block file name goes here.");
+        blockDetails.select("#blockName").html("Block name goes here.");
+        blockDetails.select("#blockType").html("Block type goes here.");
+        blockDetails.select("#blockLOC").html("Lines of code goes here");
+        blockDetails.select("#blockNOM").html("Number of methods goes here");
+        blockDetails.select("#blockMethods").html("Methods details");
     } else {
         var blockInformation = block.blockInformation;
         var blockName = blockInformation.name;
@@ -93,8 +94,12 @@ function renderBlockInformation(block) {
         var blockLOC = blockInformation.loc;
         var blockNOM = blockInformation.nom;
         var blockMethods = blockInformation.methods;
+        var blockFileName = blockInformation.fileName;
 
         var blockDetails = d3.select("#blockDetails");
+        var fileName = blockDetails.select("#blockFile");
+        fileName.html("<strong>File name: </strong>"+blockFileName);
+
         var detailsName = blockDetails.select("#blockName");
         detailsName.html("<strong>Name: </strong>"+blockName);
 
