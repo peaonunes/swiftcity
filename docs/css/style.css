@@ -13,7 +13,7 @@
 }
 
 .td-settings {
-    padding: 5px !important;
+    padding: 7.5px !important;
     font-size: 1.0em !important;
 }
 
@@ -47,4 +47,9 @@
   top: auto !important;
   bottom: 10%;
   right: 10%;
+}
+
+.details-row {
+    margin-top: 7.5px !important;
+    margin-bottom: 7.5px !important;
 }

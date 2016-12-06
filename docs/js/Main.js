@@ -4,7 +4,6 @@
 
 function init(){
     setUp();
-    winResize(appConfiguration.camera,appConfiguration.renderer,appConfiguration.width,appConfiguration.height);
 }
 
 function setUp(){
@@ -28,8 +27,6 @@ function render() {
 }
 
 function onDocumentMouseDown(event) {
-    event.stopPropagation();
-    event.preventDefault();
     if(event.button != 2){
         var canvas = document.getElementsByTagName("canvas");
         canvas = canvas[0];
@@ -42,9 +39,9 @@ function onDocumentMouseDown(event) {
 
         mouse.x = ((event.clientX / appConfiguration.renderer.domElement.width) * 2 - 1);
         mouse.x = appConfiguration.mouse.x - marginWidthError;
-        var rect = appConfiguration.renderer.domElement.getBoundingClientRect();
 
-        mouse.y = - (event.clientY / (appConfiguration.renderer.domElement.height + rect.top)) * 2 + 1;
+        var rect = appConfiguration.renderer.domElement.getBoundingClientRect();
+        mouse.y = - (event.clientY / (appConfiguration.renderer.domElement.height + rect.top + 50)) * 2 + 1;
         mouse.y = appConfiguration.mouse.y - marginHeightError;
 
         mouse.z = -1/Math.tan(22.5*Math.PI/180);

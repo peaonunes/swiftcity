@@ -7,6 +7,13 @@ let appConfiguration = {
     holdCamera : false,
     raycaster : null,
     mouse : null,
+    idGenerator : {
+        blockId : 0,
+        getId : function(){
+            this.blockId += 1 ;
+            return this.blockId;
+        }
+    },
     blockSelection : {
         "lastColor" : null,
         "currentSelection" : null
@@ -30,6 +37,7 @@ let appConfiguration = {
             return 0;
     },
     projectInfo : {
+        totalLOC : 0,
         name:"Project name",
         numberOfEnums:0,
         numberOfStructs:0,
