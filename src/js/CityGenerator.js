@@ -7,7 +7,8 @@ function runCity(files){
     renderSceneProperties();
     let city = cityMaker(files);
     var cameraX = city.floor.width;
-    renderCamareProperties(cameraX, 50, 150);
+    var cameraZ = city.floor.height;
+    renderCamareProperties(cameraX, 50, cameraZ*2);
 }
 
 function cityMaker(files){

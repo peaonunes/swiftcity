@@ -16,8 +16,8 @@ function renderControlsInformation() {
 
     var controlsHmlt = "<h5>Basic Controls</h5>"
     + "<div class='col s6 m6 l6'><strong>Mouse</strong>"
-    + "<table class='responsive-table stripped'><thead><tr><th>Zoom out</th><th>Zoom In</th><th>Rotation</th><th>Position</th></tr></thead>"
-    + "<tbody><tr><td>Scroll up</td><td>Scroll down</td><td>Pan and move</td><td>Right click</td></tr></tbody></table></div>"
+    + "<table class='responsive-table stripped'><thead><tr><th>Zoom out</th><th>Zoom In</th><th>Rotation</th><th>Move scene</th><th>Select block</th></tr></thead>"
+    + "<tbody><tr><td>Scroll up</td><td>Scroll down</td><td>Pan and move</td><td>Right click</td><td>Left click</td></tr></tbody></table></div>"
     + "<div class='col s6 m6 l6'><strong>Keyboard</strong>"
     + "<table><thead><tr><th>Move up/down</th><th>Move left/right</th><th>Zoom In/Out</th><th>Screenshot</th></tr></thead>"
     + "<tbody><tr><td>UP/Down Arrows</td><td>Left/Right Arrows</td><td>+/-</td><td>P</td></tr></tbody></table></div>";
