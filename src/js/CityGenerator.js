@@ -1,14 +1,14 @@
 /**
  * @author peaonunes / https://github.com/peaonunes
  */
-let blockId = 0;
 let sorted = false;
 
 function runCity(files){
     renderSceneProperties();
     let city = cityMaker(files);
     var cameraX = city.floor.width;
-    renderCamareProperties(cameraX, 50, 150);
+    var cameraZ = city.floor.height;
+    renderCamareProperties(cameraX, 50, cameraZ*2);
 }
 
 function cityMaker(files){
@@ -138,8 +138,8 @@ function defineXZ(blocksMatrix, dimension, file, x, z, offset){
                 x += block.size[0] + offset;
                 maxZ = Math.max(maxZ, block.size[2]);
 
-                width = Math.max(width, (block.coordinates.x + block.size[0]) - startX);
-                height = Math.max(height, (block.coordinates.z + block.size[2]) - startZ);
+                width = Math.max(width, x + offset - startX);
+                height = Math.max(height, (z + offset + offset + block.size[2]) - startZ);
             }
         }
         z += maxZ + offset;
@@ -216,8 +216,7 @@ function defineNiegh(neighMatrix, dimension, children, x, z, offset, maxZ) {
 }
 
 function getBlockId() {
-    blockId += 1;
-    return blockId;
+    return appConfiguration.idGenerator.getId();
 }
 
 function getDimension(length){
