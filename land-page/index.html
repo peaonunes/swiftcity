@@ -12,16 +12,16 @@
             <nav>
                 <div class="nav-wrapper white">
                     <a href="#!" style="margin-left: 50px;" class="brand-logo light grey-text text-darken-3">Swicity</a>
-                    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="grey-text text-darken-3 material-icons">menu</i></a>
                     <ul class="right hide-on-med-and-down" style="margin-right: 50px">
-                        <li><a class="grey-text text-darken-3" href="">Home</a></li>
-                        <li><a class="grey-text text-darken-3" href="">Examples</a></li>
-                        <li><a class="grey-text text-darken-3" href="">About</a></li>
+                        <li><a class="grey-text text-darken-3" href="#content">Home</a></li>
+                        <li><a class="grey-text text-darken-3" href="#examples">Examples</a></li>
+                        <li><a class="grey-text text-darken-3" href="#about">About</a></li>
                     </ul>
                     <ul class="side-nav" id="mobile-demo">
-                        <li><a class="grey-text text-darken-3" href="">Home</a></li>
-                        <li><a class="grey-text text-darken-3" href="">Examples</a></li>
-                        <li><a class="grey-text text-darken-3" href="">About</a></li>
+                        <li><a class="grey-text text-darken-3" href="#content">Home</a></li>
+                        <li><a class="grey-text text-darken-3" href="#examples">Examples</a></li>
+                        <li><a class="grey-text text-darken-3" href="#about">About</a></li>
                     </ul>
                 </div>
             </nav>
@@ -32,7 +32,7 @@
             <div class="row center">
                 <div class="col s12 m12 l12">
                     <h1 class="light orange-text text-darken-3"><strong>Swicity</strong> 1.0</h1>
-                    <h4 class="light grey-text text-darken-1">Visualize Software Systems written in Swift as cities!</h4>
+                    <h4 class="light">Visualize Software Systems written in Swift as cities!</h4>
                 </div>
             </div>
             </br>
@@ -40,14 +40,14 @@
             </br>
             <div class="row center" style="width: 80%">
                 <div class="col s12 m6 l6">
-                    <div class="">
+                    <div class="mouse-hover">
                         <i class="blue-text text-accent-3 large material-icons">system_update_alt</i>
                         <h5 class="">Download rhe Extractor!</h5>
                         <p class="light center">Download the extractor and the guide to run over your Swift's project. This patch explains how to scan your project and extract the metadata needed by the visualizator.<p>
                     </div>
                 </div>
                 <div class="col s12 m6 l6">
-                    <div class="">
+                    <div class="mouse-hover" onclick='openInNewTab("https://peaonunes.github.io/swiftcity/")'>
                         <i class="blue-text text-accent-3 large material-icons">play_circle_filled</i>
                         <h5 class="">Run rhe Visualizator!</h5>
                         <p class="light center">Utilizing elements and principles of City Metaphor, this web application takes your project's metadata and creates the city that correponds to your system! Having that you will be able to explore your system code for many insights.</p>
@@ -56,7 +56,7 @@
             </div>
             </br>
             </br>
-            <div class="row center grey lighten-3">
+            <div class="row center grey lighten-3" id="examples">
                 </br>
                 </br>
                 <div class="row" style="width: 80%">
@@ -80,7 +80,7 @@
             </div>
             </br>
             </br>
-            <div class="row">
+            <div class="row" id="about">
                 <div class="row" style="width: 80%">
                     <h3 class="light center">How does the Visualizator looks like?</h3>
                     <h5 class="light center">A simple demo reveals you the view and application interface!</h5>

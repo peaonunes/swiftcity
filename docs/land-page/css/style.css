@@ -27,3 +27,7 @@
 .nav-style {
     opacity: 0.9;
 }
+
+.mouse-hover {
+    cursor: pointer;
+}
